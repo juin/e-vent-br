@@ -1,5 +1,5 @@
 <?php
-require_once('../../controle/ControleUsuario.php');
+require_once('../../fachada/FachadaUsuario.php');
 
 if(isset($_POST['login']) && ($_POST['senha'])){
     $login=$_POST['login'];
@@ -7,15 +7,16 @@ if(isset($_POST['login']) && ($_POST['senha'])){
 
     if(($login) AND ($senha)) { //Ele entra nessa condição se as duas variáveis não estiverem vazia
     
-        $controle_usuario = new ControleUsuario();
+        $fachada_usuario = new FachadaUsuario();
 
-        $usuario = $controle_usuario->validarAcesso($login,$senha);
+        $usuario = $fachada_usuario->validarAcesso($login,$senha);
     
         if ($usuario) {
 
             $_SESSION['usuario'] = $usuario;
             
             print_r($_SESSION['usuario']);
+            
         } else {
             echo "erro.";
         }
