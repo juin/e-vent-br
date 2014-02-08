@@ -10,6 +10,7 @@ require_once('../../classes/UsuarioSessao.php');
  */
 class FachadaUsuario{
 
+    //Função que vai validar se o usuário pode acessar a area restrita ou não.
 	public function validarAcesso($login, $senha){
         $usuario = new UsuarioSessao();
         $usuario->setCod_usuario("3");
