@@ -1,10 +1,11 @@
 <?php
-require_once('../../modelo/ModeloConfiguracao.php'); 
+//Inclui o arquivo PersistenciaConfiguracao, responsável pela busca de dados do BD
+require_once('../../modelo/PersistenciaConfiguracao.php'); 
 /**
- * Controle responsável pelas configurações do sistema;
+ * Classe responsável pelas configurações do sistema;
  */
-class ControleConfiguracao{
-	
+class FachadaConfiguracao{
+        	
 }
 
 ?>
