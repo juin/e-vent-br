@@ -1,6 +1,6 @@
 <?php 
-
-class ModeloUsuario{
+//Classe que retorna os dados de usuário
+class PersistenciaUsuario{
 	
 	private $login;
 	private $senha;
@@ -8,7 +8,7 @@ class ModeloUsuario{
 	public function selecionar_login($login,$senha)
 	{
 		
-	}
-}
-$junior = new ModeloUsuario('');
+	}//Fim da função selecionar_login($login,$senha)
+	
+}//Fim da classe PersistenciaUsuario
 ?>
