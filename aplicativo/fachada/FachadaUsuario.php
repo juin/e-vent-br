@@ -4,22 +4,21 @@
  * responsável por retornar os dados do usuário criado na sessão.
  */
 require_once('../../classes/UsuarioSessao.php');
-
+require_once('../../classes/InstanciaUnica.php');
 /**
  * Classe responsável pelas definições do usuário;
  */
-class FachadaUsuario{
+class FachadaUsuario extends InstanciaUnica{
 
     //Função que vai validar se o usuário pode acessar a area restrita ou não.
 	public function validarAcesso($login, $senha){
-        $usuario = new UsuarioSessao();
-        $usuario->setCod_usuario("3");
-        $usuario->setLogin("event");
-        $usuario->setNome("Junior");
-        $usuario->setSenha("123");
-        return $usuario;
-	}//Fim da função validarAcesso($login, $senha)
+        $usuarios = PersistenciaUsuario::getInstancia()->selecionarPorLoginSenha($login, $senha);
+        
+        if($usuarios!=NULL){
+            return $usuarios[0];        
+        } else { return NULL; }
+	}
 
-}//Fim da Classe FachadaUsuario
+}
 
 ?>
