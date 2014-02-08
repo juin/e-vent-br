@@ -15,7 +15,11 @@ if(isset($_POST['login']) && ($_POST['senha'])){
 
             $_SESSION['usuario'] = $usuario;
             
-            print_r($_SESSION['usuario']);
+            //Pegar cada item da sessão criada com o array com os dados do usuário.
+            echo "Código: " . $_SESSION['usuario']->getCod_usuario();
+            echo "<br/>";
+            echo "Nome: " . $_SESSION['usuario']->getNome();
+            
             
         } else {
             echo "erro.";
