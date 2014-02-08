@@ -7,9 +7,7 @@ if(isset($_POST['login']) && ($_POST['senha'])){
 
     if(($login) AND ($senha)) { //Ele entra nessa condição se as duas variáveis não estiverem vazia
     
-        $fachada_usuario = new FachadaUsuario();
-
-        $usuario = $fachada_usuario->validarAcesso($login,$senha);
+        $usuario = FachadaUsuario::getInstancia()->validarAcesso($login,$senha);
     
         if ($usuario) {
 
