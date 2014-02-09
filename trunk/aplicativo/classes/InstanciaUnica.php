@@ -8,18 +8,13 @@
  
 Class InstanciaUnica
 {
-    //Guarda uma instância da classe
-    private static $instancia = null;
 
     public static function getInstancia()
     {
-
-    if (!isset(self::$instancia)) {
-            $classe = __CLASS__;
-            self::$instancia = new $classe;
-        }
-
-        return self::$instancia;
+        static $instancia = null;
+        
+        return $instancia ?: $instancia = new static;
+    
     }
 
 }
