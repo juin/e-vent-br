@@ -18,6 +18,17 @@ if(isset($_POST['login']) && ($_POST['senha'])){
             echo "<br/>";
             echo "Nome: " . $_SESSION['usuario']->getNome();
             
+            /**
+             * Teste para verificar se Instância Única está funcionando.
+             */
+            $objA = FachadaUsuario::getInstancia(); 
+            $objB = FachadaUsuario::getInstancia(); 
+            if ($objA == $objB) { 
+                echo "<br>Instância única"; 
+            } else { 
+                    echo "<br>Instâncias diferentes"; 
+                }
+            //Fim do teste InstanciaUnica
             
         } else {
             echo "erro.";
