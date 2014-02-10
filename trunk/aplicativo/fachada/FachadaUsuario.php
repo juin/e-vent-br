@@ -16,10 +16,7 @@ class FachadaUsuario extends InstanciaUnica{
         $usuarios = PersistenciaUsuario::getInstancia()->selecionarPorLoginSenha($login, $senha);
         
         if($usuarios!=NULL){
-            //Verifica se login e senha digitado é igual aos dados retornados do BD.
-            if(($usuarios[0]->getLogin()==$login) && ($usuarios[0]->getSenha()==$senha)){
-                return $usuarios[0];    
-            } else {return NULL;}
+            return $usuarios[0];
         } else { return NULL; }
 	}
 }
