@@ -13,10 +13,10 @@ class FachadaUsuario extends InstanciaUnica{
 
     //Função que vai validar se o usuário pode acessar a area restrita ou não.
 	public function validarAcesso($login, $senha){
+            
         $usuarios = PersistenciaUsuario::getInstancia()->selecionarPorLoginSenha($login, $senha);
-        
         if($usuarios!=NULL){
-            return $usuarios[0];
+            return $usuarios;
         } else { return NULL; }
 	}
 }
