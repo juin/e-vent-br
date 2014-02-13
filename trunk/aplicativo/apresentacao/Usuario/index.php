@@ -7,31 +7,17 @@ if(isset($_POST['login']) && ($_POST['senha'])){
 
     if(($login) AND ($senha)) { //Ele entra nessa condição se as duas variáveis não estiverem vazia
     
-        $usuario = FachadaUsuario::getInstancia()->validarAcesso($login,$senha);
-    
-        if ($usuario) {
+        $user = FachadaUsuario::getInstancia()->validarAcesso($login,$senha);
+        
+        if (mysql_num_rows($user) > 0) {
 
-            $_SESSION['usuario'] = $usuario;
-            
-            //Pegar cada item da sessão criada com o array com os dados do usuário.
-            echo "Código: " . $_SESSION['usuario']->getCod_usuario();
-            echo "<br/>";
-            echo "Nome: " . $_SESSION['usuario']->getNome();
-            
-            /**
-             * Teste para verificar se Instância Única está funcionando.
-             */
-            $objA = FachadaUsuario::getInstancia(); 
-            $objB = FachadaUsuario::getInstancia(); 
-            if ($objA == $objB) { 
-                echo "<br>Instância única"; 
-            } else { 
-                    echo "<br>Instâncias diferentes"; 
-                }
-            //Fim do teste InstanciaUnica
-            
+            $_SESSION['usuario'] = $user;
+            while ($row = mysql_fetch_array($_SESSION['usuario'])) {
+                printf ("ID: %s  Nome: %s", $row[0], $row["nome_certificado"]);
+                echo "<br> Login efetuado com sucesso.";
+            }
         } else {
-            echo "erro.";
+            echo "Login ou Senha inválido.";
         }
     }
 }
