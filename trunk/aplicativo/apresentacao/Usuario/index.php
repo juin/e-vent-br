@@ -9,13 +9,12 @@ if(isset($_POST['login']) && ($_POST['senha'])){
     
         $user = FachadaUsuario::getInstancia()->validarAcesso($login,$senha);
         
-        if (mysql_num_rows($user) > 0) {
-
-            $_SESSION['usuario'] = $user;
-            while ($row = mysql_fetch_array($_SESSION['usuario'])) {
-                printf ("ID: %s  Nome: %s", $row[0], $row["nome_certificado"]);
-                echo "<br> Login efetuado com sucesso.";
-            }
+        
+        if ($user != NULL) {
+            echo "Bem vindo<br>";
+            print_r($user);
+            session_start();
+            $_SESSION['UsuarioSessao'] = $user[1];
         } else {
             echo "Login ou Senha inválido.";
         }

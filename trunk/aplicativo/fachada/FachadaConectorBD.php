@@ -30,8 +30,7 @@ class FachadaConectorBD{
      * Set que recebe instancia de ParametrosAcessoBanco
      */
     public function setParametrosAcessoBanco($parametrosBD){
-        $this->parametros = $parametrosBD;
-         
+        $this->parametros = $parametrosBD;     
     }
     /**
       * Método que conecta no banco de dados

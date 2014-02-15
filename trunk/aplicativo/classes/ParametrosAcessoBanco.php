@@ -50,7 +50,7 @@ class ParametrosAcessoBanco {
 }
 /**
  * Parametros de Acesso ao banco de dados
- * Cremildo: Verificar melhor forma de refazer esse processo.
+ * Cremildo: Verificar melhor forma de refazer esse processo. (Usar Properties)
  */
 if(FachadaConectorBD::getInstancia() == NULL){
     $parametrosBD = new ParametrosAcessoBanco;
