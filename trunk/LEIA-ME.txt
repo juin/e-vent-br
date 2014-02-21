@@ -26,5 +26,6 @@ echo '$login'; //$login
 echo "$login";//Brasil
 
 
+
 Padrão -> singleton (instancia única)
 http://stackoverflow.com/questions/203336/creating-the-singleton-design-pattern-in-php5
