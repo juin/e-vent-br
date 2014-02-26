@@ -1,5 +1,6 @@
 <?php
-require_once('../../fachada/FachadaUsuario.php');
+//require_once('../../fachada/FachadaUsuario.php');
+require_once('../../fachada/FachadaUsuarioNivelAcesso.php');
 
 if(isset($_POST['login']) && ($_POST['senha'])){
     $login=$_POST['login'];
@@ -11,6 +12,10 @@ if(isset($_POST['login']) && ($_POST['senha'])){
         
         if ($usuario != NULL) {
             echo "Bem vindo<br>";
+            $_SESSION['login'] = $usuario->getLogin();
+            $_SESSION['cod_usuario'] = $usuario->getCodUsuario();
+            $_SESSION['nivel_acesso'] = $usuario->getNivelAcesso();
+            echo "Nivel de Acesso: " . FachadaUsuarioNivelAcesso::getInstancia()->ValidarNivelAcesso();
         } else {
             echo "Login ou Senha inválido.";
         }
@@ -28,9 +33,10 @@ if(isset($_POST['login']) && ($_POST['senha'])){
 <form method="post" action="index.php">
 	<label>Login:</label>
 	<input type="text" name="login" placeholder="Insira o seu nome de usuário."/>
+	<br>
 	<label>Senha:</label>
 	<input type="text" name="senha" placeholder="Insira sua senha."/>
-	<input type="submit" value="Acessar"/>
+	<br><input type="submit" value="Acessar"/>
 </form>
 </body>
 </html>
