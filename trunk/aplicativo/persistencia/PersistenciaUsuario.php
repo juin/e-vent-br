@@ -20,8 +20,10 @@ class PersistenciaUsuario extends InstanciaUnica{
         //Percorre array que retornou do banco de dados e cria um objeto do tipo UsuarioSessao
         while ($linha = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
             $usuario = new UsuarioSessao();
-            $usuario->setCod_usuario($linha['cod_usuario']);
-            $usuario->setLogin($linha['nome_certificado']);
+            $usuario->setCodUsuario($linha['cod_usuario']);
+            $usuario->setLogin($linha['login']);
+            $usuario->setNivelAcesso($linha['nivel_acesso']);
+            $usuario->setCategoria($linha['categoria']);
             
             $usuarios[$i++] = $usuario;
         }
