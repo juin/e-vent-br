@@ -14,11 +14,17 @@ class UsuarioSessao {
     //@var string
     private $senha;
     
-    public function setCod_usuario($cod_usuario){
+    //@var string
+    private $nivel_acesso;
+    
+    //@var string
+    private $categoria;
+    
+    public function setCodUsuario($cod_usuario){
         $this->cod_usuario = $cod_usuario;
     }
 
-    public function getCod_usuario(){
+    public function getCodUsuario(){
         return $this->cod_usuario;
     }
 
@@ -44,6 +50,22 @@ class UsuarioSessao {
 
     public function getSenha(){
         return $this->senha;
+    }
+
+    public function setNivelAcesso($nivel_acesso){
+        $this->nivel_acesso = $nivel_acesso;
+    }
+    
+    public function getNivelAcesso(){
+        return $this->nivel_acesso;
+    }
+    
+    public function setCategoria($categoria){
+        $this->categoria = $categoria;
+    }
+    
+    public function getCategoria(){
+        return $this->categoria;
     }
 }
 ?>
