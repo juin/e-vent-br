@@ -2,6 +2,7 @@
 require_once('../../fachada/FachadaConectorBD.php');
 require_once('../../classes/UsuarioSessao.php');
 
+//
 //Classe que retorna os dados de usuário
 class PersistenciaUsuario extends InstanciaUnica{
      
