@@ -12,7 +12,7 @@ class PersistenciaUsuario extends InstanciaUnica{
         $sql = "SELECT * FROM Usuario WHERE login='" . $login . "' AND senha='" . $senha . "'";
         
         //Retorna do Banco array com resultados da consulta.
-        $resultado = FachadaConectorBD::getInstancia()->consultarBD($sql);
+        $resultado = FachadaConectorBD::getInstancia()->consultar($sql);
         
         //Necessário inicializar váriaves para evitar "Warnings" do PHP.
         $i = 0;
@@ -39,9 +39,9 @@ class PersistenciaUsuario extends InstanciaUnica{
 				'$usuario->email','$usuario->instituicao','$usuario->curso','$usuario->lattes','$usuario->categ',
 				'$usuario->nivel','$usuario->notifica','$usuario->status',$usuario->dt_cad,$usuario->cidade)";
 		
-		$resultado = FachadaConectorBD::getInstancia()->inserirBD($sql);
+		$resultado = FachadaConectorBD::getInstancia()->inserir($sql);
 				
-		return $resultado;
+		return mysql_insert_id();
 	}
 }
 ?>

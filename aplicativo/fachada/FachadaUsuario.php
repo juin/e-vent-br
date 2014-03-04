@@ -1,16 +1,16 @@
 <?php
 /**
  *  
- * responsável por retornar os dados do usuário criado na sessão.
+ * responsÃ¡vel por retornar os dados do usuÃ¡rio criado na sessÃ£o.
  */
 require_once('../../classes/InstanciaUnica.php');
 require_once('../../persistencia/PersistenciaUsuario.php');
 /**
- * Classe responsável pelas definições do usuário;
+ * Classe responsÃ¡vel pelas definiÃ§Ãµes do usuÃ¡rio;
  */
 class FachadaUsuario extends InstanciaUnica{
 
-    //Função que vai validar se o usuário pode acessar a area restrita ou não.
+    //FunÃ§Ã£o que vai validar se o usuÃ¡rio pode acessar a area restrita ou nÃ£o.
 	public function validarAcesso($login, $senha){
             
         //Recebe um objeto do tipo UsuarioSessao da PersistenciaUsuario   
@@ -23,30 +23,9 @@ class FachadaUsuario extends InstanciaUnica{
 	
 	public function adicionarUsuario($usuario){
 		
-		$user->cod = $usuario->cod
-		$user->nome_cert = $usuario->nome_cert
-		$user->sexo = $usuario->sexo
-		$user->nasc = $usario->nasc
-		$user->cpf = $usuario->cpf
-		$user->rg = $usuario->rg
-		$user->login = $usuario->login
-		$user->senha = $usuario->senha
-		$user->tel1 = $usuario->tel1
-		$user->tel2 = $usuario->tel2
-		$user->email = $usuario->email
-		$user->instituicao = $usuario->instituicao
-		$user->curso = $usuario->curso
-		$user->lattes = $usuario->lattes
-		$user->categ = $usuario->categ
-		$user->nivel = $usuario->nivel
-		$user->notifica = $usuario->notifica
-		$user->status = $usuario->status
-		$user->dt_cad = $usuario->dt_cad
-		$user->cidade = $usuario->cidade
-		
-		$resultado = FachadaUsuario::getInstancia()->adicionarUsuario($user);
+		$id = FachadaUsuario::getInstancia()->adicionarUsuario($usuario);
 
-		return $resultado;
+		return $id;
 	}
     
 }
