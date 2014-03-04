@@ -20,6 +20,34 @@ class FachadaUsuario extends InstanciaUnica{
             return $usuarios[0];
         } else { return NULL; }
 	}
+	
+	public function adicionarUsuario($usuario){
+		
+		$user->cod = $usuario->cod
+		$user->nome_cert = $usuario->nome_cert
+		$user->sexo = $usuario->sexo
+		$user->nasc = $usario->nasc
+		$user->cpf = $usuario->cpf
+		$user->rg = $usuario->rg
+		$user->login = $usuario->login
+		$user->senha = $usuario->senha
+		$user->tel1 = $usuario->tel1
+		$user->tel2 = $usuario->tel2
+		$user->email = $usuario->email
+		$user->instituicao = $usuario->instituicao
+		$user->curso = $usuario->curso
+		$user->lattes = $usuario->lattes
+		$user->categ = $usuario->categ
+		$user->nivel = $usuario->nivel
+		$user->notifica = $usuario->notifica
+		$user->status = $usuario->status
+		$user->dt_cad = $usuario->dt_cad
+		$user->cidade = $usuario->cidade
+		
+		$resultado = FachadaUsuario::getInstancia()->adicionarUsuario($user);
+
+		return $resultado;
+	}
     
 }
 
