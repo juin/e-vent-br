@@ -51,7 +51,7 @@ class FachadaConectorBD{
     /**
       * Método que executa uma consulta no banco de dados
       */
-    public function consultarBD($query){
+    public function consultar($query){
       $this->conectarBD();
       $this->selecionarBD();
       $res = mysql_query($query) or die('Não foi possível consultar o Banco de Dados' . mysql_error());
@@ -59,7 +59,7 @@ class FachadaConectorBD{
       return $res;
    }
    
-   public function inserirBD($query){
+   public function inserir($query){
    		$this->conectarBD();
    		$this->selecionarBD();
    		$res = mysql_query($query) or die('Não foi possível inserir no Banco de Dados'.mysql_errno());
