@@ -15,6 +15,7 @@ endif;
 </head>
 
 <body>
+    <a href="sair.php">Sair</a>
     <ul>
         <li>Inicio</li>
         <li>Eventos</li>
@@ -22,8 +23,6 @@ endif;
         <li>Certificados</li>
     </ul>
     <ul>
-        <li>Inscrições</li>
-        <li>Certificados</li>
         <? menu($_SESSION['nivel_acesso']); ?>
     </ul>
 
