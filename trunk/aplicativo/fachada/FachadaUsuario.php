@@ -1,16 +1,16 @@
 <?php
 /**
  *  
- * responsÃ¡vel por retornar os dados do usuÃ¡rio criado na sessÃ£o.
+ * responsável por retornar os dados do usuário criado na sessão.
  */
 require_once('../../classes/InstanciaUnica.php');
 require_once('../../persistencia/PersistenciaUsuario.php');
 /**
- * Classe responsÃ¡vel pelas definiÃ§Ãµes do usuÃ¡rio;
+ * Classe responsável pelas definições do usuário;
  */
 class FachadaUsuario extends InstanciaUnica{
 
-    //FunÃ§Ã£o que vai validar se o usuÃ¡rio pode acessar a area restrita ou nÃ£o.
+    //Função que vai validar se o usuário pode acessar a area restrita ou não.
 	public function validarAcesso($login, $senha){
             
         //Recebe um objeto do tipo UsuarioSessao da PersistenciaUsuario   
