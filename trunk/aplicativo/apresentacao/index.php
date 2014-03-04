@@ -1,21 +1,4 @@
-<?
-require_once('Usuario/menu.php');
-session_start();
-
-if($_SESSION['usuario']==null):
-  header("location: Usuario/index.php");
-endif;
-
-?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Sistema de gerenciamento de Eventos | e-Vent-br</title>
-</head>
-
-<body>
-    <a href="sair.php">Sair</a>
+<? require_once('cabecalho.php'); ?>
     <ul>
         <li>Inicio</li>
         <li>Eventos</li>
@@ -23,8 +6,17 @@ endif;
         <li>Certificados</li>
     </ul>
     <ul>
-        <? menu($_SESSION['nivel_acesso']); ?>
+        <?  
+                menu($_SESSION['nivel_acesso']);
+        ?>
     </ul>
-
-</body>
-</html>
+    <fieldset>
+        <legend>Eventos em Andamentos</legend>
+    </fieldset>
+    <fieldset>
+        <legend>Eventos Encerrados</legend>
+    </fieldset>
+    <fieldset>
+        <legend>Inscrições</legend>
+    </fieldset>
+<? require_once('rodape.php'); ?>

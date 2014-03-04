@@ -11,8 +11,8 @@ if(isset($_POST['login']) && ($_POST['senha'])){
         $usuario = FachadaUsuario::getInstancia()->validarAcesso($login,$senha);
         
         if ($usuario != NULL) {
-            echo "Bem vindo<br>";
-            session_start();
+            session_start(); 
+            $_SESSION['tempo'] = time();
             $_SESSION['usuario'] = $usuario;
             $_SESSION['login'] = $usuario->getLogin();
             $_SESSION['cod_usuario'] = $usuario->getCodUsuario();
