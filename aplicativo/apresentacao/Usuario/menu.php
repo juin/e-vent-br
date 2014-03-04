@@ -3,7 +3,9 @@
 function menu($nivel=NULL){
     switch ($nivel) {
         case 'Super':
-            echo    "<li>Gerenciar Eventos</li>
+            echo    "<li>Inscrições</li>
+                     <li>Certificados</li>
+                     <li>Gerenciar Eventos</li>
                      <li>Atividades</li>
                      <li>Tipos de Atividades</li>
                      <li>Locais de Atividades</li>
@@ -12,15 +14,15 @@ function menu($nivel=NULL){
                      <li>Pagamentos</li>";
             break;
         case 'Administrador':
-            echo    "<li>Gerenciar Eventos</li>
+            echo    "<li>Inscrições</li>
+                     <li>Certificados</li>
+                     <li>Gerenciar Eventos</li>
                      <li>Tipos de Atividades</li>
                      <li>Locais de Atividades</li>";
             break;
-        case 'Monitor':
-            echo    "<li>Atividades</li>";
-            break;
         default:
-            
+            echo    "<li>Inscrições</li>
+                     <li>Certificados</li>";
             break;
     }
     
