@@ -1,4 +1,4 @@
-<?php
+<?
 //require_once('../../fachada/FachadaUsuario.php');
 require_once('../../fachada/FachadaUsuarioNivelAcesso.php');
 
@@ -12,10 +12,12 @@ if(isset($_POST['login']) && ($_POST['senha'])){
         
         if ($usuario != NULL) {
             echo "Bem vindo<br>";
+            session_start();
+            $_SESSION['usuario'] = $usuario;
             $_SESSION['login'] = $usuario->getLogin();
             $_SESSION['cod_usuario'] = $usuario->getCodUsuario();
             $_SESSION['nivel_acesso'] = $usuario->getNivelAcesso();
-            echo "Nivel de Acesso: " . FachadaUsuarioNivelAcesso::getInstancia()->ValidarNivelAcesso();
+            header('location: http://localhost/e-vent/aplicativo/apresentacao/index.php');
         } else {
             echo "Login ou Senha inválido.";
         }

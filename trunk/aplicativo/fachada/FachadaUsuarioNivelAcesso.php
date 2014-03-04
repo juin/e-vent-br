@@ -7,23 +7,9 @@ require_once('FachadaUsuario.php');
 
 class FachadaUsuarioNivelAcesso extends FachadaUsuario{
 
-    public function ValidarNivelAcesso(){
+    public function validarNivelAcesso(){
         
-        switch ($_SESSION['nivel_acesso']){
-            case 'Super':
-                return 'Super';
-                break;
-            case 'Administrador':
-                return 'Administrado';
-                break;
-            case 'Comum':
-                return 'Comun';
-                break;
-            default:
-                return 'Comun';
-                break;
-        
-        }
+
     }
     
 }
