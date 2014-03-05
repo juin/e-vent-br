@@ -1,27 +1,30 @@
 <?php
 
+//Classe Certificado para a emissao de certificados
+
 class Certificado{
+	 //@var int
     private $codigo;
+	
     private $usuario;
+	
+	 //@var int
     private $data_hora_salvo;
+	
+	 //@var int
     private $data_hora_enviado;
+	
+	 //@var int
     private $data_hora_emissao;
+	
     private $evento;
+	
+	 //@var string
     private $url;
+	
     private $atividades;
     
-    function __construct($codigo, $usuario, $data_hora_salvo, $data_hora_enviado, $data_hora_emissao, $evento, $url, $atividades) {
-        $this->codigo = $codigo;
-        $this->usuario = $usuario;
-        $this->data_hora_salvo = $data_hora_salvo;
-        $this->data_hora_enviado = $data_hora_enviado;
-        $this->data_hora_emissao = $data_hora_emissao;
-        $this->evento = $evento;
-        $this->url = $url;
-        $this->atividades = $atividades;
-    }
-    
- 
+   
     public function getCodigo() {
         return $this->codigo;
     }
