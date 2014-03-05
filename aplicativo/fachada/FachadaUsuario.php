@@ -23,7 +23,7 @@ class FachadaUsuario extends InstanciaUnica{
 	
 	public function adicionarUsuario($usuario){
 		
-		$id = FachadaUsuario::getInstancia()->adicionarUsuario($usuario);
+		$id = PersistenciaUsuario::getInstancia()->adicionarUsuario($usuario);
 
 		return $id;
 	}
