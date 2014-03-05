@@ -6,9 +6,7 @@
         <li>Certificados</li>
     </ul>
     <ul>
-        <?  
-                menu($_SESSION['nivel_acesso']);
-        ?>
+        <? menu($usuarioLogado->getNivelAcesso()); ?>
     </ul>
     <fieldset>
         <legend>Eventos em Andamentos</legend>
