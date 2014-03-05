@@ -39,9 +39,9 @@ class PersistenciaUsuario extends InstanciaUnica{
 				'$usuario->email','$usuario->instituicao','$usuario->curso','$usuario->lattes','$usuario->categ',
 				'$usuario->nivel','$usuario->notifica','$usuario->status',$usuario->dt_cad,$usuario->cidade)";
 		
-		$resultado = FachadaConectorBD::getInstancia()->inserir($sql);
+		$id = FachadaConectorBD::getInstancia()->inserir($sql);
 				
-		return mysql_insert_id();
+		return $id;
 	}
 }
 ?>

@@ -63,8 +63,9 @@ class FachadaConectorBD{
    		$this->conectarBD();
    		$this->selecionarBD();
    		$res = mysql_query($query) or die('Não foi possível inserir no Banco de Dados'.mysql_errno());
+   		$id = $mysql_insert_id;
    		mysql_close();
-   		return $res;
+   		return $id;
    }    
 }
 ?>
