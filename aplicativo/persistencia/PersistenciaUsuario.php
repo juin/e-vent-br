@@ -34,10 +34,10 @@ class PersistenciaUsuario extends InstanciaUnica{
 	
 	public function adicionarUsuario($usuario){
 
-		$sql = "Insert into Usuario values ($usuario->cod,'$usuario->nome_cert','$usuario->sexo',$usario->nasc,
+		$sql = "Insert into Usuario values ($usuario->cod,'$usuario->nome','$usuario->sexo',$usario->nasc,
 				'$usuario->cpf','$usuario->rg','$usuario->login','$usuario->senha','$usuario->tel1','$usuario->tel2',
-				'$usuario->email','$usuario->instituicao','$usuario->curso','$usuario->lattes','$usuario->categ',
-				'$usuario->nivel','$usuario->notifica','$usuario->status',$usuario->dt_cad,$usuario->cidade)";
+				'$usuario->email','$usuario->instituicao','$usuario->curso','$usuario->lattes','$usuario->categoria',
+				'$usuario->nivel_acesso','$usuario->notifica','$usuario->status',$usuario->dt_cad,$usuario->cidade)";
 		
 		$id = FachadaConectorBD::getInstancia()->inserir($sql);
 				
