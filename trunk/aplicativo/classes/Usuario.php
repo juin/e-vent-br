@@ -112,7 +112,7 @@ class Usuario extends UsuarioSessao{
 		$this->dt_cad = $dt_cad;
 	}
 	
-	public function setCidade(){
+	public function setCidade($cidade){
 		$this->cidade = $cidade;
 	}
 }
