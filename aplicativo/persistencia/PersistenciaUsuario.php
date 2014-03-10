@@ -32,15 +32,39 @@ class PersistenciaUsuario extends InstanciaUnica{
         return $usuarios;
 	}
 	
-	public function adicionarUsuario($usuario){
+	public function adicionarUsuario(Usuario $usuario){
 
-		$sql = "Insert into Usuario values ($usuario->cod,'$usuario->nome','$usuario->sexo',$usario->nasc,
-				'$usuario->cpf','$usuario->rg','$usuario->login','$usuario->senha','$usuario->tel1','$usuario->tel2',
-				'$usuario->email','$usuario->instituicao','$usuario->curso','$usuario->lattes','$usuario->categoria',
-				'$usuario->nivel_acesso','$usuario->notifica','$usuario->status',$usuario->dt_cad,$usuario->cidade)";
-		
-		$id = FachadaConectorBD::getInstancia()->inserir($sql);
-				
+		if ($usuario instanceof Usuario){
+			$cod = $usuario->getCodUsuario();
+			$nome = $usuario->getNome();
+			$sexo = $usuario->getSexo();
+			$nasc = $usuario->getNasc();
+			$cpf = $usuario->getCpf();
+			$rg = $usuario->getRg();
+			$login = $usuario->getLogin();
+			$senha = $usuario->getSenha();
+			$tel1 = $usuario->getTel1();
+			$tel2 = $usuario->getTel2();
+			$email = $usuario->getEmail();
+			$instituicao = $usuario->getInstituicao();
+			$curso = $usuario->getCurso();
+			$lattes = $usuario->getLattes();
+			$categ = $usuario->getCategoria();
+			$nivel = $usuario->getNivelAcesso();
+			$notif = $usuario->getNotifica();
+			$status = $usuario->getStatus();
+			$dtcad = $usuario->getDatacad();
+			$cidade = $usuario->getCidade();
+			
+			$sql = "Insert into Usuario values ($cod,'$nome','$sexo',$nasc,'$cpf','$rg','$login',
+					'$senha','$tel1','$tel2','$email','$instituicao','$curso','$lattes','$categ',
+					'$nivel','$notif','$status',$dtcad,$cidade)";
+			
+			/*$id = FachadaConectorBD::getInstancia()->inserir($sql);*/
+			$id = $sql;
+		} else {
+			$id = "Erro!";
+		}		
 		return $id;
 	}
 }
