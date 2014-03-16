@@ -77,13 +77,14 @@ class FachadaConectorBD{
    public function executarTransacao($queries){
        $this->conectarBD();
        $this->selecionarBD();
-       mysql_query('SET AUTOCOMMIT=0') or die('Não foi possível inserir no Banco de Dados'.mysql_errno());
-       mysql_query('START TRANSACTION') or die('Não foi possível inserir no Banco de Dados'.mysql_errno());
+       $comit = 'SET AUTOCOMMIT=0; START TRANSACTION;';
        foreach ($queries as $query) {
-            mysql_query($query);
-           echo "string";
+           $comit .= $query;
+           echo $comit . "<br>";
        }
-       mysql_query('COMMIT') or die('Não foi possível inserir no Banco de Dados'.mysql_errno());;
+       $comit .='COMMIT;';
+       echo "<br>FINAL: " . $comit;
+       mysql_query($comit) or die('<br>Não foi possível inserir no Banco de Dados'.mysql_errno().mysql_error());
        mysql_close();
        
    }
