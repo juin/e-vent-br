@@ -40,8 +40,7 @@ class PersistenciaEvento extends InstanciaUnica{
 	}
 	
 	public function getNomeEvento($cod_evento){
-		$sql = 'Select nome from Evento where cod_evento = '.$cod_evento;
-		
+		$sql = 'Select sigla from Evento where cod_evento = '.$cod_evento;
 		return FachadaConectorBD::getInstancia()->consultar($sql);
 	}
 }
