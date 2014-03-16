@@ -1,13 +1,10 @@
 <? 
 require_once(dirname(__FILE__).'/../config.php');
-require_once(APRESENTACAO.'cabecalho.php'); 
-
+require_once(APRESENTACAO.'cabecalho.php');
 ?>
     <ul>
         <li>Inicio</li>
         <li>Eventos</li>
-        <li>Inscrições</li>
-        <li>Certificados</li>
     </ul>
     <ul>
         <? menu($usuarioLogado->getNivelAcesso()); ?>

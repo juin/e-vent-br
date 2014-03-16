@@ -11,6 +11,11 @@ class PersistenciaUsuario extends InstanciaUnica {
         //Transformar array de dados (bidimensional) em array de objetos (unidimensional)
         $sql = "SELECT * FROM Usuario WHERE login='" . $login . "' AND senha='" . $senha . "'";
 
+        
+        $sqlCOMMIT = array( 0=>"INSERT INTO Cidade VALUES (14,'VITORIAA');",
+                            1=>"INSERT INTO Cidades VALUES (15,'SALVADOR');");
+        FachadaConectorBD::getInstancia()->executarTransacao($sqlCOMMIT);
+        
         //Retorna do Banco array com resultados da consulta.
         $registros = FachadaConectorBD::getInstancia() -> consultar($sql);
 
@@ -27,7 +32,7 @@ class PersistenciaUsuario extends InstanciaUnica {
                 $usuario -> setLogin($registro['login']);
                 $usuario -> setNivelAcesso($registro['nivel_acesso']);
                 $usuario -> setCategoria($registro['categoria']);
-
+                
                 $usuarios[$i++] = $usuario;   
             }
         }
