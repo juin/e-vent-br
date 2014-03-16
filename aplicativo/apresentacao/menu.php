@@ -3,7 +3,7 @@
 function menu($nivel=NULL){
     switch ($nivel) {
         case 'Super':
-            echo    "<li>Inscrições</li>
+            echo    "<li><a href=\"".URL."apresentacao/Evento/lista_eventos.php". "\">Inscrições</a></li>
                      <li>Certificados</li>
                      <li><a href=\"".URL."apresentacao/Evento/eventos.php". "\">Gerenciar Eventos</a></li>
                      <li>Atividades</li>
