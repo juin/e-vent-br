@@ -1,5 +1,5 @@
 <?php
-require_once ('../../fachada/PersistenciaEvento');
+require_once ('../../persistencia/PersistenciaEvento.php');
 
 class FachadaEvento extends InstanciaUnica{
 	
