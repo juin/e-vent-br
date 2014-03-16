@@ -55,8 +55,8 @@ class ParametrosAcessoBanco {
 if(FachadaConectorBD::getInstancia() == NULL){
     $parametrosBD = new ParametrosAcessoBanco;
     $parametrosBD->setBDServidor('localhost');
-    $parametrosBD->setBDUsuario('root');
-    $parametrosBD->setBDSenha('nano2012');
+    $parametrosBD->setBDUsuario('e_vent');
+    $parametrosBD->setBDSenha('3v3nt');
     $parametrosBD->setBDNomeBanco('e_event_br');  
     FachadaConectorBD::iniciarInstancia($parametrosBD);
 }
