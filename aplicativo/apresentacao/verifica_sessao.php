@@ -1,5 +1,4 @@
 <?
-require_once(dirname(__FILE__).'/../config.php');
 session_start();
 $inativo = 600; //Define tempo para sessão expirar. (em segundos)
 

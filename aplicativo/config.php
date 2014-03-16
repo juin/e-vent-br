@@ -8,5 +8,4 @@ define('FACHADAS',BASE.'fachada/');
 define('PERSISTENCIAS',BASE.'persistencia/');
 define('APRESENTACAO',BASE.'apresentacao/');
 
-
 ?>
