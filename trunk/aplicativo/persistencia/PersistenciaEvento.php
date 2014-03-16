@@ -6,8 +6,10 @@ class PersistenciaEvento extends InstanciaUnica{
 	public function getListaEventos(){
 		$sql = 'Select cod_evento, nome, sigla, data_inicio, status, pagamento from Evento';
 		
-		//return FachadaConectorBD::getInstancia()->consultar($sql);
-		$eventos[0][0] = 0;
+		$res = FachadaConectorBD::getInstancia()->consultar($sql);
+		
+		return $res;
+		/*$eventos[0][0] = 0;
 		$eventos[1][0] = 1;
 		$eventos[2][0] = 2;
 		
@@ -19,14 +21,14 @@ class PersistenciaEvento extends InstanciaUnica{
 		$eventos[1][2] = "E2";
 		$eventos[2][2] = "E3";
 		
-		return $eventos;
+		return $eventos;*/
 	}
 	
 	public function  getListaAtividadeEvento($cod_evento){
 		$sql = 'Select cod_atividade, nome from Atividade where cod_evento = '.$cod_evento;
 		
-		//return FachadaConectorBD::getInstancia()->consultar($sql);
-		$atividades[0][0] = 0;
+		return FachadaConectorBD::getInstancia()->consultar($sql);
+		/*$atividades[0][0] = 0;
 		$atividades[1][0] = 1;
 		$atividades[2][0] = 2;
 		
@@ -35,7 +37,7 @@ class PersistenciaEvento extends InstanciaUnica{
 		$atividades[2][1] = "Atividade 3";
 		
 		
-		return $atividades;
+		return $atividades;*/
 	}
 }
 
