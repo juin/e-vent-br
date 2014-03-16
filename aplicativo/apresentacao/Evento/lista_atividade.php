@@ -8,7 +8,7 @@ require_once(FACHADAS.'FachadaEvento.php');
 <?php 
 	$atividades = FachadaEvento::getInstancia()->getListaAtividadeEvento($_POST['cod_evento']);
 	foreach ($atividades as $atividade){
-		echo '<input type="checkbox" name="atv[]" value="'.$atividade[0].'">'.$atividade[1].'<br/>';
+		echo '<input type="checkbox" name="atv[]" value="'.$atividade[1].'">'.$atividade[0]." | ".$atividade[2].'<br/>';
 	}
 ?>
 <input type="hidden" name="cod_evento" value="<?php $_POST['cod_evento'];?>">
