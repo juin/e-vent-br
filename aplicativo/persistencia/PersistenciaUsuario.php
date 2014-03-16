@@ -12,8 +12,8 @@ class PersistenciaUsuario extends InstanciaUnica {
         $sql = "SELECT * FROM Usuario WHERE login='" . $login . "' AND senha='" . $senha . "'";
 
         
-        $sqlCOMMIT = array( 0=>"INSERT INTO Cidade VALUES (14,'VITORIAA');",
-                            1=>"INSERT INTO Cidades VALUES (15,'SALVADOR');");
+        $sqlCOMMIT = array( "INSERT INTO Cidade VALUES (19,'VITORIAA');",
+                            "INSERT INTO Cidade VALUES (20,'SALVADOR');");
         FachadaConectorBD::getInstancia()->executarTransacao($sqlCOMMIT);
         
         //Retorna do Banco array com resultados da consulta.
