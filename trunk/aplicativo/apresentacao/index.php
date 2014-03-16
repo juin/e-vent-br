@@ -1,4 +1,8 @@
-<? require_once('cabecalho.php'); ?>
+<? 
+require_once(dirname(__FILE__).'/../config.php');
+require_once(APRESENTACAO.'cabecalho.php'); 
+
+?>
     <ul>
         <li>Inicio</li>
         <li>Eventos</li>

@@ -1,5 +1,6 @@
 <?
-require_once('../../fachada/FachadaUsuarioNivelAcesso.php');
+require_once(dirname(__FILE__).'/../../config.php');
+require_once(FACHADAS.'FachadaUsuario.php');
 
 if(isset($_POST['login']) && ($_POST['senha'])){
     $login=$_POST['login'];

@@ -1,5 +1,6 @@
 <?php
-require_once ('../../fachada/FachadaConectorBD.php');
+require_once(dirname(__FILE__).'/../../config.php');
+require_once (FACHADAS.'FachadaConectorBD.php');
 
 class PersistenciaEvento extends InstanciaUnica{
 	
