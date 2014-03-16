@@ -1,5 +1,6 @@
 <?php
-require_once('../classes/InstanciaUnica.php');
+require_once(dirname(__FILE__).'/../../config.php');
+require_once(CLASSES.'/InstanciaUnica.php');
 /**
  * Classe com todas as funções do usuário.
  */

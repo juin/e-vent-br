@@ -1,7 +1,7 @@
 <?php
-require_once('../../fachada/FachadaUsuarioNivelAcesso.php');
-require_once('../../fachada/FachadaEvento.php');
-
+require_once(dirname(__FILE__).'/../../config.php');
+require_once(FACHADAS.'FachadaUsuarioNivelAcesso.php');
+require_once(FACHADAS.'FachadaEvento.php');
 ?>
 <h1>Atividades de <?php echo $_POST['cod_evento'];?></h1>
 <form method="post" action="lista_atividade.php">

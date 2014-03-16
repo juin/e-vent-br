@@ -1,5 +1,6 @@
-<? 
-require_once('../../classes/ParametrosAcessoBanco.php');
+<?
+require_once(dirname(__FILE__).'/../config.php');
+require_once(CLASSES.'ParametrosAcessoBanco.php');
 /**
  * Configurações do Banco de Dados
  */
@@ -70,5 +71,17 @@ class FachadaConectorBD{
    		mysql_close();
    		return $id;
    }    
+}
+/**
+ * Parametros de Acesso ao banco de dados
+ * Cremildo: Verificar melhor forma de refazer esse processo. (Usar Properties)
+ */
+if(FachadaConectorBD::getInstancia() == NULL){
+    $parametrosBD = new ParametrosAcessoBanco();
+    $parametrosBD->setBDServidor('localhost');
+    $parametrosBD->setBDUsuario('root');
+    $parametrosBD->setBDSenha('nano2012');
+    $parametrosBD->setBDNomeBanco('e_event_br');  
+    FachadaConectorBD::iniciarInstancia($parametrosBD);
 }
 ?>

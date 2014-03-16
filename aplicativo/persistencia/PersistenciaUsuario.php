@@ -1,7 +1,8 @@
 <?php
-require_once('../../fachada/FachadaConectorBD.php');
-require_once('../../classes/UsuarioSessao.php');
-
+require_once(dirname(__FILE__).'/../config.php');
+require_once(FACHADAS.'FachadaConectorBD.php');
+require_once(CLASSES.'UsuarioSessao.php');
+require_once(CLASSES.'InstanciaUnica.php');
 //
 //Classe que retorna os dados de usuário
 class PersistenciaUsuario extends InstanciaUnica{

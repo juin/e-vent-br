@@ -1,10 +1,10 @@
 <?php
 /**
- *  
  * responsável por retornar os dados do usuário criado na sessão.
  */
-require_once('../../classes/InstanciaUnica.php');
-require_once('../../persistencia/PersistenciaUsuario.php');
+require_once(dirname(__FILE__).'/../config.php');
+require_once(CLASSES.'InstanciaUnica.php');
+require_once(PERSISTENCIAS.'PersistenciaUsuario.php');
 /**
  * Classe responsável pelas definições do usuário;
  */
@@ -22,7 +22,6 @@ class FachadaUsuario extends InstanciaUnica{
 	}
 	
 	public function adicionarUsuario($usuario){
-		
 		$id = PersistenciaUsuario::getInstancia()->adicionarUsuario($usuario);
 
 		return $id;

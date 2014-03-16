@@ -1,12 +1,12 @@
 <?
-require_once('../config.php');
+require_once(dirname(__FILE__).'/../config.php');
 //Cria menu de acordo com o nivel de acesso do usuário.
 function menu($nivel=NULL){
     switch ($nivel) {
         case 'Super':
             echo    "<li>Inscrições</li>
                      <li>Certificados</li>
-                     <li><a href=\"".APRESENTACAO."Evento/eventos.php". "\">Gerenciar Eventos</a></li>
+                     <li><a href=\"".URL."apresentacao/Evento/eventos.php". "\">Gerenciar Eventos</a></li>
                      <li>Atividades</li>
                      <li>Tipos de Atividades</li>
                      <li>Locais de Atividades</li>

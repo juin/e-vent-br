@@ -48,16 +48,5 @@ class ParametrosAcessoBanco {
         return $this->bd_nome_banco;
     }
 }
-/**
- * Parametros de Acesso ao banco de dados
- * Cremildo: Verificar melhor forma de refazer esse processo. (Usar Properties)
- */
-if(FachadaConectorBD::getInstancia() == NULL){
-    $parametrosBD = new ParametrosAcessoBanco;
-    $parametrosBD->setBDServidor('localhost');
-    $parametrosBD->setBDUsuario('e_vent');
-    $parametrosBD->setBDSenha('3v3nt');
-    $parametrosBD->setBDNomeBanco('e_event_br');  
-    FachadaConectorBD::iniciarInstancia($parametrosBD);
-}
+
 ?>

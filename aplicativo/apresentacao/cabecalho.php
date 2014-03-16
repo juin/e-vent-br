@@ -1,11 +1,14 @@
 <?
-require_once('Usuario/menu.php');
-require_once('Usuario/verifica_sessao.php');
+require_once(dirname(__FILE__).'/../config.php');
+require_once(APRESENTACAO.'menu.php');
+require_once(APRESENTACAO.'verifica_sessao.php');
+require_once(CLASSES.'UsuarioSessao.php');
+//session_start();
 //Metódo mágico do PHP para carregar a classe necessaria para funcionamento correto do objeto
 //http://www.php.net/manual/pt_BR/language.oop5.autoload.php
 function __autoload($class_name) 
 {
-    require_once "../classes/".$class_name.".php";
+    require_once(CLASSES.$class_name.'.php');
 }
 $usuarioLogado = $_SESSION['usuario'];
 

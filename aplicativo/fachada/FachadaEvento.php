@@ -1,5 +1,6 @@
 <?php
-require_once ('../../persistencia/PersistenciaEvento.php');
+require_once(dirname(__FILE__).'/../../config.php');
+require_once(PERSISTENCIAS.'PersistenciaEvento.php');
 
 class FachadaEvento extends InstanciaUnica{
 	

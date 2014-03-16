@@ -1,9 +1,10 @@
 <?
+require_once(dirname(__FILE__).'/../config.php');
 session_start();
 $inativo = 600; //Define tempo para sessão expirar. (em segundos)
 
 if($_SESSION['usuario']==null){//Verifica se Sessão foi criada.
-  header("location: Usuario/login.php");//Redireciona caso a sessão ainda não tenha sido criada.
+  header('location: '.APRESENTACAO.'Usuario/login.php');//Redireciona caso a sessão ainda não tenha sido criada.
 } else{
     if (isset($_SESSION['tempo'])) {//Verifica se váriavel inicial da sessão tempo está definida.
         $session_life = time() - $_SESSION['tempo'];//Diminui tempo atual da sessão tempo.

@@ -1,7 +1,7 @@
 <?php
-
-require_once('../../classes/InstanciaUnica.php');
-require_once('../../persistencia/PersistenciaCidade.php');
+require_once(dirname(__FILE__).'/../../config.php');
+require_once(CLASSES.'InstanciaUnica.php');
+require_once(PERSISTENCIAS.'PersistenciaCidade.php');
 
 class FachadaCidade extends InstanciaUnica{ 
 
