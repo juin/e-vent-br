@@ -3,10 +3,10 @@ require_once(dirname(__FILE__).'/../../config.php');
 require_once(FACHADAS.'FachadaUsuarioNivelAcesso.php');
 require_once(FACHADAS.'FachadaEvento.php');
 ?>
-<h1>Atividades de <?php echo FachadaEvento::getInstancia()->getNomeEvento($_POST['cod_evento']);?></h1>
+<h1>Atividades de <?php echo FachadaEvento::getInstancia()->selecionaEventoPorCodigo($_POST['cod_evento'])->getNome();?></h1>
 <form method="post" action="lista_atividade.php">
 <?php 
-	$atividades = FachadaEvento::getInstancia()->getListaAtividadeEvento($_POST['cod_evento']);
+	$atividades = FachadaEvento::getInstancia()->selecionarListaAtividadePorCodigoEvento($_POST['cod_evento']);
 	foreach ($atividades as $atividade){
 		echo '<input type="checkbox" name="atv[]" value="'.$atividade[1].'">'.$atividade[0]." | ".$atividade[2].'<br/>';
 	}

@@ -1,22 +1,24 @@
 <?php
 require_once(PERSISTENCIAS.'PersistenciaEvento.php');
+require_once(CLASSES.'Evento.php');
 
 class FachadaEvento extends InstanciaUnica{
 	
-	public function getListaEventos(){
-		return PersistenciaEvento::getInstancia()->getListaEventos();
+	public function selecionarListaEventos(){
+		return PersistenciaEvento::getInstancia()->selecionarListaEventos();
 	}
 	
-	public function getListaAtividadeEvento($cod_evento){
-		return PersistenciaEvento::getInstancia()->getListaAtividadeEvento($cod_evento);
+	public function selecionarListaAtividadePorCodigoEvento($cod_evento){
+		return PersistenciaEvento::getInstancia()->selecionarListaAtividadePorCodigoEvento($cod_evento);
 	}
 	
-	public function getNomeEvento($cod_evento){
-		$res = PersistenciaEvento::getInstancia()->getNomeEvento($cod_evento);
-		foreach($res as $nome){
-			return $nome[0];
+	public function selecionaEventoPorCodigo($cod_evento){
+		$eventos = PersistenciaEvento::getInstancia()->selecionarEventoPorCodigo($cod_evento);
+		if($eventos!=NULL){
+			return $eventos[0];
+		} else { 
+			return NULL;
 		}
-		return null;
 	}
 }
 
