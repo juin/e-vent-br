@@ -8,13 +8,15 @@
  
 Class InstanciaUnica
 {
-
+    
     public static function getInstancia()
     {
         static $instancia = null;
         
-        return $instancia ?: $instancia = new static;
-    
+        if (!isset($instancia)) {
+            $instancia = new static;
+        }
+        return $instancia;
     }
 
 }
