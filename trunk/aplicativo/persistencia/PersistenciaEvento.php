@@ -23,7 +23,9 @@ class PersistenciaEvento extends InstanciaUnica{
 	}
 	
 	public function  getListaAtividadeEvento($cod_evento){
-		$sql = 'Select cod_atividade, nome from Atividade where cod_evento = '.$cod_evento;
+		$sql = 'Select a.nome, b.cod_atividade_agenda, b.horario_inicio, b.data from Atividade a,
+				Atividade_Agenda b where b.cod_atividade = a.cod_atividade AND
+				a.cod_evento = '.$cod_evento;
 		
 		return FachadaConectorBD::getInstancia()->consultar($sql);
 		/*$atividades[0][0] = 0;
