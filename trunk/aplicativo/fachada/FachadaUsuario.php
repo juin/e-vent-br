@@ -2,7 +2,6 @@
 /**
  * responsável por retornar os dados do usuário criado na sessão.
  */
-require_once(dirname(__FILE__).'/../config.php');
 require_once(CLASSES.'InstanciaUnica.php');
 require_once(PERSISTENCIAS.'PersistenciaUsuario.php');
 /**
