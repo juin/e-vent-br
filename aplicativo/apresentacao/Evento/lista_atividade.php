@@ -3,7 +3,7 @@ require_once(dirname(__FILE__).'/../../config.php');
 require_once(FACHADAS.'FachadaUsuarioNivelAcesso.php');
 require_once(FACHADAS.'FachadaEvento.php');
 ?>
-<h1>Atividades de <?php echo $_POST['cod_evento'];?></h1>
+<h1>Atividades de <?php echo FachadaEvento::getInstancia()->getNomeEvento($_POST['cod_evento']);?></h1>
 <form method="post" action="lista_atividade.php">
 <?php 
 	$atividades = FachadaEvento::getInstancia()->getListaAtividadeEvento($_POST['cod_evento']);
