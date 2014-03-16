@@ -14,10 +14,10 @@ class FachadaEvento extends InstanciaUnica{
 	
 	public function getNomeEvento($cod_evento){
 		$res = PersistenciaEvento::getInstancia()->getNomeEvento($cod_evento);
-		if (! is_null($res)){
-			$nome = $res[0];
+		foreach($res as $nome){
+			return $nome[0];
 		}
-		return $nome;
+		return null;
 	}
 }
 
