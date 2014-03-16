@@ -6,9 +6,7 @@ class PersistenciaEvento extends InstanciaUnica{
 	
 	public function getListaEventos(){
 		$sql = 'Select cod_evento, nome, sigla, data_inicio, status, pagamento from Evento';
-		
 		$res = FachadaConectorBD::getInstancia()->consultar($sql);
-		
 		return $res;
 		/*$eventos[0][0] = 0;
 		$eventos[1][0] = 1;

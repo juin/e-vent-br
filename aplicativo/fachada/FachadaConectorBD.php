@@ -56,11 +56,14 @@ class FachadaConectorBD{
       $this->conectarBD();
       $this->selecionarBD();
       $res = mysql_query($query) or die('Não foi possível consultar o Banco de Dados' . mysql_error());
+      $registros = null;
+      $i = 0;
       while ($saida = mysql_fetch_array($res)){
-      	print_r($saida);
+      	$registros[$i] = $saida;
+      	$i++;
       }
       mysql_close();
-      return $saida;
+      return $registros;
    }
    
    public function inserir($query){
