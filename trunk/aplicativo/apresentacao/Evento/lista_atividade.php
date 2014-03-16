@@ -1,6 +1,6 @@
 <?php
 require_once('../../fachada/FachadaUsuarioNivelAcesso.php');
-require_once('../../fachada/FachadaEvento');
+require_once('../../fachada/FachadaEvento.php');
 
 ?>
 <form method="post" action="">
