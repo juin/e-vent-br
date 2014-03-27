@@ -50,11 +50,11 @@ class FachadaConectorBD {
      */
     public function consultar($query) {
         $mysqli = $this -> conectarBD();
-        $res = $mysqli -> query($query);
+        $resultado = $mysqli -> query($query);
         $registros = null;
         $i = 0;
 
-        while ($saida = $res -> fetch_array(MYSQLI_NUM)) {
+        while ($saida = $resultado -> fetch_array(MYSQLI_ASSOC)) {
             $registros[$i] = $saida;
             $i++;
         }
