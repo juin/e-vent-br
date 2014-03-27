@@ -31,7 +31,6 @@ class PersistenciaUsuario extends InstanciaUnica {
                 $usuarios[$i++] = $usuario;   
             }
         }
-
         return $usuarios;
     }
 

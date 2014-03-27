@@ -54,7 +54,7 @@ class FachadaConectorBD {
         $registros = null;
         $i = 0;
 
-        while ($saida = $resultado -> fetch_array(MYSQLI_ASSOC)) {
+        while ($saida = $resultado -> fetch_array(MYSQLI_BOTH)) {
             $registros[$i] = $saida;
             $i++;
         }
@@ -71,6 +71,14 @@ class FachadaConectorBD {
         return $id;
     }
 
+    public function atualizar($query){
+        $mysqli = $this->conectarBD();
+        $mysqli->query($query);
+        $resultado = $mysqli->affected_rows;        
+        $mysqli->close();
+        return $resultado;   
+    }
+    
     public function executarTransacao($queries) {
 
         /* Formato do Array que essa função deve receber. 
