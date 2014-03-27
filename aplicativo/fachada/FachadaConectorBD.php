@@ -16,7 +16,7 @@ class FachadaConectorBD {
         if (!isset(self::$instancia)) {
             $c = __CLASS__;
             self::$instancia = new $c;
-            self::$instancia->setParametrosAcessoBanco($parametrosBD);
+            self::$instancia -> setParametrosAcessoBanco($parametrosBD);
         }
     }
 
@@ -36,7 +36,7 @@ class FachadaConectorBD {
      * Método que conecta e SELECIONA o banco de dados
      */
     public function conectarBD() {
-        $mysqli = new mysqli($this->parametros->getBDServidor(),$this->parametros->getBDUsuario(), $this->parametros->getBDSenha(),$this->parametros->getBDNomeBanco());
+        $mysqli = new mysqli($this -> parametros -> getBDServidor(), $this -> parametros -> getBDUsuario(), $this -> parametros -> getBDSenha(), $this -> parametros -> getBDNomeBanco());
         /* check connection */
         if (mysqli_connect_errno()) {
             printf("Falha na Conexão: %s\n", mysqli_connect_error());
@@ -49,17 +49,16 @@ class FachadaConectorBD {
      * Método que executa uma consulta no banco de dados
      */
     public function consultar($query) {
-        $mysqli = $this->conectarBD();
-        $res = $mysqli->query($query); 
+        $mysqli = $this -> conectarBD();
+        $res = $mysqli -> query($query);
         $registros = null;
         $i = 0;
-        
-        
-        while ($saida = $res->fetch_array(MYSQLI_NUM)) {
+
+        while ($saida = $res -> fetch_array(MYSQLI_NUM)) {
             $registros[$i] = $saida;
             $i++;
         }
-        $mysqli->close();
+        $mysqli -> close();
         return $registros;
     }
 
@@ -73,23 +72,37 @@ class FachadaConectorBD {
     }
 
     public function executarTransacao($queries) {
-        $mysqli = $this->conectarBD();
-        $comit = "";
-        $mysqli->autocommit(FALSE);
+
+        /* Formato do Array que essa função deve receber. 
+         * $sqlCOMMIT = array( "INSERT INTO Cidade VALUES (60,'VITORIAA')",
+         *                  "INSERT INTO Cidade VALUES (61,'SALVADOR')",
+         *                  "INSERT INTO Cidade VALUES(59, 'SSA')");
+         * */
+
+        $mysqli = $this -> conectarBD();
         
-        foreach ($queries as $query) {
-            $comit .= $query;
-            //$mysqli->query($query);
+        try {
+            /* Altera Status do autocommit para FALSE. Na verdade, ele começa a transação. */
+            $mysqli -> autocommit(FALSE);
+            //Percorre Array com SQL a ser inserido no BD
+            foreach ($queries as $sql) {
+                $resultado = $mysqli -> query($sql);//Executa SQL
+                if ($resultado === false) {//Se houver algum erro, gera excessão e apresenta msg de erro.
+                    throw new Exception('SQL Inválido: ' . $sql . ' ERRO: ' . $mysqli->error);
+                }
+            }
+            $mysqli -> commit();
+            echo 'Transação completada com sucesso!';
+
+        } catch (Exception $erro) {//Tratamento de excessão, caso haja alguma, realiza rollback.
+            echo 'Transação falhou: ' . $erro->getMessage();
+            $mysqli->rollback();
         }
-        $mysqli->multi_query($comit);
-        /* commit transaction */
-        if (!$mysqli->commit()) {
-            print("Transaction commit failed\n");
-            exit();
-        }
-        /* close connection */
-        $mysqli->close();
-        
+
+        /* Volta status do autocommit */
+        $mysqli -> autocommit(TRUE);
+        //Fecha conexão.
+        $mysqli -> close();
 
     }
 
