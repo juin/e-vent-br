@@ -13,13 +13,22 @@ class FachadaEvento extends InstanciaUnica{
 	}
 	
 	public function selecionaEventoPorCodigo($cod_evento){
-		$eventos = PersistenciaEvento::getInstancia()->selecionarEventoPorCodigo($cod_evento);
-		if($eventos!=NULL){
-			return $eventos[0];
+		$registros = PersistenciaEvento::getInstancia()->selecionarEventoPorCodigo($cod_evento);
+		if($registros!=NULL){
+			return $registros[0];
 		} else { 
 			return NULL;
 		}
 	}
+    
+    public function selecionarVagasDisponiveisPorAtividades($cod_atividade){
+        $registros = PersistenciaEvento::getInstancia()->selecionarVagasDisponiveisPorAtividade($cod_atividade);
+        if($registros!=NULL){
+            return $registros[0];
+        } else { 
+            return -1;
+        }
+    }
 }
 
 ?>
