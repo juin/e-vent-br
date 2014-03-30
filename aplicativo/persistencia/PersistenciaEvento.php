@@ -39,15 +39,15 @@ class PersistenciaEvento extends InstanciaUnica{
 			foreach ($res as $r){
 				$eventos[$i] = new Evento();
 				$eventos[$i]->setCodevento($cod_evento);
-				$eventos[$i]->setNome($r[1]);
-				$eventos[$i]->setSigla($r[2]);
-				$eventos[$i]->setDatainicio($r[3]);
-				$eventos[$i]->setDatafim($r[4]);
-				$eventos[$i]->setDatahorapublicado($r[5]);
-				$eventos[$i]->setStatus($r[6]);
-				$eventos[$i]->setPagamento($r[7]);
-				$eventos[$i]->setUrlatividade($r[8]);
-				$eventos[$i]->setUrlevento($r[9]);
+				$eventos[$i]->setNome($r["nome"]);
+				$eventos[$i]->setSigla($r["sigla"]);
+				$eventos[$i]->setDatainicio($r["data_inicio"]);
+				$eventos[$i]->setDatafim($r["data_fim"]);
+				$eventos[$i]->setDatahorapublicado($r["data_hora_publicado"]);
+				$eventos[$i]->setStatus($r["status"]);
+				$eventos[$i]->setPagamento($r["pagamento"]);
+				$eventos[$i]->setUrlatividade($r["url_gabarito_atividades"]);
+				$eventos[$i]->setUrlevento($r["url_gabarito_evento"]);
 				$i++;
 			}
 		}
