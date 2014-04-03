@@ -1,12 +1,10 @@
 <?php
 require_once (FACHADAS.'FachadaConectorBD.php');
-require_once (CLASSES.'Evento.php');
-require_once (CLASSES.'InstanciaUnica.php');
 
 class PersistenciaEvento extends InstanciaUnica{
 	
-	public function selecionarListaEventos(){
-		$sql = 'Select cod_evento, nome, sigla, data_inicio, status, pagamento from Evento where status ';
+	public function selecionarListaEventos($status){
+		$sql = "Select cod_evento, nome, sigla, data_inicio, status, pagamento from Evento WHERE status LIKE '".$status."'";
 		$res = FachadaConectorBD::getInstancia()->consultar($sql);
 		return $res;
 	}
@@ -29,11 +27,10 @@ class PersistenciaEvento extends InstanciaUnica{
             $registros = FachadaConectorBD::getInstancia()->consultar($sql);
             
             return $registros;
-
     }
     
 	public function selecionarEventoPorCodigo($cod_evento){
-		$eventos;
+		$eventos = NULL;
 		$sql = 'Select * from Evento where cod_evento = '.$cod_evento;
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
@@ -55,8 +52,8 @@ class PersistenciaEvento extends InstanciaUnica{
 		}
 		return $eventos;
 	}
-	
-	public function selecionarAtividadePorCodigo($cod_atividade_agenda){
+    
+    public function selecionarAtividadePorCodigo($cod_atividade_agenda){
 		$atividades;
 		$sql = "Select nome from atividade a, atividade_agenda ag where a.cod_atividade = ag.cod_atividade AND ag.cod_atividade_agenda = ".$cod_atividade_agenda;
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
@@ -68,6 +65,38 @@ class PersistenciaEvento extends InstanciaUnica{
 		}
 		return $atividades;
 	}
+    
+    public function selecionarParticipantesPorAtividade($cod_atividade){
+        $participantes = NULL;
+        $sql = "Select u.cod_usuario, u.nome_certificado, h.frequente" .
+                " From Usuarios u, Atividade_Agenda aa, Inscricao i, Inscricao_Historico h" .
+                " Where aa.cod_atividade_agenda = '" . $cod_atividade . "'" .
+                        " and h.cod_atividade_agenda = aa.cod_atividade_agenda " .
+                        " and i.cod_inscricao = h.cod_inscricao" .
+                        " and i.status = 'Confirmada'";
+        $registros = FachadaConectorBD::getInstancia()->consultar($sql);
+        $i = 0;
+        if (!is_null($registros)){
+            foreach ($registros as $registro){
+                $participantes[$i] = new Usuario();
+                $participantes[$i]->setCodUsuario($registro["cod_usuario"]);
+                $participantes[$i]->setNome($registro["nome"]);
+                $participantes[$i]->setFrequente($registro["frequente"]);
+                $i++;
+            }
+        }
+        return $participantes;
+    }
+    
+    public function selecionarAtividadesRealizadasPorUsuario($cod_evento, $cod_usuario, $funcao) {
+        $atividades = NULL;
+        $sql = "Select from a.cod_atividade, a.nome" .
+                " From Atividade a, Usuario_Atividade ua, Atividade_Valor av" .
+                " Where av.cod_evento = '" . $cod_evento . "'" .
+                " and ua.cod_atividade = av.cod_atividade" .
+                " and ua.cod_usuario = '" . $cod_usuario . "'" .
+                " and ua.funcao = '" . $funcao . "'";
+    }
 }
 
 ?>

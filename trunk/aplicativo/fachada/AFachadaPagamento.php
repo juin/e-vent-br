@@ -10,6 +10,10 @@ abstract class AFachadaPagamento extends InstanciaUnica implements IFachadaPagam
     function confirmarPagamentoInscricao($cod_inscricao){
         return PersistenciaPagamento::getInstancia()->confirmarPagamentoInscricao($cod_inscricao);
     }
+    
+    function cancelarPagamentoInscricao($cod_inscricao){
+        return PersistenciaPagamento::getInstancia()->cancelarPagamentoInscricao($cod_inscricao);       
+    }
 }
 
 ?>
