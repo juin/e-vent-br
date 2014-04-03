@@ -6,7 +6,17 @@ require_once (CLASSES . 'InstanciaUnica.php');
 //
 //Classe que retorna os dados de usuário
 class PersistenciaUsuario extends InstanciaUnica {
-
+    
+    //Seleciona todas as inscrições do usuário
+    public function selecionarInscricoes($cod_usuario){
+        
+        $sql = "SELECT * FROM Inscricao WHERE cod_usuario='" . $cod_usuario . "' LIMIT 5";
+        
+        $registros = FachadaConectorBD::getInstancia()->consultar($sql);
+            
+        return $registros;
+    }
+    
     public function selecionarPorLoginSenha($login, $senha) {
         //Transformar array de dados (bidimensional) em array de objetos (unidimensional)
         $sql = "SELECT * FROM Usuario WHERE login='" . $login . "' AND senha='" . $senha . "'";

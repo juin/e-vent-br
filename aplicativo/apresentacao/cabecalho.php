@@ -2,6 +2,8 @@
 require_once(APRESENTACAO.'menu.php');
 require_once(APRESENTACAO.'verifica_sessao.php');
 require_once(CLASSES.'UsuarioSessao.php');
+require_once(FACHADAS.'FachadaUsuarioNivelAcesso.php');
+require_once(FACHADAS.'FachadaEvento.php');
 //Metódo mágico do PHP para carregar a classe necessaria para funcionamento correto do objeto
 //http://www.php.net/manual/pt_BR/language.oop5.autoload.php
 function __autoload($class_name) 

@@ -26,6 +26,10 @@ class FachadaUsuario extends InstanciaUnica{
 		return $id;
 	}
     
+    public function listarInscricoes($cod_usuario){
+        return PersistenciaUsuario::getInstancia()->selecionarInscricoes($cod_usuario);
+    }
+    
 }
 
 ?>
