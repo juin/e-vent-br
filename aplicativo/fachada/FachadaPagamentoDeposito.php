@@ -10,7 +10,7 @@ class FachadaPagamentoDeposito extends AFachadaPagamento{
     }
     
     function cancelarPagamentoInscricao($cod_inscricao){
-        
+        return parent::cancelarPagamentoInscricao($cod_inscricao);
     }
     
 }

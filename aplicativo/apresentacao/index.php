@@ -19,11 +19,35 @@ require_once(FACHADAS.'FachadaEvento.php');
     <legend>
         Eventos em Andamentos
     </legend>
+    <? 
+        $eventos_andamento = FachadaEvento::getInstancia()->listarEventosEmAndamento();
+    ?>
+    <ul>
+        <?
+            if($eventos_andamento!=NULL){
+                foreach ($eventos_andamento as $andamento) {
+                    echo "<li><a href=\"".URL."apresentacao/Evento/evento.php?cod_evento=".$andamento['cod_evento'] . "\">".$andamento['nome']."</a></li>";
+                }
+            }
+        ?>
+    </ul>
 </fieldset>
 <fieldset>
     <legend>
         Eventos Encerrados
     </legend>
+    <? 
+        $eventos_encerrados = FachadaEvento::getInstancia()->listarEventosEncerrados();
+    ?>
+    <ul>
+        <?
+            if($eventos_andamento!=NULL){
+                foreach ($eventos_encerrados as $andamento) {
+                    echo "<li>".$andamento['nome']."</li>";
+                }
+            }
+        ?>
+    </ul>
 </fieldset>
 <fieldset>
     <legend>
