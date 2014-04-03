@@ -20,6 +20,15 @@ class FachadaEvento extends InstanciaUnica{
 			return NULL;
 		}
 	}
+	
+	public function selecionaAtividadePorCodigo($cod_atividade_agenda){
+		$registros = PersistenciaEvento::getInstancia()->selecionarAtividadePorCodigo($cod_atividade_agenda);
+		if($registros != NULL){
+			return $registros[0];
+		} else {
+			return NULL;
+		}
+	}
     
     public function selecionarVagasDisponiveisPorAtividades($cod_atividade){
         $registros = PersistenciaEvento::getInstancia()->selecionarVagasDisponiveisPorAtividade($cod_atividade);

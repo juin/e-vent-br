@@ -1,5 +1,7 @@
 <?php
 require_once (FACHADAS.'FachadaConectorBD.php');
+require_once (CLASSES.'Evento.php');
+require_once (CLASSES.'InstanciaUnica.php');
 
 class PersistenciaEvento extends InstanciaUnica{
 	
@@ -33,10 +35,10 @@ class PersistenciaEvento extends InstanciaUnica{
 	public function selecionarEventoPorCodigo($cod_evento){
 		$eventos;
 		$sql = 'Select * from Evento where cod_evento = '.$cod_evento;
-		$res = FachadaConectorBD::getInstancia()->consultar($sql);
+		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
-		if (!is_null($res)){
-			foreach ($res as $r){
+		if (!is_null($registros)){
+			foreach ($registros as $r){
 				$eventos[$i] = new Evento();
 				$eventos[$i]->setCodevento($cod_evento);
 				$eventos[$i]->setNome($r["nome"]);
@@ -52,6 +54,19 @@ class PersistenciaEvento extends InstanciaUnica{
 			}
 		}
 		return $eventos;
+	}
+	
+	public function selecionarAtividadePorCodigo($cod_atividade_agenda){
+		$atividades;
+		$sql = "Select nome from atividade a, atividade_agenda ag where a.cod_atividade = ag.cod_atividade AND ag.cod_atividade_agenda = ".$cod_atividade_agenda;
+		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$i = 0;
+		if (!is_null($registros)){
+			foreach ($registros as $r){
+				$atividades = $r;
+			}
+		}
+		return $atividades;
 	}
 }
 
