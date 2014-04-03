@@ -4,7 +4,7 @@ require_once (FACHADAS.'FachadaConectorBD.php');
 class PersistenciaEvento extends InstanciaUnica{
 	
 	public function selecionarListaEventos(){
-		$sql = 'Select cod_evento, nome, sigla, data_inicio, status, pagamento from Evento';
+		$sql = 'Select cod_evento, nome, sigla, data_inicio, status, pagamento from Evento where status ';
 		$res = FachadaConectorBD::getInstancia()->consultar($sql);
 		return $res;
 	}
@@ -46,7 +46,7 @@ class PersistenciaEvento extends InstanciaUnica{
 				$eventos[$i]->setDatahorapublicado($r["data_hora_publicado"]);
 				$eventos[$i]->setStatus($r["status"]);
 				$eventos[$i]->setPagamento($r["pagamento"]);
-				$eventos[$i]->setUrlatividade($r["url_gabarito_atividades"]);
+				$eventos[$i]->setUrlatividade($r["url_gabarito_atividade"]);
 				$eventos[$i]->setUrlevento($r["url_gabarito_evento"]);
 				$i++;
 			}
