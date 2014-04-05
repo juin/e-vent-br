@@ -6,7 +6,7 @@ require_once(FACHADAS.'FachadaEvento.php');
 $cod_evento = $_GET['cod_evento'];
 
 if($cod_evento!=NULL){
-    $evento = FachadaEvento::getInstancia()->selecionaEventoPorCodigo($cod_evento);
+    $evento = FachadaEvento::getInstancia()->listarEventoPorCodigo($cod_evento);
     echo $evento->getCodevento() . "<br>";
     echo $evento->getNome() . "<br>";
     echo $evento->getSigla() . "<br>";
