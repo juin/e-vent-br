@@ -24,12 +24,12 @@ echo "Atividades<br>";
 ?>
 <form method="post" action="lista_atividade.php">
     <?php 
-        $atividade = FachadaEvento::getInstancia()->selecionarAtividadePorCodigoEvento();
-        foreach ($eventos as $evento){
-            echo '<input type="radio" name="cod_evento" value="'.$evento[0].'">'.$evento[2].'-'.$evento[1].'<br/>';
+        $atividades = FachadaEvento::getInstancia()->listarAtividadesPorCodigoEvento($cod_evento);
+        foreach ($atividades as $atividade){
+            echo '<input type="radio" name="cod_evento" value="'.$atividade->getCodAtividadeAgenda().'">'.$atividade->getNome().'-'.$atividade->getStatus().'<br/>';
         }
     ?>
-    <input type="submit" value="Inscrever">
+    <input type="submit" value="Gerenciar">
 </form>
 <?
 echo "<br><br><br><a href='javascript:history.back(2)'>Clique aqui para voltar</a>";
