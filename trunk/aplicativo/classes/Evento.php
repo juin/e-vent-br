@@ -24,15 +24,15 @@ class Evento {
 		return $this->sigla;
 	}
 	
-	public function getDatainicio(){
+	public function getDataInicio(){
 		return $this->data_inicio;
 	}
 	
-	public function getDatafim(){
+	public function getDataFim(){
 		return $this->data_fim;
 	}
 	
-	public function getDatahorapublicado(){
+	public function getDataHoraPublicado(){
 		return $this->data_hora_publicado;
 	}
 	
@@ -44,15 +44,15 @@ class Evento {
 		return $this->pagamento;
 	}
 	
-	public function getUrlatividade(){
+	public function getUrlAtividade(){
 		return $this->url_gabarito_atividade;
 	}
 	
-	public function geturlevento(){
+	public function getUrlEvento(){
 		return $this->url_gabarito_evento;
 	}
 	
-	public function setCodevento($cod_evento){
+	public function setCodEvento($cod_evento){
 		$this->cod_evento = $cod_evento;
 	}
 	
@@ -64,15 +64,15 @@ class Evento {
 		$this->sigla = $sigla;
 	}
 	
-	public function setDatainicio($data_inicio){
+	public function setDataInicio($data_inicio){
 		$this->data_inicio = $data_inicio;
 	}
 	
-	public function setDatafim($data_fim){
+	public function setDataFim($data_fim){
 		$this->data_fim = $data_fim;
 	}
 	
-	public function setDatahorapublicado($data_hora_publicado){
+	public function setDataHoraPublicado($data_hora_publicado){
 		$this->data_hora_publicado = $data_hora_publicado;
 	}
 	
@@ -84,11 +84,11 @@ class Evento {
 		$this->pagamento = $pagamento;
 	}
 	
-	public function setUrlatividade($url_atividade){
+	public function setUrlAtividade($url_atividade){
 		$this->url_gabarito_atividade = $url_atividade;
 	}
 	
-	public function setUrlevento($url_evento){
+	public function setUrlEvento($url_evento){
 		$this->url_gabarito_evento = $url_evento;
 	}
 }
