@@ -54,7 +54,7 @@ class PersistenciaEvento extends InstanciaUnica{
 	}
     
     public function selecionarAtividadePorCodigo($cod_atividade_agenda){
-		$atividades;
+		$atividades = NULL;
 		$sql = "Select nome from atividade a, atividade_agenda ag where a.cod_atividade = ag.cod_atividade AND ag.cod_atividade_agenda = ".$cod_atividade_agenda;
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
