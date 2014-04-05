@@ -61,18 +61,18 @@ class PersistenciaEvento extends InstanciaUnica{
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
-			foreach ($registros as $r){
+			foreach ($registros as $registro){
 				$eventos[$i] = new Evento();
 				$eventos[$i]->setCodevento($cod_evento);
-				$eventos[$i]->setNome($r["nome"]);
-				$eventos[$i]->setSigla($r["sigla"]);
-				$eventos[$i]->setDatainicio($r["data_inicio"]);
-				$eventos[$i]->setDatafim($r["data_fim"]);
-				$eventos[$i]->setDatahorapublicado($r["data_hora_publicado"]);
-				$eventos[$i]->setStatus($r["status"]);
-				$eventos[$i]->setPagamento($r["pagamento"]);
-				$eventos[$i]->setUrlatividade($r["url_gabarito_atividade"]);
-				$eventos[$i]->setUrlevento($r["url_gabarito_evento"]);
+				$eventos[$i]->setNome($registro["nome"]);
+				$eventos[$i]->setSigla($registro["sigla"]);
+				$eventos[$i]->setDatainicio($registro["data_inicio"]);
+				$eventos[$i]->setDatafim($registro["data_fim"]);
+				$eventos[$i]->setDatahorapublicado($registro["data_hora_publicado"]);
+				$eventos[$i]->setStatus($registro["status"]);
+				$eventos[$i]->setPagamento($registro["pagamento"]);
+				$eventos[$i]->setUrlatividade($registro["url_gabarito_atividade"]);
+				$eventos[$i]->setUrlevento($registro["url_gabarito_evento"]);
 				$i++;
 			}
 		}
@@ -119,12 +119,25 @@ class PersistenciaEvento extends InstanciaUnica{
     
     public function selecionarAtividadesRealizadasPorUsuario($cod_evento, $cod_usuario, $funcao) {
         $atividades = NULL;
-        $sql = "Select from a.cod_atividade, a.nome" .
-                " From Atividade a, Usuario_Atividade ua, Atividade_Valor av" .
-                " Where av.cod_evento = '" . $cod_evento . "'" .
-                " and ua.cod_atividade = av.cod_atividade" .
+        $sql = "Select a.cod_atividade, a.nome, a.status" .
+                " From Atividade a, Usuario_Atividade ua" .
+                " Where a.cod_evento = '" . $cod_evento . "'" .
                 " and ua.cod_usuario = '" . $cod_usuario . "'" .
+				" and ua.cod_atividade = a.cod_atividade" . 
                 " and ua.funcao = '" . $funcao . "'";
+		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$i = 0;
+		if (!is_null($registros)){
+			foreach ($registros as $registro){
+				$atividades[i] = new Atividade();
+				$atividades[i]->setCodAtividade($registro["cod_atividade"]);
+				$atividades[i]->setNome($registro["nome"]);
+				$atividades[i]->setStatus($registro["status"]);
+				$i++;
+			}
+		}
+		
+		return $atividades;
     }
 }
 
