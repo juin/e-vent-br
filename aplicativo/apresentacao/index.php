@@ -3,6 +3,7 @@ require_once (dirname(__FILE__) . '/../config.php');
 require_once (APRESENTACAO . 'cabecalho.php');
 require_once(FACHADAS.'FachadaUsuarioNivelAcesso.php');
 require_once(FACHADAS.'FachadaEvento.php');
+require_once(FACHADAS.'FachadaInscricao.php');
 ?>
 <ul>
     <li>
@@ -26,7 +27,7 @@ require_once(FACHADAS.'FachadaEvento.php');
         <?
             if($eventos_andamento!=NULL){
                 foreach ($eventos_andamento as $andamento) {
-                    echo "<li><a href=\"".URL."apresentacao/Evento/evento.php?cod_evento=".$andamento['cod_evento'] . "\">".$andamento['nome']."</a></li>";
+                    echo "<li><a href=\"".URL."apresentacao/Evento/evento.php?cod_evento=".$andamento->getCodEvento() . "\">".$andamento->getNome() ."</a></li>";
                 }
             }
         ?>
@@ -43,7 +44,7 @@ require_once(FACHADAS.'FachadaEvento.php');
         <?
             if($eventos_andamento!=NULL){
                 foreach ($eventos_encerrados as $andamento) {
-                    echo "<li>".$andamento['nome']."</li>";
+                    echo "<li>".$andamento->getNome() ."</li>";
                 }
             }
         ?>
@@ -54,15 +55,13 @@ require_once(FACHADAS.'FachadaEvento.php');
         Inscrições
     </legend>
     <?
-        $inscricoes = FachadaUsuario::getInstancia() -> listarInscricoes($usuarioLogado -> getCodUsuario());
+        $inscricoes = FachadaInscricao::getInstancia() -> listarInscricoesPorUsuario($usuarioLogado -> getCodUsuario());
     ?>
     <ul>
         <?
         if ($inscricoes!=NULL) {
             foreach ($inscricoes as $inscricao) {
-                $evento = FachadaEvento::getInstancia() -> selecionaEventoPorCodigo($inscricao['cod_evento']);
-                echo "<li>Código Inscrição: " . $inscricao['cod_inscricao'] . " Evento: " . $evento -> getNome() . " Status: " . $inscricao['status'];
-
+                echo "<li>Código Inscrição: " . $inscricao->getCodInscricao() . " Evento: " . $inscricao -> getNomeEvento() . " Status: " . $inscricao->getStatus();
             }
         }
         ?>

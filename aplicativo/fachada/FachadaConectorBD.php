@@ -62,8 +62,8 @@ class FachadaConectorBD {
         return $registros;
     }
 
-    public function consultar($query, $limite) {
-    	return consultar($query . " LIMIT " . $limite);
+    public function consultarComLimite($query, $limite) {
+    	return FachadaConectorBD::getInstancia()->consultar($query . " LIMIT " . $limite);
     }
 
     public function inserir($query) {
