@@ -62,6 +62,10 @@ class FachadaConectorBD {
         return $registros;
     }
 
+    public function consultar($query, $limite) {
+    	return consultar($query . " LIMIT " . $limite);
+    }
+
     public function inserir($query) {
         $mysqli = $this->conectarBD();
         $res = $mysqli->query($query); 
