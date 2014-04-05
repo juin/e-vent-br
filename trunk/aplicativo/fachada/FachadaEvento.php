@@ -4,24 +4,24 @@ require_once(CLASSES.'Evento.php');
 
 class FachadaEvento extends InstanciaUnica{
 	
-	public function selecionarListaEventos(){
-		return PersistenciaEvento::getInstancia()->selecionarListaEventos('%');
+	public function listarEventos(){
+		return PersistenciaEvento::getInstancia()->selecionarEventosPorStatus('%');
 	}
 	
     public function listarEventosEmAndamento(){
-        return PersistenciaEvento::getInstancia()->selecionarListaEventos(EVENTO_STATUS_ANDAMENTO);
+        return PersistenciaEvento::getInstancia()->selecionarEventosPorStatus(EVENTO_STATUS_ANDAMENTO);
     }
     
     public function listarEventosEncerrados(){
-        return PersistenciaEvento::getInstancia()->selecionarListaEventos(EVENTO_STATUS_ENCERRADO);
+        return PersistenciaEvento::getInstancia()->selecionarEventosPorStatus(EVENTO_STATUS_ENCERRADO);
     }
           
-	public function selecionarListaAtividadePorCodigoEvento($cod_evento){
-		return PersistenciaEvento::getInstancia()->selecionarListaAtividadePorCodigoEvento($cod_evento);
+	public function listarAtividadesPorCodigoEvento($cod_evento){
+		return PersistenciaEvento::getInstancia()->selecionarAtividadesPorCodigoEvento($cod_evento);
 	}
 	
-	public function selecionaEventoPorCodigo($cod_evento){
-		$registros = PersistenciaEvento::getInstancia()->selecionarEventoPorCodigo($cod_evento);
+	public function listarEventoPorCodigo($cod_evento){
+		$registros = PersistenciaEvento::getInstancia()->selecionarEventosPorCodigo($cod_evento);
 		if($registros!=NULL){
 			return $registros[0];
 		} else { 
@@ -29,8 +29,8 @@ class FachadaEvento extends InstanciaUnica{
 		}
 	}
 	
-	public function selecionaAtividadePorCodigo($cod_atividade_agenda){
-		$registros = PersistenciaEvento::getInstancia()->selecionarAtividadePorCodigo($cod_atividade_agenda);
+	public function listarAtividadePorCodigo($cod_atividade_agenda){
+		$registros = PersistenciaEvento::getInstancia()->selecionarAtividadesPorCodigo($cod_atividade_agenda);
 		if($registros != NULL){
 			return $registros[0];
 		} else {
@@ -38,8 +38,8 @@ class FachadaEvento extends InstanciaUnica{
 		}
 	}
     
-    public function selecionarVagasDisponiveisPorAtividades($cod_atividade){
-        $registros = PersistenciaEvento::getInstancia()->selecionarVagasDisponiveisPorAtividade($cod_atividade);
+    public function listarVagasDisponiveisPorAtividades($cod_atividade){
+        $registros = PersistenciaEvento::getInstancia()->listarVagasDisponiveisPorAtividade($cod_atividade);
         if($registros!=NULL){
             return $registros[0];
         } else { 
