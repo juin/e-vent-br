@@ -7,7 +7,7 @@ require_once(FACHADAS.'FachadaEvento.php');
 	<?php 
 		$eventos = FachadaEvento::getInstancia()->listarEventos();
 		foreach ($eventos as $evento){
-			echo '<input type="radio" name="cod_evento" value="'.$evento[0].'">'.$evento[2].'-'.$evento[1].'<br/>';
+			echo '<input type="radio" name="cod_evento" value="'.$evento->getCodEvento().'">'.$evento->getSigla().'-'.$evento->getNome().'<br/>';
 		}
 	?>
 	<input type="submit" value="Inscrever">
