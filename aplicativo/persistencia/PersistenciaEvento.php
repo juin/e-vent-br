@@ -1,6 +1,6 @@
 <?php
 require_once (FACHADAS.'FachadaConectorBD.php');
-
+require_once(CLASSES . 'AtividadeAgenda.php');
 class PersistenciaEvento extends InstanciaUnica{
 	
 	public function selecionarEventosPorStatus($status){
@@ -26,7 +26,7 @@ class PersistenciaEvento extends InstanciaUnica{
 	
 	public function  selecionarAtividadesPorCodigoEvento($cod_evento){
 		$atividades = NULL;	
-		$sql = 'Select b.cod_atividade_agenda, a.nome, b.horario_inicio, b.data from Atividade a,
+		$sql = 'Select b.cod_atividade_agenda, a.nome, b.horario_inicio, b.horario_fim, b.data, a.status from Atividade a,
 				Atividade_Agenda b where b.cod_atividade = a.cod_atividade AND
 				a.cod_evento = '.$cod_evento;
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
@@ -34,10 +34,12 @@ class PersistenciaEvento extends InstanciaUnica{
 		if (!is_null($registros)){
 			foreach ($registros as $registro){
 				$atividades[$i] = new AtividadeAgenda();
+				$atividades[$i]->setNome($registro["nome"]);
 				$atividades[$i]->setCodAtividadeAgenda($registro["cod_atividade_agenda"]);
-				$atividades[$i]->setNome($registro["horario_inicio"]);
-				$atividades[$i]->setNome($registro["horario_fim"]);
-				$atividades[$i]->setNome($registro["data"]);
+				$atividades[$i]->setHorarioInicio($registro["horario_inicio"]);
+				$atividades[$i]->setHorarioFim($registro["horario_fim"]);
+				$atividades[$i]->setData($registro["data"]);
+				$atividades[$i]->setStatus($registro["status"]);
 				$i++;
 			}
 		}

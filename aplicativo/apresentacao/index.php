@@ -42,9 +42,9 @@ require_once(FACHADAS.'FachadaInscricao.php');
     ?>
     <ul>
         <?
-            if($eventos_andamento!=NULL){
-                foreach ($eventos_encerrados as $andamento) {
-                    echo "<li>".$andamento->getNome() ."</li>";
+            if($eventos_encerrados!=NULL){
+                foreach ($eventos_encerrados as $encerrado) {
+                    echo "<li>".$encerrado->getNome() ."</li>";
                 }
             }
         ?>

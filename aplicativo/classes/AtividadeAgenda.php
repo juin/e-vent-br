@@ -1,14 +1,15 @@
 <?php
 
-class Atividade {
+class AtividadeAgenda {
 	private $cod_atividade_agenda;
 	private $nome;
 	private $data;
 	private $horario_inicio;
 	private $horario_fim;
+	private $status;
 	
 	public function getCodAtividadeAgenda(){
-		return $this->$cod_atividade_agenda;
+		return $this->cod_atividade_agenda;
 	}
 	
 	public function getNome(){
@@ -31,7 +32,6 @@ class Atividade {
 		$this->resumo = $cod_atividade_agenda;
 	}
 
-	
 	public function setNome($nome){
 		$this->nome = $nome;
 	}
@@ -48,6 +48,13 @@ class Atividade {
 		$this->horario_fim = $horario_fim;
 	}
 	
+	public function getStatus(){
+		return $this->status;
+	}
+	
+	public function setStatus($status){
+		$this->status = $status;
+	}
 }
 
 ?>
