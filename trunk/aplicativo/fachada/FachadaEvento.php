@@ -47,16 +47,12 @@ class FachadaEvento extends InstanciaUnica{
         }
     }
     
-    // seleciona usuarios participantes por atividade
-    // aplicabilidades:
-    // 1. Emissao de listas de presencas
-    // 2. Controle de presencas (depois de coletar as presencas, registra-las no sistema)
     public function listarParticipantesPorAtividade($cod_atividade) {
-        $registros = PersistenciaEvento::getInstancia()->selecionarParticipantesPorAtividade($cod_atividade);
+        return PersistenciaEvento::getInstancia()->selecionarParticipantesPorAtividade($cod_atividade);
     }
     
-    public function listarAtividadesMonitoradaPorUsuario($cod_evento, $cod_usuario){
-        
+    public function listarAtividadesMonitoradaPorUsuario($cod_evento, $cod_usuario, $funcao){
+        return PersistenciaEvento::getInstancia()->selecionarAtividadesRealizadasPorUsuario($cod_evento, $cod_usuario, $funcao);
     }
 }
 
