@@ -12,7 +12,7 @@ class Evento {
 	private $url_gabarito_atividade;
 	private $url_gabarito_evento;
 	
-	public function getCodevento(){
+	public function getCodEvento(){
 		return $this->cod_evento;
 	}
 	

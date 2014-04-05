@@ -5,26 +5,18 @@
 class Certificado{
 	 //@var int
     private $codigo;
-	
     private $usuario;
-	
 	 //@var int
     private $data_hora_salvo;
-	
 	 //@var int
     private $data_hora_enviado;
-	
 	 //@var int
     private $data_hora_emissao;
-	
     private $evento;
-	
 	 //@var string
     private $url;
-	
     private $atividades;
-    
-   
+	
     public function getCodigo() {
         return $this->codigo;
     }
