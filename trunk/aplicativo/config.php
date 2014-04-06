@@ -2,7 +2,7 @@
 
 //Contantes de Endereço
 define('MODULO_DIRETORIO', dirname(__FILE__).'/');
-define('URL','http://localhost/e-vent/aplicativo/');
+define('URL','http://localhost/e-vent-br/aplicativo/');
 define('BASE',MODULO_DIRETORIO);
 define('CLASSES',BASE.'classes/');
 define('FACHADAS',BASE.'fachada/');
@@ -10,6 +10,12 @@ define('PERSISTENCIAS',BASE.'persistencia/');
 define('APRESENTACAO',BASE.'apresentacao/');
 
 //Constantes de Banco de Dados
+//Acesso
+define('ACESSO_SERVIDOR','localhost');
+define('ACESSO_USUARIO','root');
+define('ACESSO_SENHA','admin');
+define('ACESSO_NOME_BANCO','e_vent_br');
+//Convencoes de estados e numeracoes
 define('USUARIO_ATIVIDADE_FUNCAO_MINISTRANTE','Ministrante');
 define('USUARIO_ATIVIDADE_FUNCAO_MONITOR','Monitor');
 define('ATIVIDADE_TIPO_FREQUENCIA_EVENTO','Evento');
