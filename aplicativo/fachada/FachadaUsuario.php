@@ -1,23 +1,16 @@
 <?php
-/**
- * responsável por retornar os dados do usuário criado na sessão.
- */
 require_once(CLASSES.'InstanciaUnica.php');
 require_once(PERSISTENCIAS.'PersistenciaUsuario.php');
-/**
- * Classe responsável pelas definições do usuário;
- */
+
 class FachadaUsuario extends InstanciaUnica{
 
-    //Função que vai validar se o usuário pode acessar a area restrita ou não.
 	public function validarAcesso($login, $senha){
-            
-        //Recebe um objeto do tipo UsuarioSessao da PersistenciaUsuario   
         $usuarios = PersistenciaUsuario::getInstancia()->selecionarPorLoginSenha($login, $senha);
         if($usuarios!=NULL){
-            //Retorna o objeto encontrado no BD
             return $usuarios[0];
-        } else { return NULL; }
+        } else { 
+        	return NULL; 
+        }
 	}
 	
 	public function adicionarUsuario($usuario){
@@ -25,6 +18,46 @@ class FachadaUsuario extends InstanciaUnica{
 
 		return $id;
 	}
+	
+	public function usuarioEhCoordenador($cod_usuario, $cod_evento){
+        $usuarios = PersistenciaUsuario::getInstancia()->selecionarPorEventoFuncao(
+        	$cod_usuario, $cod_evento, USUARIO_EVENTO_FUNCAO_COORD);
+        if($usuarios != NULL){
+            return true;
+        } else { 
+        	return false; 
+        }
+	}
+	
+	public function usuarioEhAuxiliar($cod_usuario, $cod_evento){
+        $usuarios = PersistenciaUsuario::getInstancia()->selecionarPorEventoFuncao(
+        	$cod_usuario, $cod_evento, USUARIO_EVENTO_FUNCAO_AUX);
+        if($usuarios != NULL){
+            return true;
+        } else { 
+        	return false; 
+        }
+	}
+    
+    public function usuarioEhMinistrante($cod_usuario, $cod_atividade){
+        $usuarios = PersistenciaUsuario::getInstancia()->selecionarPorAtividadeFuncao(
+        	$cod_usuario, $cod_atividade, USUARIO_ATIVIDADE_FUNCAO_MINISTRANTE);
+        if($usuarios != NULL){
+            return true;
+        } else { 
+        	return false; 
+        }
+    }
+    
+    public function usuarioEhMonitor($cod_usuario, $cod_atividade){
+        $usuarios = PersistenciaUsuario::getInstancia()->selecionarPorAtividadeFuncao(
+        	$cod_usuario, $cod_atividade, USUARIO_ATIVIDADE_FUNCAO_MONITOR);
+        if($usuarios != NULL){
+            return true;
+        } else { 
+        	return false; 
+        }
+    }
     
 }
 
