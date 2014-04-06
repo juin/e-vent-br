@@ -10,7 +10,7 @@ if($_SESSION['usuario']==null){//Verifica se Sessão foi criada.
         if ($session_life > $inativo) {//Verifica se usuário está inativo há mais segundos que o definido acima.
             session_unset();//Apaga dados da sessão
             session_destroy();//Destroi dados da sessão
-            header("Location: Usuario/login.php");//Redirecio para página de login
+            header('location: '.APRESENTACAO.'Usuario/login.php');//Redirecio para página de login
         }
     }
     $_SESSION['tempo'] = time();//Registra novo tempo na sessão.
