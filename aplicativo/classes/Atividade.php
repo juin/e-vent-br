@@ -14,10 +14,10 @@ class Atividade {
 	private $observacao;
 	private $tipo_frequencia;
 	private $status;
-	private $vagas;
+	
 	
 	public function getCodAtividade(){
-		return $this->$cod_atividade;
+		return $this->cod_atividade;
 	}
 	
 	public function getNome(){
@@ -67,11 +67,7 @@ class Atividade {
 	public function getStatus(){
 		return $this->status;
 	}
-	
-	public function getVagas(){
-		return $this->vagas;
-	}
-	
+		
 	public function setCodAtividade($cod_atividade) {
 		$this->cod_atividade = $cod_atividade;
 	}
@@ -111,7 +107,7 @@ class Atividade {
 	public function setVagas($vagas){
 		$this->vagas = $vagas;
 	}
-	
+		
 	public function setObservacao($observacao){
 		$this->observacao = $observacao;
 	}
@@ -124,9 +120,6 @@ class Atividade {
 		$this->status = $status;
 	}
 	
-	public function setVagas($vagas) {
-		$this->vagas = $vagas;
-	}
 }
 
 ?>
