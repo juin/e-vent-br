@@ -12,9 +12,9 @@ define('APRESENTACAO',BASE.'apresentacao/');
 //Constantes de Banco de Dados
 //Acesso
 define('ACESSO_SERVIDOR','localhost');
-define('ACESSO_USUARIO','root');
-define('ACESSO_SENHA','admin');
-define('ACESSO_NOME_BANCO','e_vent_br');
+define('ACESSO_USUARIO','e_vent');
+define('ACESSO_SENHA','3v3nt');
+define('ACESSO_NOME_BANCO','e_event_br');
 //Convencoes de estados e numeracoes
 define('USUARIO_ATIVIDADE_FUNCAO_MINISTRANTE','Ministrante');
 define('USUARIO_ATIVIDADE_FUNCAO_MONITOR','Monitor');
