@@ -14,7 +14,7 @@ if(isset($_POST['login']) && ($_POST['senha'])){
             session_start(); 
             $_SESSION['tempo'] = time();
             $_SESSION['usuario'] = $usuario;
-            header('location: http://localhost/e-vent/aplicativo/apresentacao/index.php');
+            header('location: '.URL.'apresentacao/index.php');
         } else {
             echo "Login ou Senha inválido.";
         }
