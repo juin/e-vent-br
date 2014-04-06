@@ -7,7 +7,7 @@ require_once (FACHADAS . 'FachadaEvento.php');
 $eventos = FachadaEvento::getInstancia() -> listarEventos();
 echo "<ul>";
 foreach ($eventos as $evento) {
-	 echo "<li><a href=\"" . URL . "apresentacao/Evento/evento.php?cod_evento=" . $evento->getCodEvento() . "\">".$evento->getNome() . $evento -> getStatus() . "</a></li>";
+	 echo "<li><a href=\"" . URL . "apresentacao/Evento/gerencia_evento.php?cod_evento=" . $evento->getCodEvento() . "\">".$evento->getNome() . $evento -> getStatus() . "</a></li>";
 }
 echo "</ul>";
 ?>

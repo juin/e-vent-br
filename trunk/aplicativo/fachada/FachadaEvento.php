@@ -29,8 +29,17 @@ class FachadaEvento extends InstanciaUnica{
 		}
 	}
 	
-	public function listarAtividadePorCodigo($cod_atividade_agenda){
-		$registros = PersistenciaEvento::getInstancia()->selecionarAtividadesPorCodigo($cod_atividade_agenda);
+	public function listarAtividadePorCodigo($cod_atividade){
+		$registros = PersistenciaEvento::getInstancia()->selecionarAtividadesPorCodigo($cod_atividade);
+		if($registros != NULL){
+			return $registros[0];
+		} else {
+			return NULL;
+		}
+	}
+	
+	public function listarAgendasPorAtividade($cod_atividade){
+		$registros = PersistenciaEvento::getInstancia()->selecionarAgendasPorAtivdade($cod_atividade);
 		if($registros != NULL){
 			return $registros[0];
 		} else {

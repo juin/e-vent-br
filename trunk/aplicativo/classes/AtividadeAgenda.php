@@ -29,7 +29,7 @@ class AtividadeAgenda {
 	}
 
 	public function setCodAtividadeAgenda($cod_atividade_agenda){
-		$this->resumo = $cod_atividade_agenda;
+		$this->cod_atividade_agenda = $cod_atividade_agenda;
 	}
 
 	public function setNome($nome){
