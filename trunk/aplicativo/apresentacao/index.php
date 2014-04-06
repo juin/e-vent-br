@@ -27,7 +27,7 @@ require_once(FACHADAS.'FachadaInscricao.php');
         <?
             if($eventos_andamento!=NULL){
                 foreach ($eventos_andamento as $andamento) {
-                    echo "<li><a href=\"".URL."apresentacao/Evento/evento.php?cod_evento=".$andamento->getCodEvento() . "\">".$andamento->getNome() ."</a></li>";
+                    echo "<li><a href=\"" . URL . "apresentacao/Evento/evento.php?cod_evento=" . $andamento->getCodEvento() . "\">".$andamento->getNome() ."</a></li>";
                 }
             }
         ?>
@@ -44,7 +44,7 @@ require_once(FACHADAS.'FachadaInscricao.php');
         <?
             if($eventos_encerrados!=NULL){
                 foreach ($eventos_encerrados as $encerrado) {
-                    echo "<li>".$encerrado->getNome() ."</li>";
+                    echo "<li><a href=\"" . URL . "apresentacao/Evento/evento.php?cod_evento=" . $encerrado->getCodEvento() . "\">".$encerrado->getNome() . "</a></li>";
                 }
             }
         ?>
@@ -55,13 +55,13 @@ require_once(FACHADAS.'FachadaInscricao.php');
         Inscrições
     </legend>
     <?
-        $inscricoes = FachadaInscricao::getInstancia() -> listarInscricoesPorUsuario($usuarioLogado -> getCodUsuario());
+        $inscricoes = FachadaInscricao::getInstancia()->listarInscricoesPorUsuario($usuarioLogado->getCodUsuario());
     ?>
     <ul>
         <?
         if ($inscricoes!=NULL) {
             foreach ($inscricoes as $inscricao) {
-                echo "<li>Código Inscrição: " . $inscricao->getCodInscricao() . " Evento: " . $inscricao -> getNomeEvento() . " Status: " . $inscricao->getStatus();
+                echo "<li>Código Inscrição: " . $inscricao->getCodInscricao() . " Evento: " . $inscricao->getNomeEvento() . " Status: " . $inscricao->getStatus();
             }
         }
         ?>
