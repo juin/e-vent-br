@@ -1,5 +1,5 @@
 <?
-require_once (CLASSES . 'ParametrosAcessoBanco.php');
+require_once (CLASSES.'ParametrosAcessoBanco.php');
 /**
  * Configurações do Banco de Dados
  */
@@ -36,7 +36,7 @@ class FachadaConectorBD {
      * Método que conecta e SELECIONA o banco de dados
      */
     public function conectarBD() {
-        $mysqli = new mysqli($this -> parametros -> getBDServidor(), $this -> parametros -> getBDUsuario(), $this -> parametros -> getBDSenha(), $this -> parametros -> getBDNomeBanco());
+        $mysqli = new mysqli($this->parametros->getBDServidor(), $this->parametros->getBDUsuario(), $this->parametros->getBDSenha(), $this->parametros->getBDNomeBanco());
         /* check connection */
         if (mysqli_connect_errno()) {
             printf("Falha na Conexão: %s\n", mysqli_connect_error());
@@ -133,10 +133,10 @@ class FachadaConectorBD {
  */
 if (FachadaConectorBD::getInstancia() == NULL) {
     $parametrosBD = new ParametrosAcessoBanco();
-    $parametrosBD -> setBDServidor('localhost');
-    $parametrosBD -> setBDUsuario('e_vent');
-    $parametrosBD -> setBDSenha('3v3nt');
-    $parametrosBD -> setBDNomeBanco('e_event_br');
+    $parametrosBD->setBDServidor(ACESSO_SERVIDOR);
+    $parametrosBD->setBDUsuario(ACESSO_USUARIO);
+    $parametrosBD->setBDSenha(ACESSO_SENHA);
+    $parametrosBD->setBDNomeBanco(ACESSO_NOME_BANCO);
     FachadaConectorBD::iniciarInstancia($parametrosBD);
 }
 ?>
