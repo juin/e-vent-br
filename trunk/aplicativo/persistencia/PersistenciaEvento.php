@@ -2,6 +2,7 @@
 require_once (FACHADAS.'FachadaConectorBD.php');
 require_once(CLASSES . 'Atividade.php');
 require_once(CLASSES . 'AtividadeAgenda.php');
+require_once(PERSISTENCIAS . 'PersistenciaLocal.php');
 
 class PersistenciaEvento extends InstanciaUnica{
 	
@@ -28,19 +29,14 @@ class PersistenciaEvento extends InstanciaUnica{
 	
 	public function  selecionarAtividadesPorCodigoEvento($cod_evento){
 		$atividades = NULL;	
-		$sql = 'Select b.cod_atividade_agenda, a.nome, b.horario_inicio, b.horario_fim, b.data, a.status from Atividade a,
-				Atividade_Agenda b where b.cod_atividade = a.cod_atividade AND
-				a.cod_evento = '.$cod_evento;
+		$sql = "SELECT a.cod_atividade, a.nome, a.status FROM Atividade a WHERE a.cod_evento =".$cod_evento;
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
 			foreach ($registros as $registro){
-				$atividades[$i] = new AtividadeAgenda();
+				$atividades[$i] = new Atividade();
+				$atividades[$i]->setCodAtividade($registro["cod_atividade"]);
 				$atividades[$i]->setNome($registro["nome"]);
-				$atividades[$i]->setCodAtividadeAgenda($registro["cod_atividade_agenda"]);
-				$atividades[$i]->setHorarioInicio($registro["horario_inicio"]);
-				$atividades[$i]->setHorarioFim($registro["horario_fim"]);
-				$atividades[$i]->setData($registro["data"]);
 				$atividades[$i]->setStatus($registro["status"]);
 				$i++;
 			}
@@ -111,18 +107,57 @@ class PersistenciaEvento extends InstanciaUnica{
 		return $atividades;
 	}
 	
-	public function selecionarAgendasPorAtividade($cod_atividade_agenda){
-		$atividades_agendadas = NULL;
-		$sql = "SELECT a.cod_atividade, a.nome FROM atividade a, atividade_agenda ag WHERE a.cod_atividade= ag.cod_atividade AND a.cod_atividade_agenda=".$cod_atividade_agenda;
+	public function selecionarAgendasPorCodigo($cod_atividade_agenda){
+		$agendas = NULL;
+		$sql = "SELECT ag.cod_atividade_agenda, ag.data, ag.horario_inicio, 
+		ag.horario_fim, ag.cod_local FROM Atividade_Agenda ag 
+		WHERE ag.cod_atividade_agenda=".$cod_atividade_agenda;
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
 			foreach ($registros as $registro){
+				$local = null;
+				$cod_local = $registro["cod_local"];
+				if (!is_null($cod_local)) {
+					$locais = PersistenciaLocal::getInstancia()->selecionarPorCodigo($cod_local);
+					if(!is_null($locais)){
+						$local = $locais[0];
+					}
+				}
 				$atividades_agendadas[$i] = new AtividadeAgenda();
 				$atividades_agendadas[$i]->setCodAtividadeAgenda($registro["cod_atividade_agenda"]);
 				$atividades_agendadas[$i]->setData($registro["data"]);
 				$atividades_agendadas[$i]->setHorarioInicio($registro["horario_inicio"]);
 				$atividades_agendadas[$i]->setHorarioFim($registro["horario_fim"]);
+				$atividades_agendadas[$i]->setLocal($local);
+				$i++;
+			}
+		}
+		return $atividades_agendadas;
+	}
+	public function selecionarAgendasPorAtividade($cod_atividade){
+		$atividades_agendadas = NULL;
+		$sql = "SELECT ag.cod_atividade_agenda, ag.data, ag.horario_inicio, 
+		ag.horario_fim, ag.cod_local FROM Atividade a, Atividade_Agenda ag 
+		WHERE a.cod_atividade= ag.cod_atividade AND ag.cod_atividade=".$cod_atividade;
+		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$i = 0;
+		if (!is_null($registros)){
+			foreach ($registros as $registro){
+				$local = null;
+				$cod_local = $registro["cod_local"];
+				if (!is_null($cod_local)) {
+					$locais = PersistenciaLocal::getInstancia()->selecionarPorCodigo($cod_local);
+					if(!is_null($locais)){
+						$local = $locais[0];
+					}
+				}
+				$atividades_agendadas[$i] = new AtividadeAgenda();
+				$atividades_agendadas[$i]->setCodAtividadeAgenda($registro["cod_atividade_agenda"]);
+				$atividades_agendadas[$i]->setData($registro["data"]);
+				$atividades_agendadas[$i]->setHorarioInicio($registro["horario_inicio"]);
+				$atividades_agendadas[$i]->setHorarioFim($registro["horario_fim"]);
+				$atividades_agendadas[$i]->setLocal($local);
 				$i++;
 			}
 		}

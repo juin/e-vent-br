@@ -24,7 +24,7 @@ echo "Atividades<br>";
 $atividades = FachadaEvento::getInstancia() -> listarAtividadesPorCodigoEvento($cod_evento);
 if ($atividades != null) {
 	foreach ($atividades as $atividade) {
-		echo "<li><a href=\"".URL."apresentacao/Evento/gerencia_atividade.php?cod_atividade=".$atividade->getCodAtividadeAgenda()."\">".$atividade->getNome()."-".$atividade -> getStatus()."</a></li>";
+		echo "<li><a href=\"".URL."apresentacao/Evento/gerencia_atividade.php?cod_atividade=".$atividade->getCodAtividade()."\">".$atividade->getNome()."-".$atividade -> getStatus()."</a></li>";
 	}
 }
 
