@@ -6,7 +6,8 @@
 	echo "<h3>Evento: ".
 		 FachadaEvento::getInstancia()->listarEventoPorCodigo($_POST['cod_evento'])->getNome();
 	echo "</h3><br/>";
+	
 	foreach ($_POST['atv'] as $atv){
-		echo "Atividade : ".FachadaEvento::getInstancia()->listarAtividadePorCodigo($atv[0])."<br/>";
+		echo "Atividade: ".FachadaEvento::getInstancia()->listarAtividadePorCodigo($atv[0])."<br/>";
 	}
 ?>
