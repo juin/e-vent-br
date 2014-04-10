@@ -4,7 +4,7 @@ require_once(FACHADAS.'FachadaUsuarioNivelAcesso.php');
 require_once(FACHADAS.'FachadaEvento.php');
 ?>
 <h1>Atividades de <?php echo FachadaEvento::getInstancia()->listarEventoPorCodigo($_GET['cod_evento'])->getNome();?></h1>
-<form method="post" action="confirma_evento.php">
+<form method="post" action="confirmacao_evento.php">
 	<?php 
 		$atividades = FachadaEvento::getInstancia()->listarAtividadesPorCodigoEvento($_GET['cod_evento']);
 		foreach ($atividades as $atividade){
