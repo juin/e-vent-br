@@ -44,6 +44,30 @@ class PersistenciaEvento extends InstanciaUnica{
 		return $atividades;
 	}
 	
+	public function selecionarAtividadeAgendaPorCodigoEvento($cod_evento){
+		$atividades = NULL;
+		$sql = "Select a.cod_atividade, a.nome, a.status, aa.data, aa.cod_atividade_agenda,
+				aa.horario_inicio, aa.horario_fim from atividade a, atividade_agenda aa 
+				where a.cod_atividade = aa.cod_atividade AND a.cod_evento = ".$cod_evento;
+		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$i = 0;
+		if (!is_null($registros)){
+			foreach ($registros as $registro){
+				$atividades[$i] = new AtividadeAgenda();
+				$atividades[$i]->setCodAtividadeAgenda($registro["cod_atividade_agenda"]);
+				$atividades[$i]->setNome($registro["nome"]);
+				$atividades[$i]->setData($registro["data"]);
+				$atividades[$i]->setStatus($registro["status"]);
+				$atividades[$i]->setData($registro["data"]);
+				$atividades[$i]->setCodAtividade($registro["cod_atividade"]);
+				$atividades[$i]->setHorarioInicio($registro["horario_inicio"]);
+				$atividades[$i]->setHorarioFim($registro["horario_fim"]);
+				$i++;
+			}
+		}
+		return $atividades;
+	}
+	
     public function selecionarVagasDisponiveisPorAtividade($cod_atividade_agenda){
             $sql = "SELECT (a.vagas - count(*)) as quantidadeVagas FROM Atividade a, 
                     Inscricao i, Inscricao_Historico h, Atividade_Agenda aa WHERE
