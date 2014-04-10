@@ -1,6 +1,6 @@
 <?php
 
-//Contantes de Endereço
+//Contantes de Enderecos
 define('MODULO_DIRETORIO', dirname(__FILE__).'/');
 define('URL','http://localhost/e-vent/aplicativo/');
 define('BASE',MODULO_DIRETORIO);
@@ -8,7 +8,8 @@ define('CLASSES',BASE.'classes/');
 define('FACHADAS',BASE.'fachada/');
 define('PERSISTENCIAS',BASE.'persistencia/');
 define('APRESENTACAO',BASE.'apresentacao/');
-
+define('SCRIPTS',URL.'../recursos/js/' );
+define('UTILIDADES',BASE.'utilidades.php');
 //Constantes de Banco de Dados
 //Acesso
 define('ACESSO_SERVIDOR','localhost');
