@@ -38,6 +38,12 @@ class FachadaUsuario extends InstanciaUnica{
         	return false; 
         }
 	}
+	
+	public function usuarioEhAuxiliarOuCoordenador($cod_usuario, $cod_evento){
+		$ehaux = FachadaUsuario::getInstancia()->usuarioEhAuxiliar($cod_usuario,$cod_evento);
+		$ehcoord = FachadaUsuario::getInstancia()->usuarioEhCoordenador($cod_usuario,$cod_evento);
+		return ($ehaux || $ehcoord);
+	}
     
     public function usuarioEhMinistrante($cod_usuario, $cod_atividade){
         $usuarios = PersistenciaUsuario::getInstancia()->selecionarPorAtividadeFuncao(
