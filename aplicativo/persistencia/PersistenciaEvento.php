@@ -44,10 +44,10 @@ class PersistenciaEvento extends InstanciaUnica{
 		return $atividades;
 	}
 	
-    public function selecionarVagasDisponiveisPorAtividade($cod_atividade){
+    public function selecionarVagasDisponiveisPorAtividade($cod_atividade_agenda){
             $sql = "SELECT (a.vagas - count(*)) as quantidadeVagas FROM Atividade a, 
                     Inscricao i, Inscricao_Historico h, Atividade_Agenda aa WHERE
-                    aa.cod_atividade_agenda = '"  . $cod_atividade . "' AND i.status in ('Andamento', 'Confirmada')
+                    aa.cod_atividade_agenda = '"  . $cod_atividade_agenda . "' AND i.status in ('Andamento', 'Confirmada')
                     AND h.cod_inscricao = i.cod_inscricao AND aa.cod_atividade_agenda = h.cod_atividade_agenda AND
                     a.cod_atividade = aa.cod_atividade GROUP BY a.vagas";
             $registro = FachadaConectorBD::getInstancia()->consultar($sql);
@@ -168,7 +168,7 @@ class PersistenciaEvento extends InstanciaUnica{
         $participantes = NULL;
         $sql = "Select u.cod_usuario, u.nome_certificado, h.frequente" .
                 " From Usuarios u, Atividade_Agenda aa, Inscricao i, Inscricao_Historico h" .
-                " Where aa.cod_atividade_agenda = '" . $cod_atividade . "'" .
+                " Where aa.cod_atividade_agenda = '".$cod_atividade."'" .
                         " and h.cod_atividade_agenda = aa.cod_atividade_agenda " .
                         " and i.cod_inscricao = h.cod_inscricao" .
                         " and i.status = 'Confirmada'";
@@ -190,8 +190,8 @@ class PersistenciaEvento extends InstanciaUnica{
         $atividades = NULL;
         $sql = "Select a.cod_atividade, a.nome, a.status" .
                 " From Atividade a, Usuario_Atividade ua" .
-                " Where a.cod_evento = '" . $cod_evento . "'" .
-                " and ua.cod_usuario = '" . $cod_usuario . "'" .
+                " Where a.cod_evento = '".$cod_evento."'" .
+                " and ua.cod_usuario = '".$cod_usuario."'" .
 				" and ua.cod_atividade = a.cod_atividade" . 
                 " and ua.funcao = '" . $funcao . "'";
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
