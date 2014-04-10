@@ -45,9 +45,6 @@ class FachadaConectorBD {
         return $mysqli;
     }
 
-    /**
-     * Método que executa uma consulta no banco de dados
-     */
     public function consultar($query) {
         $mysqli = $this -> conectarBD();
         $resultado = $mysqli -> query($query);
