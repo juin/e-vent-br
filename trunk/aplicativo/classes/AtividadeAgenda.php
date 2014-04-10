@@ -8,6 +8,7 @@ class AtividadeAgenda {
 	private $horario_fim;
 	private $status;
 	private $local;
+	private $cod_atividade;
 	
 	public function getCodAtividadeAgenda(){
 		return $this->cod_atividade_agenda;
@@ -31,6 +32,10 @@ class AtividadeAgenda {
 
 	public function getLocal(){
 		return $this->local;
+	}
+	
+	public function getCodAtividade(){
+		return $this->cod_atividade;
 	}
 	
 	public function setCodAtividadeAgenda($cod_atividade_agenda){
@@ -63,6 +68,10 @@ class AtividadeAgenda {
 	
 	public function setLocal($local){
 		$this->local = $local;
+	}
+	
+	public function setCodAtividade($cod_atividade){
+		$this->cod_atividade = $cod_atividade;
 	}
 }
 
