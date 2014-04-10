@@ -27,7 +27,7 @@ require_once(FACHADAS.'FachadaInscricao.php');
         <?
             if($eventos_andamento!=NULL){
                 foreach ($eventos_andamento as $andamento) {
-                    echo "<li><a href=\"" . URL . "apresentacao/Evento/evento.php?cod_evento=" . $andamento->getCodEvento() . "\">".$andamento->getNome() ."</a></li>";
+                    echo "<li><a href=\"" . URL . "apresentacao/Evento/gerencia_evento.php?cod_evento=" . $andamento->getCodEvento() . "\">".$andamento->getNome() ."</a></li>";
                 }
             }
         ?>
@@ -44,7 +44,7 @@ require_once(FACHADAS.'FachadaInscricao.php');
         <?
             if($eventos_encerrados!=NULL){
                 foreach ($eventos_encerrados as $encerrado) {
-                    echo "<li><a href=\"" . URL . "apresentacao/Evento/evento.php?cod_evento=" . $encerrado->getCodEvento() . "\">".$encerrado->getNome() . "</a></li>";
+                    echo "<li><a href=\"" . URL . "apresentacao/Evento/gerencia_evento.php?cod_evento=" . $encerrado->getCodEvento() . "\">".$encerrado->getNome() . "</a></li>";
                 }
             }
         ?>
