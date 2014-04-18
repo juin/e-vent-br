@@ -66,14 +66,6 @@ class FachadaConectorBD {
     public function inserir($query) {
         $mysqli = $this->conectarBD();
         $res = $mysqli->query($query); 
-        $registros = null;
-        $i = 0;
-        
-        
-        while ($saida = $res->fetch_array(MYSQLI_NUM)) {
-            $registros[$i] = $saida;
-            $i++;
-        }
         $id = $mysqli->insert_id;
         $mysqli->close();
         return $id;
