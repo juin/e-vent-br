@@ -1,6 +1,6 @@
 <?php
 require_once(dirname(__FILE__).'/../../config.php');
-require_once(FACHADAS.'FachadaUsuarioNivelAcesso.php');
+require_once(dirname(__FILE__).'/../../utilidades.php');
 require_once(FACHADAS.'FachadaEvento.php');
 ?>
 <h1>Atividades de <?php echo FachadaEvento::getInstancia()->listarEventoPorCodigo($_GET['cod_evento'])->getNome();?></h1>
@@ -9,7 +9,7 @@ require_once(FACHADAS.'FachadaEvento.php');
 		$atividades = FachadaEvento::getInstancia()->listarAtividadeAgendaPorEvento($_GET['cod_evento']);
 		foreach ($atividades as $atividade){
 			echo '<input type="checkbox" name="atv[]" value="'.$atividade->getCodAtividadeAgenda().'">'.$atividade->getNome()." | 
-				  Data: ".$atividade->getData()." | Horario Início: ".$atividade->getHorarioInicio()."| Vagas: ".
+				  Data: ".arrumaData($atividade->getData())." | Horario Início: ".$atividade->getHorarioInicio()."| Vagas: ".
 				  FachadaEvento::getInstancia()->listarAtividadePorCodigo($atividade->getCodAtividade())->getVagas().'<br/>';
 		}
 	?>
