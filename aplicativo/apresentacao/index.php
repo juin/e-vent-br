@@ -1,7 +1,6 @@
 <?
 require_once (dirname(__FILE__) . '/../config.php');
 require_once (APRESENTACAO . 'cabecalho.php');
-require_once(FACHADAS.'FachadaUsuarioNivelAcesso.php');
 require_once(FACHADAS.'FachadaEvento.php');
 require_once(FACHADAS.'FachadaInscricao.php');
 ?>
