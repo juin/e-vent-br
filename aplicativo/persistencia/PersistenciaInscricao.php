@@ -1,6 +1,8 @@
 <?php
+require_once(dirname(__FILE__).'../../config.php');
 require_once (FACHADAS.'FachadaConectorBD.php');
 require_once (CLASSES.'Inscricao.php');
+require_once(CLASSES.'InstanciaUnica.php');
 
 class PersistenciaInscricao extends InstanciaUnica {
     
@@ -26,6 +28,26 @@ class PersistenciaInscricao extends InstanciaUnica {
 			}
 		}
         return $inscricoes;
+    }
+    
+    public function realizaInscricao(Inscricao $inscricao){
+    	$sql = "INSERT INTO `inscricao`
+    			(`cod_usuario`, `cod_evento`,
+    			`data_hora`, `forma_pagamento`, `status`)
+    			VALUES
+    			(".$inscricao->getCodUsuario().",".$inscricao->getCodEvento().",now(),
+    			'".$inscricao->getFormaPagamento()."','".$inscricao->getStatus()."')";
+    	return FachadaConectorBD::getInstancia()->inserir($sql);
+    }
+    
+    public function realizaInscricaoEmAtividade($cod_inscricao, $cod_atividade_agenda){
+    	$sql = "INSERT INTO `inscricao_historico`
+    			(`cod_inscricao`, `cod_atividade_agenda`, `valor_pago`, 
+    			`frequente`, `observacao`)
+    			VALUES
+    			(".$cod_inscricao.",".$cod_atividade_agenda.",
+    			0.00,'".INSCRICAO_HISTORICO_FREQUENTE_NAO_LANCADO."','')";
+    	return FachadaConectorBD::getInstancia()->inserir($sql);
     }
 
 }

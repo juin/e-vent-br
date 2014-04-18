@@ -134,7 +134,7 @@ class PersistenciaEvento extends InstanciaUnica{
 	public function selecionarAgendasPorCodigo($cod_atividade_agenda){
 		$agendas = NULL;
 		$sql = "SELECT ag.cod_atividade_agenda, ag.data, ag.horario_inicio, 
-		ag.horario_fim, ag.cod_local FROM Atividade_Agenda ag 
+		ag.horario_fim, ag.cod_local, ag.cod_atividade FROM Atividade_Agenda ag 
 		WHERE ag.cod_atividade_agenda=".$cod_atividade_agenda;
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
@@ -153,6 +153,7 @@ class PersistenciaEvento extends InstanciaUnica{
 				$atividades_agendadas[$i]->setData($registro["data"]);
 				$atividades_agendadas[$i]->setHorarioInicio($registro["horario_inicio"]);
 				$atividades_agendadas[$i]->setHorarioFim($registro["horario_fim"]);
+				$atividades_agendadas[$i]->setCodAtividade($registro["cod_atividade"]);
 				$atividades_agendadas[$i]->setLocal($local);
 				$i++;
 			}

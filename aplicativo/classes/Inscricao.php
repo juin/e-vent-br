@@ -7,6 +7,7 @@ class Inscricao {
 	private $status;
 	private $cod_evento;
 	private $nome_evento;
+	private $cod_usuario;
 
 	public function setCodInscricao($cod_inscricao) {
 		$this -> cod_inscricao = $cod_inscricao;
@@ -56,5 +57,12 @@ class Inscricao {
 		return $this -> nome_evento;
 	}
 
+	public function setCodUsuario($cod_usuario){
+		$this->cod_usuario = $cod_usuario;
+	}
+	
+	public function getCodUsuario(){
+		return $this->cod_usuario;
+	}
 }
 ?>

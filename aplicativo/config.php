@@ -51,7 +51,7 @@ define('EVENTO_PAGAMENTO_PAGO','Pago');
 define('BOLETO_STATUS_ABERTO','Aberto');
 define('BOLETO_STATUS_PAGO','Pago');
 define('BOLETO_STATUS_CANCELADO','Cancelado');
-define('INSCRICAO_FORMA_PGTO_VISTA','A vista');
+define('INSCRICAO_FORMA_PGTO_VISTA','Vista');
 define('INSCRICAO_FORMA_PGTO_BOLETO','Boleto');
 define('INSCRICAO_STATUS_ANDAMENTO','Andamento');
 define('INSCRICAO_STATUS_CONFIRMADA','Confirmada');
