@@ -3,14 +3,11 @@
 //Classe Certificado para a emissao de certificados
 
 class Certificado{
-	 //@var int
+
     private $cod_certificado;
 	private $cod_inscricao;
-	 //@var int
-    private $data_hora_salvo;
-	 //@var int
+	private $data_hora_salvo;
     private $data_hora_enviado;
-	 //@var int
     private $data_hora_emissao;
     private $cod_validacao;
 	
