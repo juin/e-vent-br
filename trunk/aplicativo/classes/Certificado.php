@@ -4,27 +4,24 @@
 
 class Certificado{
 	 //@var int
-    private $codigo;
-    private $usuario;
+    private $cod_certificado;
+	private $cod_inscricao;
 	 //@var int
     private $data_hora_salvo;
 	 //@var int
     private $data_hora_enviado;
 	 //@var int
     private $data_hora_emissao;
-    private $evento;
-	 //@var string
-    private $url;
-    private $atividades;
+    private $cod_validacao;
 	
-    public function getCodigo() {
-        return $this->codigo;
+    public function getCodCertificado() {
+        return $this->cod_certificado;
     }
-
-    public function getUsuario() {
-        return $this->usuario;
+	
+	public function getCodCertificado() {
+        return $this->cod_certificado;
     }
-
+	
     public function getData_hora_salvo() {
         return $this->data_hora_salvo;
     }
@@ -37,26 +34,18 @@ class Certificado{
         return $this->data_hora_emissao;
     }
 
-    public function getEvento() {
-        return $this->evento;
+	 public function getCodValidacao() {
+        return $this->cod_validacao;
     }
 
-    public function getUrl() {
-        return $this->url;
-    }
-
-    public function getAtividades() {
-        return $this->atividades;
-    }
-
-    public function setCodigo($codigo) {
-        $this->codigo = $codigo;
-    }
-
-    public function setUsuario($usuario) {
-        $this->usuario = $usuario;
-    }
-
+    public function setCodCertificado($cod_certificado){
+		$this->cod_certificado = $cod_certificado;
+	}
+	
+	public function setCodInscricao($cod_inscricao){
+		$this->cod_inscricao = $cod_inscricao;
+	}
+	
     public function setData_hora_salvo($data_hora_salvo) {
         $this->data_hora_salvo = $data_hora_salvo;
     }
@@ -68,19 +57,12 @@ class Certificado{
     public function setData_hora_emissao($data_hora_emissao) {
         $this->data_hora_emissao = $data_hora_emissao;
     }
-
-    public function setEvento($evento) {
-        $this->evento = $evento;
+	
+	 public function setCodValidacao($cod_validacao) {
+        $this->cod_validacao = $cod_validacao;
     }
+	
 
-    public function setUrl($url) {
-        $this->url = $url;
-    }
-
-    public function setAtividades($atividades) {
-        $this->atividades = $atividades;
-    }
-
-
+    
 
 }
