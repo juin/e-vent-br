@@ -19,9 +19,26 @@ class FachadaCertificado extends InstanciaUnica{
 		//return $_SESSION['Evento']->getCodEvento();
 	}
 	
-	//retorna a inscricao atraves do codigo
-	public function getInscricaoPorCodigo(){
-		//retorna minha inscricao
+
+	public function listarPorUsuario($cod_usuario){
+		return PersistenciaCertificado::getInstancia()->selecionarPorUsuario;
 	}
 	
+	public function verificarCertificado($cod_validacao){
+		$registros=PersistenciaCertificado::getInstancia()->selecionarPorCodigoValidacao;
+		if(count($registros)>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function emitirCertificado($cod_certificado){
+		
+	}
+	public function salvarCertificado($cod_certificado){
+		
+	}
+	public function enviarCertificado($cod_certificado){
+		
+	}
 }
