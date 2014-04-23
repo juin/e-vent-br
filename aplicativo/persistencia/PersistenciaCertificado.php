@@ -34,12 +34,30 @@ class PersistenciaCertificado extends InstanciaUnica{
 		return $registros;
 	}
 	public function atualizarDataEmissao($cod_certificado,$data){
-		
+		$sql = 'UPDATE Certificado set data_emissao = '.$data.' where cod_certificado = '.$cod_certificado;
+		$registros = FachadaConectorBD::getInstancia()->atualizar($sql);
+		if($registros != null){
+			return 0;
+		} else {
+			return null;
+		}
 	}
 	public function atualizarDataSalvo($cod_certificado,$data){
-		
+		$sql= 'UPDATE Certificado set data_salvo = '.$data.'Where cod_certificado='.$cod_certificado;
+		$registros = FachadaConectorBD::getInstancia()->atualizar($sql);
+		if($registros != null){
+			return 0;
+		} else {
+			return null;
+		}
 	}
 	public function atualizarDataEnvio($cod_certificado,$data){
-		
+		$sql = 'UPDATE Certificado set data_envio = '.$data.' where cod_certificado = '.$cod_certificado;
+		$registros = FachadaConectorBD::getInstancia()->atualizar($sql);
+		if($registros != null){
+			return 0;
+		} else {
+			return null;
+		}
 	}
 }
