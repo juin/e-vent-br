@@ -9,14 +9,12 @@ class FachadaCertificado extends InstanciaUnica{
 	
 	//Busca o codigo do usurio
 	public function getCodigoDaSessao(){
-		return 0;
-		//return $_SESSION['Usuario']->getCodUsuario();
+		return $_SESSION['Usuario']->getCodUsuario();
 	}
 	
 	//busca o codigo do evento
 	public function getCodigoEvento(){
-		return 0;
-		//return $_SESSION['Evento']->getCodEvento();
+		return $_SESSION['Evento']->getCodEvento();
 	}
 	
 
@@ -41,4 +39,17 @@ class FachadaCertificado extends InstanciaUnica{
 	public function enviarCertificado($cod_certificado){
 		
 	}
+	
+	public function atualizarDataEmissao($cod_certificado, $data){
+		return PersistenciaCertificado::getInstancia()->atualizarDataEmissao($cod_certificado, $data);
+	}
+	
+	public function atualizarDataSalvo($cod_certificado,$data){
+		return PersistenciaCertificado::getInstancia()->atualizarDataSalvo($cod_certificado, $data);
+	}
+	
+	public function atualizarDataEnvio($cod_certificado,$data){
+		return PersistenciaCertificado::getInstancia()->atualizarDataEnvio($cod_certificado, $data);
+	}
+	
 }
