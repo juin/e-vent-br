@@ -10,10 +10,19 @@ class Certificado{
     private $data_hora_enviado;
     private $data_hora_emissao;
     private $cod_validacao;
+	private $nome_certificado;
+	private $nome_atividade;
+	private $carga_horaria;
+	private $nome_evento;
+
 	
     public function getCodCertificado() {
         return $this->cod_certificado;
     }
+	
+	public function getNomeCertificado(){
+		return $this->nome_certificado;
+	}
 	
 	public function getCodCertificado() {
         return $this->cod_certificado;
@@ -34,6 +43,19 @@ class Certificado{
 	 public function getCodValidacao() {
         return $this->cod_validacao;
     }
+	 
+	 public function getNomeAtividade(){
+		return $this->nome_atividade;
+	}
+	 
+	 public function getCargaHoraria(){
+		return $this->carga_horaria;
+	}
+	 
+	public function getNomeEvento(){
+		return $this->nome_evento;
+	}
+	
 
     public function setCodCertificado($cod_certificado){
 		$this->cod_certificado = $cod_certificado;
@@ -55,11 +77,27 @@ class Certificado{
         $this->data_hora_emissao = $data_hora_emissao;
     }
 	
+	public function setNomeCertificado($nome_certificado){
+		$this->nome_certificado=$nome_certificado;
+	}
+	
 	 public function setCodValidacao($cod_validacao) {
         $this->cod_validacao = $cod_validacao;
     }
+	 
+	 public function setNomeAtividade($nome_atividade){
+		$this->nome_atividade = $nome_atividade;
+	}
+	 
+	 public function setCargaHoraria($carga_horaria){
+		$this->carga_horaria = $carga_horaria;
+	}
+	 
+	 public function setNomeEvento($nome_evento){
+	 	$this->nome_evento=$nome_evento;
+	 }
 	
-
+	
     
 
 }
