@@ -26,6 +26,7 @@ class PersistenciaCertificado extends InstanciaUnica{
 			$certificados[$i] = $certificado;
 			$i++;
 		}
+	return $certificados;
 	}
 	public function selecionarPorCodigoValidacao($cod_validacao){
 		$sql='Select cod_certificado from Certificado where cod_validacao = '.$cod_validacao;
@@ -60,4 +61,27 @@ class PersistenciaCertificado extends InstanciaUnica{
 			return null;
 		}
 	}
+	
+	public function emitirCertificado($cod_usuario, $cod_evento){
+		
+           $sql='Select a.nome_certificado, b.nome as nome_atividade, b.carga_horaria, c.nome as nome_evento from
+            	Usuario a, Atividade b,Evento c, Inscricao_Historico d, Inscricao e, Atividade_Agenda f where a.cod_usuario=e.cod_usuario AND d.cod_inscricao= e.cod_inscricao AND 
+				d.cod_atividade_agenda=f.cod_atividade_agenda AND f.cod_atividade=b.cod_atividade AND d.frequente="Presente" AND a.cod_usuario='.$cod_usuario.' AND c.cod_evento = '.$cod_evento;
+				
+		$registros= FachadaConectorBD::getInstancia()->consultar($sql);
+		$certificados;
+		$i=0;
+		foreach ($registros as $registro){
+				$certificado=new Certificado();
+				$certificado->setNomeCertificado($nome_certificado);
+				$certificado->setNomeAtividade($nome_atividade);
+				$certificado->setCargaHoraria($carga_horaria);
+				$certificado->setNomeEvento($nome_evento);
+				$certificados[$i] = $certificado;
+			    $i++;
+				
+		}
+		return $certificados;
+				
 }
+	}
