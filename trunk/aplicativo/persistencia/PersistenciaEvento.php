@@ -194,7 +194,8 @@ class PersistenciaEvento extends InstanciaUnica{
         $participantes = NULL;
         $sql = "Select u.nome_certificado,u.rg,u.cod_usuario from usuario u, inscricao i, inscricao_historico h 
         		where i.cod_usuario = u.cod_usuario AND h.cod_inscricao = i.cod_inscricao 
-        		AND h.cod_atividade_agenda = ".$cod_atividade." AND i.status = 'Confirmada'";
+        		AND h.cod_atividade_agenda = ".$cod_atividade." AND i.status = 'Confirmada'
+        		ORDER BY nome_certificado";
         $registros = FachadaConectorBD::getInstancia()->consultar($sql);
         $i = 0;
         if (!is_null($registros)){
