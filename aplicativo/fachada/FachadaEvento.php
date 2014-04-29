@@ -76,6 +76,28 @@ class FachadaEvento extends InstanciaUnica{
     public function listarAtividadesMonitoradaPorUsuario($cod_evento, $cod_usuario, $funcao){
         return PersistenciaEvento::getInstancia()->selecionarAtividadesRealizadasPorUsuario($cod_evento, $cod_usuario, $funcao);
     }
+    
+    public function listarInscritosPorCodigoAtividadeAgenda($cod_atividade_agenda){
+    	$registros = PersistenciaEvento::getInstancia()->selecionarInscritosPorCodigoAtividadeAgenda($cod_atividade_agenda);
+    	$inscritos = null;
+    	$i = 0;
+    	if (!is_null($registros)){
+    		foreach ($registros as $registro){
+    			$inscritos[$i] = $registro['nome_certificado'];
+    			$i++;
+    		}
+    	}
+    	return $inscritos;
+    }
+    
+    public function listarEventoPorAtividade($cod_atividade){
+    	$registros = PersistenciaEvento::getInstancia()->selecionarEventoPorAtividade($cod_atividade);
+    	if($registros!=NULL){
+    		return $registros[0];
+    	} else {
+    		return -1;
+    	}
+    }
 }
 
 ?>
