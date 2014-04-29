@@ -1,4 +1,5 @@
 <?php
+require_once(CLASSES . 'UsuarioSessao.php');;
 
 class Usuario extends UsuarioSessao{
     private $sexo, $nasc, $cpf, $rg, $tel1, $tel2, $email, $instituicao, $curso,
