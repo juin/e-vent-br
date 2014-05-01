@@ -21,9 +21,14 @@
 </form>
 <form action="efetua_pagamento.php" method="post">
 	
-	<?php print_r($_POST['atv']);
+	<?php
+		$valor_total_inscricao = 0;
 		foreach ($_POST['atv'] as $atv){
 			echo '<input type="hidden" value="'.$atv[0].'" name="atv[]" />';
+			//$valor_total_inscricao = $valor_total_inscricao + 
+			//FachadaEvento::getInstancia()->listarAtividadePorCodigo(
+				//FachadaEvento::getInstancia()->listarAgendaPorCodigo(
+					//$atv[0])->getCodAtividade())->getValor();
 		}
 	?>
 	<input type="hidden" value="<?php echo $_POST['cod_evento'];?>" name="cod_evento" />
