@@ -2,18 +2,27 @@
 
 class AtividadeValor {
 
-	private $cod_atividade;
+	private $nome;
+	private $cod_atividade_tipo;
 	private $cod_evento;
 	private $valor_estudante;
 	private $valor_professor;
 	private $valor_profissional_outros;
 
-	public function getCodAtividade() {
-		return $this -> cod_atividade;
+	public function getNome(){
+		return $this->nome;
+	}
+	
+	public function setNome($nome){
+		$this->nome = $nome;
+	}
+	
+	public function getCodAtividadeTipo() {
+		return $this -> cod_atividade_tipo;
 	}
 
-	public function setCodAtividade($cod_atividade) {
-		$this -> cod_atividade = $cod_atividade;
+	public function setCodAtividadeTipo($cod_atividade_tipo) {
+		$this -> cod_atividade_tipo = $cod_atividade_tipo;
 	}
 
 	public function getCodEvento() {
@@ -47,4 +56,5 @@ class AtividadeValor {
 	public function setValorProfissionalOutros($valor_profissional_outros) {
 		$this -> valor_profissional_outros = $valor_profissional_outros;
 	}
+	
 }
