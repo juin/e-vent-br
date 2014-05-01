@@ -15,7 +15,7 @@
 			 		listarAgendaPorCodigo($atv[0])->getCodAtividade())->getNome()."<br/>";
 	}
 ?>
-<form action="lista_atividade.php" method="get">
+<form action="lista_atividades.php" method="get">
 	<input type="hidden" value="<?php echo $_POST['cod_evento'];?>" name="cod_evento" />
 	<input type="submit" value="Retornar" />
 </form>
@@ -26,5 +26,5 @@
 		}
 	?>
 	<input type="hidden" value="<?php echo $_POST['cod_evento'];?>" name="cod_evento" />
-	<input type="submit" value="Avançar" />
+	<input type="submit" value="Avanï¿½ar" />
 </form>
