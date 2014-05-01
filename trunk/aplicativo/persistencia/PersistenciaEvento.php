@@ -77,7 +77,7 @@ class PersistenciaEvento extends InstanciaUnica{
                     a.cod_atividade = aa.cod_atividade GROUP BY a.vagas";
             $registro = FachadaConectorBD::getInstancia()->consultar($sql);
 
-            return $registro;
+            return $registro[0];
     }
     
 	public function selecionarEventosPorCodigo($cod_evento){

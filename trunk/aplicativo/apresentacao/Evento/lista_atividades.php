@@ -8,9 +8,23 @@ require_once(FACHADAS.'FachadaEvento.php');
 	<?php 
 		$atividades = FachadaEvento::getInstancia()->listarAtividadeAgendaPorEvento($_GET['cod_evento']);
 		foreach ($atividades as $atividade){
-			echo '<input type="checkbox" name="atv[]" value="'.$atividade->getCodAtividadeAgenda().'">'.$atividade->getNome()." | 
-				  Data: ".arrumaData($atividade->getData())." | Horario Inicio: ".$atividade->getHorarioInicio()."| Vagas: ".
-				  FachadaEvento::getInstancia()->listarAtividadePorCodigo($atividade->getCodAtividade())->getVagas().'<br/>';
+			$disponiveis =  FachadaEvento::getInstancia()->listarVagasDisponiveisPorAtividade($atividade->getCodAtividadeAgenda());
+			if ($disponiveis > 0) 
+			{ 
+				echo '<input type="checkbox" name="atv[]" value="'.$atividade->getCodAtividadeAgenda().'">'.$atividade->getNome()." | 
+					  Data: ".arrumaData($atividade->getData())." | Horario Inicio: ".$atividade->getHorarioInicio()."| Total de vagas: ".
+					  FachadaEvento::getInstancia()->listarAtividadePorCodigo($atividade->getCodAtividade())->getVagas().
+				      "| Vagas disponiveis: ".$disponiveis.
+				     "<br/>";
+			}
+			else 
+			{
+				echo $atividade->getNome()." | 
+					 Data: ".arrumaData($atividade->getData())." | Horario Inicio: ".$atividade->getHorarioInicio()."| Total de vagas: ".
+					 FachadaEvento::getInstancia()->listarAtividadePorCodigo($atividade->getCodAtividade())->getVagas().
+				     "| ESGOTADO! ".
+				     "<br/>";
+			}
 		}
 	?>
 	<input type="hidden" name="cod_evento" value="<?php echo $_GET['cod_evento'];?>">

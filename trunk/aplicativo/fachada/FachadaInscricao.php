@@ -13,11 +13,6 @@ class FachadaInscricao extends InstanciaUnica{
 		return PersistenciaInscricao::getInstancia()->realizarInscricao($inscricao, 
 			$cods_atividades_agenda);
 	}
-	
-	public function realizarInscricaoEmAtividade($cod_inscricao, $cod_atividade_agenda){
-		return PersistenciaInscricao::getInstancia()->
-							realizarInscricaoEmAtividade($cod_inscricao, $cod_atividade_agenda);
-	}
 }
 
 ?>

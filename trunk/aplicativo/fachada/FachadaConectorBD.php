@@ -88,7 +88,7 @@ class FachadaConectorBD {
     }
     
     public function executarTransacao(array $queries) {
-    	$resultado = 0;
+    	$resultado = -1;
         $mysqli = $this -> conectarBD();
         try {
             /* Altera Status do autocommit para FALSE. Na verdade, ele começa a transação. */
@@ -101,19 +101,14 @@ class FachadaConectorBD {
                 }
             }
             $mysqli -> commit();
-            echo 'Transação completada com sucesso!';
+            $resultado = 0;
         } catch (Exception $erro) {//Tratamento de excessão, caso haja alguma, realiza rollback.
-            echo 'Transação falhou: ' . $erro->getMessage();
             $mysqli->rollback();
-            
             $resultado = $erro->getCode();
         }
-
-        /* Volta status do autocommit */
         $mysqli -> autocommit(TRUE);
-        //Fecha conexão.
         $mysqli -> close();
-        
+
         return $resultado;
     }
 }
