@@ -30,7 +30,7 @@ class PersistenciaInscricao extends InstanciaUnica {
         return $inscricoes;
     }
     
-    public function realizaInscricao(Inscricao $inscricao){
+    public function realizarInscricao(Inscricao $inscricao){
     	$sql = "INSERT INTO `inscricao`
     			(`cod_usuario`, `cod_evento`,
     			`data_hora`, `forma_pagamento`, `status`)
@@ -40,7 +40,7 @@ class PersistenciaInscricao extends InstanciaUnica {
     	return FachadaConectorBD::getInstancia()->inserir($sql);
     }
     
-    public function realizaInscricaoEmAtividade($cod_inscricao, $cod_atividade_agenda){
+    public function realizarInscricaoEmAtividade($cod_inscricao, $cod_atividade_agenda){
     	$sql = "INSERT INTO `inscricao_historico`
     			(`cod_inscricao`, `cod_atividade_agenda`, `valor_pago`, 
     			`frequente`, `observacao`)

@@ -4,7 +4,7 @@
 	require_once(FACHADAS.'FachadaInscricao.php');
 	require_once(FACHADAS.'FachadaEvento.php');
 	
-	//Passo #1 Inscrição Geral
+	//Passo #1 Inscricao Geral
 	$inscricao = new Inscricao();
 	$inscricao->setFormaPagamento(INSCRICAO_FORMA_PGTO_VISTA);
 	$inscricao->setStatus(INSCRICAO_STATUS_ANDAMENTO);
@@ -12,17 +12,17 @@
 	$inscricao->setNomeEvento(
 					FachadaEvento::getInstancia()->
 					listarEventoPorCodigo($_POST['cod_evento'])->getNome());
-	//Pegar Usuário da Sessão
+	//Pegar Usuario da Sessao
 	$inscricao->setCodUsuario("1");
 	
 	//$queries[0]
-	$nro_inscricao = FachadaInscricao::getInstancia()->realizaInscricao($inscricao);
+	$nro_inscricao = FachadaInscricao::getInstancia()->realizarInscricao($inscricao);
 	$inscricao->setCodInscricao($nro_inscricao);
 	echo "<br>";
-	//Passo #2 Inscrição nas Atividades
+	//Passo #2 Inscricao nas Atividades
 	foreach ($_POST['atv'] as $atv){
 		echo FachadaInscricao::getInstancia()->
-				realizaInscricaoEmAtividade($inscricao->getCodInscricao(),$atv[0]);
+				realizarInscricaoEmAtividade($inscricao->getCodInscricao(),$atv[0]);
 		echo "<br>";
 	}
 	
