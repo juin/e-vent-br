@@ -48,7 +48,7 @@ class PersistenciaEvento extends InstanciaUnica{
 	public function selecionarAtividadeAgendaPorCodigoEvento($cod_evento){
 		$atividades = NULL;
 		$sql = "Select a.cod_atividade, a.nome, a.status, aa.data, aa.cod_atividade_agenda,
-				aa.horario_inicio, aa.horario_fim from atividade a, atividade_agenda aa 
+				aa.horario_inicio, aa.horario_fim from Atividade a, Atividade_Agenda aa 
 				where a.cod_atividade = aa.cod_atividade AND a.cod_evento = ".$cod_evento;
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
@@ -161,6 +161,7 @@ class PersistenciaEvento extends InstanciaUnica{
 		}
 		return $atividades_agendadas;
 	}
+	
 	public function selecionarAgendasPorAtividade($cod_atividade){
 		$atividades_agendadas = NULL;
 		$sql = "SELECT ag.cod_atividade_agenda, ag.data, ag.horario_inicio, 
@@ -192,7 +193,7 @@ class PersistenciaEvento extends InstanciaUnica{
     
     public function selecionarParticipantesPorAtividade($cod_atividade){
         $participantes = NULL;
-        $sql = "Select u.nome_certificado,u.rg,u.cod_usuario from usuario u, inscricao i, inscricao_historico h 
+        $sql = "Select u.nome_certificado,u.rg,u.cod_usuario from Usuario u, Inscricao i, Inscricao_Historico h 
         		where i.cod_usuario = u.cod_usuario AND h.cod_inscricao = i.cod_inscricao 
         		AND h.cod_atividade_agenda = ".$cod_atividade." AND i.status = 'Confirmada'
         		ORDER BY nome_certificado";
