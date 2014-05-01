@@ -49,7 +49,6 @@ class PersistenciaInscricao extends InstanciaUnica {
     			SELECT MAX(cod_inscricao), ".$cod_atividade_agenda.", 0.00, '".
     			INSCRICAO_HISTORICO_FREQUENTE_NAO_LANCADO."', NULL FROM Inscricao;";
 		}
-		print_r($queries);
 		
 		return FachadaConectorBD::getInstancia()->executarTransacao($queries);    	
     }
