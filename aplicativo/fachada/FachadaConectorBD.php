@@ -48,6 +48,7 @@ class FachadaConectorBD {
     public function consultar($query) {
         $mysqli = $this -> conectarBD();
         $resultado = $mysqli -> query($query);
+		printf("Código de erro: %d\n", $mysqli->errno);
         $registros = null;
         $i = 0;
 
@@ -55,6 +56,7 @@ class FachadaConectorBD {
             $registros[$i] = $saida;
             $i++;
         }
+		
         $mysqli -> close();
         return $registros;
     }
