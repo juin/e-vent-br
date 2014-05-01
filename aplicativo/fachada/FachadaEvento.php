@@ -5,7 +5,7 @@ require_once(CLASSES.'Evento.php');
 class FachadaEvento extends InstanciaUnica{
 	
 	public function listarEventos(){
-		return PersistenciaEvento::getInstancia()->selecionarEventosPorStatus('%');
+		return PersistenciaEvento::getInstancia()->selecionarEventosPorStatus(EVENTO_STATUS_TODOS);
 	}
 	
     public function listarEventosEmAndamento(){
