@@ -1,7 +1,7 @@
 <?php
 	echo "<h1>MockUP Pagamento</h1>";
 	echo "<h2>Faz de conta que todo mundo pagou!</h2>";
-	echo "<h3>Pagamento � vista Efetuado com Sucesso!</h3>";
+	echo "<h3>Pagamento a vista Efetuado com Sucesso!</h3>";
 ?>
 <form action="inscricao.php" method="post">
 	<?php 
@@ -10,5 +10,5 @@
 		}
 	?>
 	<input type="hidden" value="<?php echo $_POST['cod_evento'];?>" name="cod_evento" />
-	<input type="submit" value="Avan�ar" />
+	<input type="submit" value="Avancar" />
 </form>

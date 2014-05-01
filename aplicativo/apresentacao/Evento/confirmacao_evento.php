@@ -20,11 +20,12 @@
 	<input type="submit" value="Retornar" />
 </form>
 <form action="efetua_pagamento.php" method="post">
-	<?php 
+	
+	<?php print_r($_POST['atv']);
 		foreach ($_POST['atv'] as $atv){
 			echo '<input type="hidden" value="'.$atv[0].'" name="atv[]" />';
 		}
 	?>
 	<input type="hidden" value="<?php echo $_POST['cod_evento'];?>" name="cod_evento" />
-	<input type="submit" value="Avan�ar" />
+	<input type="submit" value="Avancar" />
 </form>
