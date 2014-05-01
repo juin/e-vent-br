@@ -2,15 +2,6 @@
 
 class PersistenciaCertificado extends InstanciaUnica{
 	
-	public function SelecionaInscricaoPorCodigoEvento($codUsuario, $codEvento){
-		//recupera codigo de inscricao
-		$sql= 'Select * from Inscricao where cod_usuario = '.$codUsuario;
-		$sql= 'Select * from Inscricao where cod_evento ='.$codEvento;
-		$inscricao = FachadaConectorBD::getInstancia()->consultar($sql);
-		return $inscricao;
-		
-	}
-	
 	public function selecionarPorUsuario($cod_usuario){
 		$sql= 'Select * from Certificado where cod_inscricao in (Select cod_inscricao from inscricao where cod_usuario = '.$cod_usuario.')';
 		$registros= FachadaConectorBD::getInstancia()->consultar($sql);
@@ -67,7 +58,7 @@ class PersistenciaCertificado extends InstanciaUnica{
 		}
 	}
 	
-	public function emitirCertificado($cod_usuario, $cod_evento){
+	public function selecionarPorUsuarioEvento($cod_usuario, $cod_evento){
         $sql='Select a.nome_certificado, b.nome as nome_atividade, b.carga_horaria, c.nome as nome_evento from
               Usuario a, Atividade b,Evento c, Inscricao_Historico d, Inscricao e, Atividade_Agenda f where a.cod_usuario=e.cod_usuario AND d.cod_inscricao= e.cod_inscricao AND 
 			  d.cod_atividade_agenda=f.cod_atividade_agenda AND f.cod_atividade=b.cod_atividade AND d.frequente="Presente" AND a.cod_usuario='.$cod_usuario.' AND c.cod_evento = '.$cod_evento;
@@ -77,10 +68,10 @@ class PersistenciaCertificado extends InstanciaUnica{
 		$i = 0;
 		foreach ($registros as $registro){
 				$certificado=new Certificado();
-				$certificado->setNomeCertificado($nome_certificado);
-				$certificado->setNomeAtividade($nome_atividade);
-				$certificado->setCargaHoraria($carga_horaria);
-				$certificado->setNomeEvento($nome_evento);
+				$certificado->setNomeCertificado($registro['nome_certificado']);
+				$certificado->setNomeAtividade($registro['nome_atividade']);
+				$certificado->setCargaHoraria($registro['carga_horaria']);
+				$certificado->setNomeEvento($registro['nome_evento']);
 				$certificados[$i] = $certificado;
 			    $i++;
 				
