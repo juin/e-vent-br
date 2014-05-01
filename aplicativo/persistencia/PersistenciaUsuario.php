@@ -18,6 +18,7 @@ class PersistenciaUsuario extends InstanciaUnica {
                 $usuario = new UsuarioSessao();
                 $usuario -> setCodUsuario($registro['cod_usuario']);
                 $usuario -> setLogin($registro['login']);
+				$usuario -> setNome($registro['nome_certificado']);
                 $usuario -> setNivelAcesso($registro['nivel_acesso']);
                 $usuario -> setCategoria($registro['categoria']);
                 

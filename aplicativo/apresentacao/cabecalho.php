@@ -22,5 +22,5 @@ $usuarioLogado = $_SESSION['usuario'];
 
 <body>
     
-<p>Olá, <? echo $usuarioLogado->getLogin(); ?>! <a href="#">Minha conta</a>   <a href="<? echo URL . "apresentacao/sair.php"?>">Sair</a></p>
+<p>Olá, <? echo $usuarioLogado->getNome(); ?>! <a href="#">Minha conta</a>   <a href="<? echo URL . "apresentacao/sair.php"?>">Sair</a></p>
     
