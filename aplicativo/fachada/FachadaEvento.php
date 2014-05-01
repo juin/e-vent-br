@@ -61,7 +61,7 @@ class FachadaEvento extends InstanciaUnica{
 	}
 	
     public function listarVagasDisponiveisPorAtividade($cod_atividade_agenda){
-        $registros = PersistenciaEvento::getInstancia()->selecionarVagasDisponiveisPorAtividade($cod_atividade);
+        $registros = PersistenciaEvento::getInstancia()->selecionarVagasDisponiveisPorAtividade($cod_atividade_agenda);
         if($registros!=NULL){
             return $registros[0];
         } else { 
