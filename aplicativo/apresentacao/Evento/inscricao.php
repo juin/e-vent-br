@@ -15,18 +15,5 @@
 					listarEventoPorCodigo($_POST['cod_evento'])->getNome());
 	//Pegar Usuario da Sessao
 	$inscricao->setCodUsuario($usuarioLogado->getCodUsuario());
-	echo $usuarioLogado->getNome();
-	
-	//$queries[0]
-	$nro_inscricao = FachadaInscricao::getInstancia()->realizarInscricao($inscricao);
-	$inscricao->setCodInscricao($nro_inscricao);
-	echo "<br>";
-	//Passo #2 Inscricao nas Atividades
-	print_r($_POST['atv']);
-	foreach ($_POST['atv'] as $atv){
-		FachadaInscricao::getInstancia()->
-			realizarInscricaoEmAtividade($inscricao->getCodInscricao(),$atv[0]);
-	}
-	
-	
+	echo FachadaInscricao::getInstancia()->realizarInscricao($inscricao, $_POST['atv']);
 ?>

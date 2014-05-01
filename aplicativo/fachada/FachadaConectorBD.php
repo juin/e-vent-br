@@ -87,16 +87,9 @@ class FachadaConectorBD {
         return $resultado;   
     }
     
-    public function executarTransacao($queries) {
-
-        /* Formato do Array que essa função deve receber. 
-         * $sqlCOMMIT = array( "INSERT INTO Cidade VALUES (60,'VITORIAA')",
-         *                  "INSERT INTO Cidade VALUES (61,'SALVADOR')",
-         *                  "INSERT INTO Cidade VALUES(59, 'SSA')");
-         * */
-
+    public function executarTransacao(array $queries) {
+    	$resultado = 0;
         $mysqli = $this -> conectarBD();
-        
         try {
             /* Altera Status do autocommit para FALSE. Na verdade, ele começa a transação. */
             $mysqli -> autocommit(FALSE);
@@ -109,19 +102,20 @@ class FachadaConectorBD {
             }
             $mysqli -> commit();
             echo 'Transação completada com sucesso!';
-
         } catch (Exception $erro) {//Tratamento de excessão, caso haja alguma, realiza rollback.
             echo 'Transação falhou: ' . $erro->getMessage();
             $mysqli->rollback();
+            
+            $resultado = $erro->getCode();
         }
 
         /* Volta status do autocommit */
         $mysqli -> autocommit(TRUE);
         //Fecha conexão.
         $mysqli -> close();
-
+        
+        return $resultado;
     }
-
 }
 
 /**

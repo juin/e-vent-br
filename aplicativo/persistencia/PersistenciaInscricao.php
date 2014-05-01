@@ -30,24 +30,28 @@ class PersistenciaInscricao extends InstanciaUnica {
         return $inscricoes;
     }
     
-    public function realizarInscricao(Inscricao $inscricao){
-    	$sql = "INSERT INTO Inscricao
+    public function realizarInscricao(Inscricao $inscricao, array $cods_atividades_agenda) {
+    	$i = 0;
+    	// adiciona a rotina de criacao da inscricao
+    	$queries[$i] = "INSERT INTO Inscricao
     			(cod_usuario, cod_evento,
     			data_hora, forma_pagamento, status)
     			VALUES
     			(".$inscricao->getCodUsuario().",".$inscricao->getCodEvento().",now(),
-    			'".$inscricao->getFormaPagamento()."','".$inscricao->getStatus()."')";
-    	return FachadaConectorBD::getInstancia()->inserir($sql);
-    }
-    
-    public function realizarInscricaoEmAtividade($cod_inscricao, $cod_atividade_agenda){
-    	$sql = "INSERT INTO Inscricao_Historico
+    			'".$inscricao->getFormaPagamento()."','".$inscricao->getStatus()."');";
+    	// adiciona na mesma colecao de comandos cada insert para cadastro das atividades
+    	// o MAX (padrao SQL) seleciona o ultimo codigo inserido para inscricao
+    	foreach ($cods_atividades_agenda as $cod_atividade_agenda) {
+	       $i++;
+	       $queries[$i] = "INSERT INTO Inscricao_Historico
     			(cod_inscricao, cod_atividade_agenda, valor_pago, 
     			frequente, observacao)
-    			VALUES
-    			(".$cod_inscricao.",".$cod_atividade_agenda.",
-    			0.00,'".INSCRICAO_HISTORICO_FREQUENTE_NAO_LANCADO."',NULL)";
-    	return FachadaConectorBD::getInstancia()->inserir($sql);
+    			SELECT MAX(cod_inscricao), ".$cod_atividade_agenda.", 0.00, '".
+    			INSCRICAO_HISTORICO_FREQUENTE_NAO_LANCADO."', NULL FROM Inscricao;";
+		}
+		print_r($queries);
+		
+		return FachadaConectorBD::getInstancia()->executarTransacao($queries);    	
     }
 
 }
