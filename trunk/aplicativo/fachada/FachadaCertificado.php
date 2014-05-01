@@ -8,17 +8,6 @@ require_once(CLASSES.'Usuario.php');
 
 class FachadaCertificado extends InstanciaUnica{
 	
-	//Busca o codigo do usurio
-	public function getCodigoDaSessao(){
-		return $_SESSION['Usuario']->getCodUsuario();
-	}
-	
-	//busca o codigo do evento
-	public function getCodigoEvento(){
-		return $_SESSION['Evento']->getCodEvento();
-	}
-	
-
 	public function listarPorUsuario($cod_usuario){
 		return PersistenciaCertificado::getInstancia()->selecionarPorUsuario;
 	}
