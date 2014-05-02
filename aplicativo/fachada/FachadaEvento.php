@@ -98,6 +98,14 @@ class FachadaEvento extends InstanciaUnica{
     		return -1;
     	}
     }
+    
+    public function inserirEventoNovo(Evento $evento){
+    	return PersistenciaEvento::getInstancia()->gravarEventoNovo($evento);
+    }
+    
+    public function inserirPresencaPorCodigos($cod_atividade_agenda, $cod_usuario, $cod_evento){
+    	return PersistenciaEvento::getInstancia()->inserirPresencaPorCodigos($cod_atividade_agenda, $cod_usuario, $cod_evento);
+    }
 }
 
 ?>
