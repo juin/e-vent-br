@@ -258,6 +258,17 @@ class PersistenciaEvento extends InstanciaUnica{
     	}
     	return $eventos;
     }
+    
+    public function gravarEventoNovo(Evento $evento){
+    	return 0;
+    }
+    
+    public function inserirPresencaPorCodigos($cod_atividade_agenda, $cod_usuario, $cod_evento){
+    	$sql = "Update Inscricao_Historico set frequente ='Presente' where cod_inscricao = 
+    			(Select cod_inscricao from Inscricao where cod_usuario = ".$cod_usuario."
+    				AND cod_evento = ".$cod_evento.") AND cod_atividade_agenda = ".$cod_atividade_agenda;
+    	return FachadaConectorBD::getInstancia()->atualizar($sql);
+    }
 }
 
 ?>

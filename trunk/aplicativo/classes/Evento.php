@@ -11,6 +11,9 @@ class Evento {
 	private $pagamento;
 	private $url_gabarito_atividade;
 	private $url_gabarito_evento;
+	private $url_imagem;
+	private $url_site;
+	private $dias_pgto;
 	
 	public function getCodEvento(){
 		return $this->cod_evento;
@@ -52,6 +55,18 @@ class Evento {
 		return $this->url_gabarito_evento;
 	}
 	
+	public function getUrlImagem(){
+		return $this->url_imagem;
+	}
+	
+	public function getUrlSite(){
+		return $this->url_site;
+	}
+	
+	public function getDiasLimitePagamento(){
+		return $this->dias_pgto;
+	}
+	
 	public function setCodEvento($cod_evento){
 		$this->cod_evento = $cod_evento;
 	}
@@ -90,6 +105,18 @@ class Evento {
 	
 	public function setUrlEvento($url_evento){
 		$this->url_gabarito_evento = $url_evento;
+	}
+	
+	public function setUrlImagem($url_imagem){
+		$this->url_imagem = $url_imagem;
+	}
+	
+	public function setUrlSite($url_site){
+		$this->url_site = $url_site;
+	}
+	
+	public function setDiasLimitePagamento($dias_pgto){
+		$this->dias_pgto = $dias_pgto;
 	}
 }
 
