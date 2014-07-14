@@ -1,5 +1,6 @@
 <?php
-	require_once (CLASSES . 'Evento.php');
+	require_once(dirname(__FILE__).'/../../config.php');
+	require_once(CLASSES . 'Evento.php');
 	require_once(FACHADAS . 'FachadaEvento.php');
 ?>
 <h1>Cadastro de Evento</h1><br />
@@ -16,7 +17,8 @@
 		</select><br />
 	<label for="dias_pgto">Prazo de Pagamento:</label><input name="dias_pgto" type="text" maxlength="5" /><br />
 	<label for="site">Site:</label><input name="site" type="text" maxlength="100"/><br />
-	<label for="logo_evt">Imagem:</label><input name="logo_evt" type="file" /><br />
+	<!-- <label for="logo_evt">Imagem:</label><input name="logo_evt" type="file" /><br /> -->
+	<input type="submit" value="Cadastrar" name="cadastro" />
 </form>
 <?php
 	if(isset($_POST['nome'])){
@@ -26,12 +28,15 @@
 		$evento->setSigla($_POST['sigla']);
 		$evento->setDataInicio($_POST['dtini']);
 		$evento->setDataFim($_POST['dtfim']);
-		$evento->setNome($_POST['nome']);
 		$evento->setPagamento($_POST['pgto']);
 		$evento->setDiasLimitePagamento($_POST['dias_pgto']);
-		$evento->setUrlSite($_POST['url_site']);
-		$evento->setUrlImagem($_POST['logo_evt']);
+		$evento->setUrlSite($_POST['site']);
+		//$evento->setUrlImagem($_POST['logo_evt']);
 		
-		echo FachadaEvento::getInstancia()->inserirNovoEvento($evento);
+		$retorno = FachadaEvento::getInstancia()->inserirEventoNovo($evento);
+		
+		if ($retorno > 0 ){
+			echo "<h4>Evento cadastrado com sucesso!</h4>";
+		}
 	}
 ?>

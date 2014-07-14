@@ -1,5 +1,6 @@
 <?php
-require_once (FACHADAS.'FachadaConectorBD.php');
+require_once(dirname(__FILE__).'/../config.php');
+require_once(FACHADAS.'FachadaConectorBD.php');
 require_once(CLASSES . 'Atividade.php');
 require_once(CLASSES . 'AtividadeAgenda.php');
 require_once(CLASSES . 'Usuario.php');
@@ -260,7 +261,12 @@ class PersistenciaEvento extends InstanciaUnica{
     }
     
     public function gravarEventoNovo(Evento $evento){
-    	return 0;
+    	$sql = "INSERT INTO `evento` (`nome`, `sigla`,
+    			`data_inicio`, `data_fim`,`status`,
+    			`pagamento`) VALUES ('".$evento->getNome()."','".$evento->getSigla()."',
+    			'".$evento->getDataInicio()."','".$evento->getDataFim()."','".EVENTO_STATUS_ANDAMENTO."',
+				'".$evento->getPagamento()."')";
+    	return FachadaConectorBD::getInstancia()->inserir($sql);
     }
     
     public function inserirPresencaPorCodigos($cod_atividade_agenda, $cod_usuario, $cod_evento){

@@ -72,7 +72,6 @@ class FachadaConectorBD {
         $res = $mysqli->query($query);
 		 
         $id = $mysqli->insert_id;
-		echo $id;
 		if($mysqli->errno!=0)
 			printf("Codigo de erro: %d\n", $mysqli->errno);
         $mysqli->close();
