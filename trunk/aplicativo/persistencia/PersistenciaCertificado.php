@@ -1,4 +1,5 @@
 <?php
+require_once(CLASSES.'InstanciaUnica.php');
 
 class PersistenciaCertificado extends InstanciaUnica{
 	
