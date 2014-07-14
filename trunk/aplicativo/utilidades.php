@@ -12,4 +12,11 @@ function arrumaData($data){
 	return $data;
 }
 
+//Muda o padrão de hora HH:MM:SS para HH:MM
+function arrumaHora($hora){
+	$hora_tmp = explode(":",$hora);
+	$hora = $hora_tmp[0].":".$hora_tmp[1];
+	return $hora;
+}
+
 ?>

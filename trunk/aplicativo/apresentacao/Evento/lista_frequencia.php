@@ -18,7 +18,8 @@
 		echo "<h1>".$nome_evento."</h1>";
 		echo "<h2>".$nome_atividade."</h2>";
 		echo "<h3>".arrumaData($atividade_agenda->getData())." | ".
-			 $atividade_agenda->getHorarioInicio()." - ".$atividade_agenda->getHorarioFim()."</h3>";
+			 arrumaHora($atividade_agenda->getHorarioInicio()).
+			 " - ".arrumaHora($atividade_agenda->getHorarioFim())."</h3>";
 	echo "</div>";
 	$i = 1;
 	echo "<table>";

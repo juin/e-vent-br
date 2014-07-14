@@ -103,7 +103,7 @@ class FachadaEvento extends InstanciaUnica{
     	return PersistenciaEvento::getInstancia()->gravarEventoNovo($evento);
     }
     
-    public function inserirPresencaPorCodigos($cod_atividade_agenda, $cod_usuario, $cod_evento){
+    public function lancarPresencaPorCodigos($cod_atividade_agenda, $cod_usuario, $cod_evento){
     	return PersistenciaEvento::getInstancia()->inserirPresencaPorCodigos($cod_atividade_agenda, $cod_usuario, $cod_evento);
     }
 }

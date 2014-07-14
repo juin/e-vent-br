@@ -38,7 +38,7 @@ echo "</div>";
 if(isset($_POST['presentes'][0])){
 	$presentes = '';
 	foreach($_POST['presentes'] as $p){
-		FachadaEvento::getInstancia()->inserirPresencaPorCodigos($cod_atividade_agenda, $p, $cod_evento);
+		FachadaEvento::getInstancia()->lancarPresencaPorCodigos($cod_atividade_agenda, $p, $cod_evento);
 	}
 }
 ?>
