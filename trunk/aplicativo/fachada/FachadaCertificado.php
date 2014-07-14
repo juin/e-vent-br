@@ -31,7 +31,7 @@ class FachadaCertificado extends InstanciaUnica{
                 $pdf->Open();
                 $pdf->SetMargins(0, 0, 0);
 			//pegar do banco a imagem
-			$pdf->Image("fundo.png", null, null, 297, 210);
+			$pdf->Image('teste_fundo.png', null, null, 297, 210);
 			//cor da fonte
 			$pdf->SetTextColor(12, 54, 27);
 			//nome do aluno
