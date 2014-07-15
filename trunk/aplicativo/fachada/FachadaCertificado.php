@@ -31,9 +31,7 @@ class FachadaCertificado extends InstanciaUnica{
                 $pdf->Open();
                 $pdf->SetMargins(0, 0, 0);
 			//pegar do banco a imagem * TA DANDO ERRO NA BUSCA DA IMAGEM
-			
-			$imagem="teste_fundo.png";
-			$pdf->Image($imagem, null, null, 297, 210);
+			$pdf->Image("C:/wamp/www/e-vent/aplicativo/fachada/teste.jpg", null, null, 297, 210);
 			//cor da fonte
 			$pdf->SetTextColor(12, 54, 27);
 			//nome do aluno
