@@ -6,7 +6,7 @@ require_once(FACHADAS.'FachadaInscricao.php');
 ?>
 <ul>
     <li>
-        Inicio
+        Início
     </li>
     <li>
         Eventos
