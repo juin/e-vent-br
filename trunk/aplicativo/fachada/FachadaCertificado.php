@@ -30,24 +30,27 @@ class FachadaCertificado extends InstanciaUnica{
 			    $pdf = new FPDF('L', 'mm');
                 $pdf->Open();
                 $pdf->SetMargins(0, 0, 0);
-			//pegar do banco a imagem * TA DANDO ERRO NA BUSCA DA IMAGEM
-			$pdf->Image("C:/wamp/www/e-vent/aplicativo/fachada/teste.jpg", null, null, 297, 210);
+			//ta buscando a imagem so no meu, editem para testar
+			$pdf->Image("C:/wamp/www/e-vent/aplicativo/fachada/teste_fundo.png", null, null, 297, 210);
 			//cor da fonte
 			$pdf->SetTextColor(12, 54, 27);
 			//nome do aluno
 			 $pdf->SetFont('Arial', 'B', 30);
 			 $nome=strtoupper(utf8_decode($certificado->getNomeAluno()));  // Maiuscula e resolve problema de acentuação
-			    $pdf->SetFont('Arial', '', 15);
+			 $pdf->Text(30, 50, $nome);
+			    $pdf->SetFont('Arial', '', 20);
 				//máximo 5
 				$vetor= $certificado->getNomeAtividade();
-				$vetorCH->getCargaHoraria();
+				$vetorCH = $certificado->getCargaHoraria();
 			 for ($j = 0; $j < count($vetor); $j++) {
-                  $pdf_minicurso = $vetor($j)." - ".$vetorCH;
+                $pdf_minicurso = $vetor[$j]." - ".$vetorCH[$j];
 				 $linha = 130 + (8 * $j);
-                    $pdf->Text(10, $linha, $pdf_minicurso);
+                    $pdf->Text(30, $linha, $pdf_minicurso);
 					
 			 }
-			 $pdf->Output('./fundo_cert/cert.pdf');
+			 $nome_evt = $certificado->getNomeEvento();
+			 $pdf->Text(30, 70, $nome_evt);
+			 $pdf->Output('C:/wamp/www/e-vent/aplicativo/TESTEPDF/cert.pdf');
 			 
 			 
 	}
