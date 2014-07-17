@@ -73,10 +73,18 @@ class PersistenciaEvento extends InstanciaUnica{
     public function selecionarVagasDisponiveisPorAtividade($cod_atividade_agenda){
             $sql = "SELECT (a.vagas - count(*)) as quantidadeVagas FROM Atividade a, 
                     Inscricao i, Inscricao_Historico h, Atividade_Agenda aa WHERE
-                    aa.cod_atividade_agenda = '"  . $cod_atividade_agenda . "' AND i.status in ('Andamento', 'Confirmada')
+                    aa.cod_atividade_agenda = '" . $cod_atividade_agenda . "' AND i.status in ('Andamento', 'Confirmada')
                     AND h.cod_inscricao = i.cod_inscricao AND aa.cod_atividade_agenda = h.cod_atividade_agenda AND
                     a.cod_atividade = aa.cod_atividade GROUP BY a.vagas";
             $registro = FachadaConectorBD::getInstancia()->consultar($sql);
+            // pesquisa nula indica que nao existem inscricoes para o evento
+            if (is_null($registro)) {
+            	// deve retornar, neste caso, o total de vagas da atividade
+            	$sql = "SELECT a.vagas as quantidadeVagas FROM Atividade a,
+            			Atividade_Agenda aa WHERE aa.cod_atividade_agenda = '" . $cod_atividade_agenda . 
+						"' AND a.cod_atividade = aa.cod_atividade";
+            	$registro = FachadaConectorBD::getInstancia()->consultar($sql);
+            }
 
             return $registro[0];
     }
