@@ -2,13 +2,15 @@
 
 class AtividadeValor {
 
-	private $nome;
-	private $cod_atividade_tipo;
 	private $cod_evento;
 	private $valor_estudante;
 	private $valor_professor;
 	private $valor_profissional_outros;
-
+	
+	//Váriaveis da tabela Atividade_tipo
+	private $nome;
+	private $cod_atividade_tipo;
+	
 	public function getNome(){
 		return $this->nome;
 	}

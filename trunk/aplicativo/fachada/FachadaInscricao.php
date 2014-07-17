@@ -9,6 +9,10 @@ class FachadaInscricao extends InstanciaUnica{
 		return PersistenciaInscricao::getInstancia()->selecionarInscricoesPorUsuario($cod_usuario);
 	}
 	
+	public function listarInscricoesPorEvento($cod_evento){
+		return PersistenciaInscricao::getInstancia()->selecionarInscricoesPorEvento($cod_evento);
+	}
+	
 	public function realizarInscricao(Inscricao $inscricao, array $cods_atividades_agenda){
 		return PersistenciaInscricao::getInstancia()->realizarInscricao($inscricao, 
 			$cods_atividades_agenda);

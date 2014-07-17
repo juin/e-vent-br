@@ -1,6 +1,7 @@
 <?php
 
 class Atividade {
+		
 	private $cod_atividade;
 	private $nome;
 	private $resumo;
@@ -14,7 +15,10 @@ class Atividade {
 	private $observacao;
 	private $tipo_frequencia;
 	private $status;
-	
+	private $cod_atividade_tipo;
+	private $cod_evento;
+	//array com código das agendas
+	private $cod_atividade_agenda = null;
 	
 	public function getCodAtividade(){
 		return $this->cod_atividade;
@@ -67,7 +71,19 @@ class Atividade {
 	public function getStatus(){
 		return $this->status;
 	}
-		
+	
+	public function getcodAtividadeTipo(){
+		return $this->cod_atividade_tipo;		
+	}
+	
+	public function getCodEvento(){
+		return $this->cod_evento;
+	}
+	
+	public function getCodAtividadeAgenda(){
+		return $this->cod_atividade_agenda;
+	}
+	
 	public function setCodAtividade($cod_atividade) {
 		$this->cod_atividade = $cod_atividade;
 	}
@@ -120,6 +136,35 @@ class Atividade {
 		$this->status = $status;
 	}
 	
+	public function setcodAtividadeTipo($cod_atividade_Tipo){
+		$this->cod_atividade_tipo = $cod_atividade_Tipo;		
+	}
+	
+	public function setCodEvento($cod_evento){
+		$this->cod_evento = $cod_evento;
+	}
+	
+	//Verificar como implementar o set do array com os códigos das agendas dessas atividade
+	//$acao = incluir/excluir
+	public function setCodAtividadeAgenda($acao,$cod_atividade_agenda){
+		if($acao == "incluir"){
+			if($this->cod_atividade_agenda!=null){
+				if(!in_array($cod_atividade_agenda, $this->cod_atividade_agenda)){
+					$tamanho = count($this->cod_atividade_agenda);
+					//$this->cod_atividade_agenda[$tamanho] = $cod_atividade_agenda;
+					array_push($this->cod_atividade_agenda,$cod_atividade_agenda);
+				}
+			}else{
+				$this->cod_atividade_agenda[0] = $cod_atividade_agenda;
+			}
+		}else if($acao=="excluir"){
+			if($this->cod_atividade_agenda!=null){				
+				if (($chave = array_search($cod_atividade_agenda, $this->cod_atividade_agenda)) != false) {
+			   	unset($this->cod_atividade_agenda[$chave]);
+				}
+			}
+		}
+	}
 }
 
 ?>

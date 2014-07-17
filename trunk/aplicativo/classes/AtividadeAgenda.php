@@ -1,77 +1,60 @@
 <?php
 
 class AtividadeAgenda {
-	private $cod_atividade_agenda;
-	private $nome;
-	private $data;
-	private $horario_inicio;
-	private $horario_fim;
-	private $status;
-	private $local;
-	private $cod_atividade;
-	
+		
+	private $codAtividadeAgenda = null;
+	private $data = null;
+	private $horarioInicio = null;
+	private $horarioFim = null;
+	private $codLocal = null;
+	private $codAtividade = null;
+
 	public function getCodAtividadeAgenda(){
-		return $this->cod_atividade_agenda;
+		return $this->codAtividadeAgenda;
 	}
-	
-	public function getNome(){
-		return $this->nome;
+
+	public function setCodAtividadeAgenda($codAtividadeAgenda){
+		$this->codAtividadeAgenda = $codAtividadeAgenda;
 	}
-	
+
 	public function getData(){
 		return $this->data;
-	}
-	
-	public function getHorarioInicio(){
-		return $this->horario_inicio;
-	}
-	
-	public function getHorarioFim(){
-		return $this->horario_fim;
-	}
-
-	public function getLocal(){
-		return $this->local;
-	}
-	
-	public function getCodAtividade(){
-		return $this->cod_atividade;
-	}
-	
-	public function setCodAtividadeAgenda($cod_atividade_agenda){
-		$this->cod_atividade_agenda = $cod_atividade_agenda;
-	}
-
-	public function setNome($nome){
-		$this->nome = $nome;
 	}
 
 	public function setData($data){
 		$this->data = $data;
 	}
 
-	public function setHorarioInicio($horario_inicio){
-		$this->horario_inicio = $horario_inicio;
+	public function getHorarioInicio(){
+		return $this->horarioInicio;
 	}
-	
-	public function setHorarioFim($horario_fim){
-		$this->horario_fim = $horario_fim;
+
+	public function setHorarioInicio($horarioInicio){
+		$this->horarioInicio = $horarioInicio;
 	}
-	
-	public function getStatus(){
-		return $this->status;
+
+	public function getHorarioFim(){
+		return $this->horarioFim;
 	}
-	
-	public function setStatus($status){
-		$this->status = $status;
+
+	public function setHorarioFim($horarioFim){
+		$this->horarioFim = $horarioFim;
 	}
-	
-	public function setLocal($local){
-		$this->local = $local;
+
+	public function getCodLocal(){
+		return $this->codLocal;
 	}
-	
-	public function setCodAtividade($cod_atividade){
-		$this->cod_atividade = $cod_atividade;
+
+	public function setCodLocal($codLocal){
+		$this->codLocal = $codLocal;
+	}
+
+	public function getCodAtividade(){
+		return $this->codAtividade;
+	}
+
+	public function setCodAtividade($codAtividade){
+		$this->codAtividade = $codAtividade;
 	}
 }
 

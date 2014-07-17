@@ -15,11 +15,7 @@ class FachadaEvento extends InstanciaUnica{
     public function listarEventosEncerrados(){
         return PersistenciaEvento::getInstancia()->selecionarEventosPorStatus(EVENTO_STATUS_ENCERRADO);
     }
-          
-	public function listarAtividadesPorCodigoEvento($cod_evento){
-		return PersistenciaEvento::getInstancia()->selecionarAtividadesPorCodigoEvento($cod_evento);
-	}
-	
+
 	public function listarEventoPorCodigo($cod_evento){
 		$registros = PersistenciaEvento::getInstancia()->selecionarEventosPorCodigo($cod_evento);
 		if($registros!=NULL){
@@ -28,54 +24,6 @@ class FachadaEvento extends InstanciaUnica{
 			return NULL;
 		}
 	}
-	
-	public function listarAtividadePorCodigo($cod_atividade){
-		$registros = PersistenciaEvento::getInstancia()->selecionarAtividadesPorCodigo($cod_atividade);
-		if($registros != NULL){
-			return $registros[0];
-		} else {
-			return NULL;
-		}
-	}
-	
-	public function listarAgendasPorAtividade($cod_atividade){
-		$registros = PersistenciaEvento::getInstancia()->selecionarAgendasPorAtividade($cod_atividade);
-		if($registros != NULL){
-			return $registros;
-		} else {
-			return NULL;
-		}
-	}
-	
-	public function listarAtividadeAgendaPorEvento($cod_evento){
-		return PersistenciaEvento::getInstancia()->selecionarAtividadeAgendaPorCodigoEvento($cod_evento);
-	}
-    
-	public function listarAgendaPorCodigo($cod_atividade_agenda){
-		$registros = PersistenciaEvento::getInstancia()->selecionarAgendasPorCodigo($cod_atividade_agenda);
-		if($registros != NULL){
-			return $registros[0];
-		} else {
-			return NULL;
-		}
-	}
-	
-    public function listarVagasDisponiveisPorAtividade($cod_atividade_agenda){
-        $registros = PersistenciaEvento::getInstancia()->selecionarVagasDisponiveisPorAtividade($cod_atividade_agenda);
-        if($registros!=NULL){
-            return $registros[0];
-        } else { 
-            return -1;
-        }
-    }
-    
-    public function listarParticipantesPorAtividade($cod_atividade) {
-        return PersistenciaEvento::getInstancia()->selecionarParticipantesPorAtividade($cod_atividade);
-    }
-    
-    public function listarAtividadesMonitoradaPorUsuario($cod_evento, $cod_usuario, $funcao){
-        return PersistenciaEvento::getInstancia()->selecionarAtividadesRealizadasPorUsuario($cod_evento, $cod_usuario, $funcao);
-    }
     
     public function listarInscritosPorCodigoAtividadeAgenda($cod_atividade_agenda){
     	$registros = PersistenciaEvento::getInstancia()->selecionarInscritosPorCodigoAtividadeAgenda($cod_atividade_agenda);
@@ -99,6 +47,9 @@ class FachadaEvento extends InstanciaUnica{
     	}
     }
     
+	public function listarInscritosporCodigoEvento($cod_evento){
+		
+	}
     public function inserirEventoNovo(Evento $evento){
     	return PersistenciaEvento::getInstancia()->gravarEventoNovo($evento);
     }
@@ -106,6 +57,7 @@ class FachadaEvento extends InstanciaUnica{
     public function lancarPresencaPorCodigos($cod_atividade_agenda, $cod_usuario, $cod_evento){
     	return PersistenciaEvento::getInstancia()->inserirPresencaPorCodigos($cod_atividade_agenda, $cod_usuario, $cod_evento);
     }
+
 }
 
 ?>
