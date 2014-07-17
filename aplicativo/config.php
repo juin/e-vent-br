@@ -15,7 +15,7 @@ define('UTILIDADES',BASE.'utilidades.php');
 define('ACESSO_SERVIDOR','localhost');
 define('ACESSO_USUARIO','e_vent');
 define('ACESSO_SENHA','3v3nt');
-define('ACESSO_NOME_BANCO','e_event_br');
+define('ACESSO_NOME_BANCO','e_vent_br');
 //Convencoes de estados e numeracoes
 define('USUARIO_ATIVIDADE_FUNCAO_MINISTRANTE','Ministrante');
 define('USUARIO_ATIVIDADE_FUNCAO_MONITOR','Monitor');
@@ -58,7 +58,5 @@ define('INSCRICAO_FORMA_PGTO_DEPOSITO','Deposito');
 define('INSCRICAO_STATUS_ANDAMENTO','Andamento');
 define('INSCRICAO_STATUS_CONFIRMADA','Confirmada');
 define('INSCRICAO_STATUS_CANCELADA','Cancelada');
-define('ENDERECO_FINAL_CERTIFICADO','C:/wamp/www/e-vent/recursos/PDF/cert.pdf');
-define('ENDERECO_FUNDO_CERTIFICADO', 'C:/wamp/www/e-vent/recursos/imagem/teste_fundo.jpg');
 
 ?>

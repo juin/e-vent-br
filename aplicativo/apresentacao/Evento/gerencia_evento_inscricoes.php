@@ -2,7 +2,6 @@
 require_once (dirname(__FILE__) . '/../../config.php');
 require_once (APRESENTACAO . 'cabecalho.php');
 require_once (FACHADAS . 'FachadaEvento.php');
-require_once (FACHADAS . 'FachadaAtividade.php');
 
 $cod_evento = $_GET['cod_evento'];
 echo "Informações do Evento: <br>";
@@ -20,9 +19,9 @@ if ($cod_evento != NULL) {
 }
 
 echo "*************<br>";
-echo "Atividades<br>";
+echo "Acompanhamento de inscrições<br>";
 
-$atividades = FachadaAtividade::getInstancia() -> listarAtividadesPorCodigoEvento($cod_evento);
+$inscricoes = FachadaEvento::getInstancia()->lis
 if ($atividades != null) {
 	foreach ($atividades as $atividade) {
 		echo "<li><a href=\"".URL."apresentacao/Evento/gerencia_atividade.php?cod_atividade=".$atividade->getCodAtividade()."\">".$atividade->getNome()."-".$atividade -> getStatus()."</a></li>";
@@ -31,4 +30,3 @@ if ($atividades != null) {
 
 echo "<br><br><br><a href='javascript:history.back(2)'>Clique aqui para voltar</a>";
 ?>
-

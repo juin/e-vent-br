@@ -74,6 +74,14 @@ INSERT INTO Local (cod_local, nome, sigla, bloco) VALUES
 	(1, 'Lab. de Simulação Computacional', 'G1', 'Bloco G'),
 	(2, 'Lab. de Linguagem de Programação I', 'B12', 'Bloco B'),
 	(3, 'Lab. de Linguagem de Programação II', 'C3/3', 'Bloco C');
+	(4,'Lab. de Redes de Computadores', 'C3/2', 'Bloco C');
+	(5, 'Lab. de Linguagem de Programação III', 'D1','Bloco D');
+	(6,'Lab. de Manutenção','D10','Bloco D');
+	(7,'Lab. de extensão do CVT','CVT 02','CVT');
+	(8,'Sala 02','02','Bloco G');
+	(9,'Sala 03','03','Bloco G');
+	(10,'Sala 04','04','Bloco G');
+	(11,'Sala 05','05','Bloco G');
 
 -- =======================
 -- Tabela Atividade_Agenda

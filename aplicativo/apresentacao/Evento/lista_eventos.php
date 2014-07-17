@@ -5,7 +5,7 @@ require_once (FACHADAS . 'FachadaEvento.php');
 require_once (FACHADAS . 'FachadaUsuario.php');
 
 $eventos = FachadaEvento::getInstancia() -> listarEventos();
-echo '<form method="post" action="lista_atividades.php">';
+
 foreach ($eventos as $evento) {	
 	 $coord_aux = FachadaUsuario::getInstancia()->usuarioEhAuxiliarOuCoordenador($usuarioLogado->getCodUsuario(), $evento->getCodEvento());
 	 if ($coord_aux){
@@ -13,6 +13,5 @@ foreach ($eventos as $evento) {
 	 } else {
 	 	echo "<a href=\"" . URL . "apresentacao/Evento/lista_atividades.php?cod_evento=" . $evento->getCodEvento() . "\">".$evento->getNome() ." | ". $evento -> getStatus() . "</a><br/>";
 	 }
-	 
 }
 ?>
