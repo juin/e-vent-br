@@ -1,0 +1,30 @@
+Convenções do Projeto:
+
+Nome da classe com mesmo nome do arquivo php. Ex: FachadaUsuario.php -> class FachadaUsuario
+
+Padrão de nomes para métodos -> getInstancia() | getCodUsuario()
+
+Classes de Fachada e Persistencia não têm atributos
+
+Usar require_once para incluir arquivos
+
+Comentar antes de todas as variáveis seguindo o seguinte modelo:
+//@var int
+$cod_usuario
+
+Nome de variáveis seguindo o seguinte modelo:
+$cod_usuario, $data_hora_pagamento
+
+Ferramenta para gerar classe
+http://desenvolvimentoparaweb.com/ferramentas/classesPHP/
+
+
+Uso de aspas simples e duplas
+$login = "Brasil";
+echo $login; //Brasil
+echo '$login'; //$login
+echo "$login";//Brasil
+
+
+Padrão -> singleton (instancia única)
+http://stackoverflow.com/questions/203336/creating-the-singleton-design-pattern-in-php5
