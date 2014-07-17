@@ -31,7 +31,7 @@ class FachadaCertificado extends InstanciaUnica{
                 $pdf->Open();
                 $pdf->SetMargins(0, 0, 0);
 			//ta buscando a imagem so no meu, editem para testar
-			$pdf->Image("C:/wamp/www/e-vent/aplicativo/fachada/teste_fundo.png", null, null, 297, 210);
+			$pdf->Image("C:/wamp/www/e-vent/recursos/imagem/teste_fundo.jpg", null, null, 297, 210);
 			//cor da fonte
 			$pdf->SetTextColor(12, 54, 27);
 			//nome do aluno
@@ -50,7 +50,11 @@ class FachadaCertificado extends InstanciaUnica{
 			 }
 			 $nome_evt = $certificado->getNomeEvento();
 			 $pdf->Text(30, 70, $nome_evt);
-			 $pdf->Output('C:/wamp/www/e-vent/aplicativo/TESTEPDF/cert.pdf');
+			 $pdf->Output('C:/wamp/www/e-vent/recursos/PDF/cert.pdf');
+			 //criar objeto certificadp
+			 //salvar endereço gerado no banco
+			 //iframe
+			
 			 
 			 
 	}

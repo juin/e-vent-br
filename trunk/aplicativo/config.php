@@ -58,5 +58,7 @@ define('INSCRICAO_FORMA_PGTO_DEPOSITO','Deposito');
 define('INSCRICAO_STATUS_ANDAMENTO','Andamento');
 define('INSCRICAO_STATUS_CONFIRMADA','Confirmada');
 define('INSCRICAO_STATUS_CANCELADA','Cancelada');
+define('ENDERECO_FINAL_CERTIFICADO','C:/wamp/www/e-vent/recursos/PDF/cert.pdf');
+define('ENDERECO_FUNDO_CERTIFICADO', 'C:/wamp/www/e-vent/recursos/imagem/teste_fundo.jpg');
 
 ?>
