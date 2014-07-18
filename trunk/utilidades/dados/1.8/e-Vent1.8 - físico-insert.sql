@@ -131,18 +131,28 @@ INSERT INTO Local (cod_local, nome, sigla, bloco, quantidade_maxima) VALUES
 -- =======================
 INSERT INTO Atividade_Agenda (cod_atividade_agenda, data, horario_inicio, horario_fim, cod_local, cod_atividade) VALUES
 	(1, '2013-06-06', '14:00', '18:00', 2, 1);
+	(2, '2013-06-07', '14:00', '18:00', 2, 1);
+	(3, '2013-06-08', '14:00', '18:00', 2, 1);
 
 -- =========
 -- Inscricao
 -- =========
 INSERT INTO Inscricao (cod_inscricao, cod_usuario, cod_evento, data_hora_inscricao, status) VALUES
 	(1, 1, 1, now(), 'Confirmada');
+	(2, 1, 1, now(), 'Confirmada');
 
 -- ===================
 -- Inscricao_Historico
 -- ===================
 INSERT INTO Inscricao_Historico (cod_inscricao, cod_atividade_agenda, valor_pago, frequente) VALUES
 	(1, 1, 80.0, 'Presente');
+	(1, 2, 80.0, 'Presente');
+	(1, 3, 80.0, 'Presente');
+	(2, 1, 80.0, 'Presente');
+	(2, 2, 80.0, 'Presente');
+	(2, 3, 80.0, 'Presente');
+	
+	
 
 -- ===========
 -- Certificado

@@ -8,9 +8,9 @@ class PersistenciaInscricao extends InstanciaUnica {
     
     //Seleciona todas as inscrições do usuário
     public function selecionarInscricoesPorUsuario($cod_usuario){
-        $sql = "Select i.cod_inscricao, e.cod_evento, e.nome, i.data_hora_inscricao, i.forma_pagamento, i.status
-        	    From Inscricao i, Evento e Where i.cod_usuario='" . $cod_usuario . "'
-        		and e.cod_evento = i.cod_evento Order by i.cod_inscricao Desc";
+        $sql = "SELECT i.cod_inscricao, e.cod_evento, e.nome, i.data_hora_inscricao, i.status
+        	    FROM Inscricao i, Evento e WHERE i.cod_usuario='" . $cod_usuario . "'
+        		AND e.cod_evento = i.cod_evento ORDER BY i.cod_inscricao DESC";
         // seleciona os 5 ultimos registros de inscricao
         $registros = FachadaConectorBD::getInstancia()->consultarComLimite($sql,5);
         $inscricoes = null;
@@ -20,9 +20,7 @@ class PersistenciaInscricao extends InstanciaUnica {
 				$inscricoes[$i] = new Inscricao();
 				$inscricoes[$i]->setCodInscricao($registro["cod_inscricao"]);
 				$inscricoes[$i]->setCodEvento($registro["cod_evento"]);
-				$inscricoes[$i]->setNomeEvento($registro["nome"]);
-				$inscricoes[$i]->setDataHora($registro["data_hora_inscricao"]);
-				$inscricoes[$i]->setFormaPagamento($registro["forma_pagamento"]);
+				$inscricoes[$i]->setDataHoraInscricao($registro["data_hora_inscricao"]);
 				$inscricoes[$i]->setStatus($registro["status"]);
 				$i++;
 			}
@@ -53,26 +51,33 @@ class PersistenciaInscricao extends InstanciaUnica {
         return $inscricoes;
     }
     
-    public function realizarInscricao(Inscricao $inscricao, array $cods_atividades_agenda) {
+    public function realizarInscricao(Inscricao $inscricao, array $codigos_atividades) {
     	$i = 0;
     	// adiciona a rotina de criacao da inscricao
     	$queries[$i] = "INSERT INTO Inscricao
     			(cod_usuario, cod_evento,
-    			data_hora, forma_pagamento, status)
+    			data_hora_inscricao, status)
     			VALUES
     			(".$inscricao->getCodUsuario().",".$inscricao->getCodEvento().",now(),
-    			'".$inscricao->getFormaPagamento()."','".$inscricao->getStatus()."');";
+    			'".$inscricao->getStatus()."');";
     	// adiciona na mesma colecao de comandos cada insert para cadastro das atividades
-    	// o MAX (padrao SQL) seleciona o ultimo codigo inserido para inscricao
-    	foreach ($cods_atividades_agenda as $cod_atividade_agenda) {
-	       $i++;
-	       $queries[$i] = "INSERT INTO Inscricao_Historico
+    	// o MAX (padrao SQL) seleciona o ultimo codigo inserido para inscricao   	
+    	foreach ($codigos_atividades as $codigo_atividade) {
+    		
+    		$codigos_agenda = FachadaAtividade::getInstancia()->
+    		listarAtividadeAgendaPorCodigoAtividade($codigo_atividade);
+	     	
+			var_dump($codigos_agenda);
+			foreach ($codigos_agenda as $codigo_agenda) {
+				$i++;
+				$queries[$i] = "INSERT INTO Inscricao_Historico
     			(cod_inscricao, cod_atividade_agenda, valor_pago, 
     			frequente, observacao)
-    			SELECT MAX(cod_inscricao), ".$cod_atividade_agenda.", 0.00, '".
-    			INSCRICAO_HISTORICO_FREQUENTE_NAO_LANCADO."', NULL FROM Inscricao;";
+    			SELECT MAX(cod_inscricao), ".$codigo_agenda->getCodAtividadeAgenda().", 0.00, '".
+    			INSCRICAO_HISTORICO_FREQUENTE_NAO_LANCADO."', NULL FROM Inscricao;";	
+			}
 		}
-		
+		var_dump($queries);
 		return FachadaConectorBD::getInstancia()->executarTransacao($queries);    	
     }
 

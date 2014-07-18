@@ -60,7 +60,7 @@ require_once(FACHADAS.'FachadaInscricao.php');
         <?
         if ($inscricoes!=NULL) {
             foreach ($inscricoes as $inscricao) {
-                echo "<li>Código Inscrição: " . $inscricao->getCodInscricao() . " Evento: " . $inscricao->getNomeEvento() . " Status: " . $inscricao->getStatus();
+                echo "<li>Código Inscrição: " . $inscricao->getCodInscricao() . " Evento: " . $inscricao->getCodEvento() . " Status: " . $inscricao->getStatus();
             }
         }
         ?>
