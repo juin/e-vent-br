@@ -4,12 +4,14 @@
 	require_once(CLASSES.'Inscricao.php');
 	require_once(FACHADAS.'FachadaInscricao.php');
 	require_once(FACHADAS.'FachadaEvento.php');
+	require_once(FACHADAS.'FachadaAtividade.php');
 	
 	$vagas = true; 
-	$codigos_atividades_agenda = $_POST['atv'];
+	$codigos_atividades = $_POST['atividades'];
+	$cod_evento = $_POST['cod_evento'];
 	// verifica se ainda tem vagas disponiveis
-	foreach ($codigos_atividades_agenda as $codigo_atividade_agenda) {
-		$disponiveis = FachadaEvento::getInstancia()->listarVagasDisponiveisPorAtividade($codigo_atividade_agenda);
+	foreach ($codigos_atividades as $codigo_atividade) {
+		$disponiveis = FachadaAtividade::getInstancia()->listarVagasDisponiveisPorAtividade($codigo_atividade);
 		if ($disponiveis == 0) {
 			$vagas = false;
 		}
@@ -17,11 +19,10 @@
 	// realiza a inscricao se ainda houver vagas em todas atividades agendadas
 	if ($vagas) {
 		$inscricao = new Inscricao();
-		$inscricao->setFormaPagamento(INSCRICAO_FORMA_PGTO_VISTA);
-		$inscricao->setStatus(INSCRICAO_STATUS_ANDAMENTO);
-		$inscricao->setCodEvento($_POST['cod_evento']);
 		$inscricao->setCodUsuario($usuarioLogado->getCodUsuario());
-		$resultado = FachadaInscricao::getInstancia()->realizarInscricao($inscricao, $codigos_atividades_agenda);
+		$inscricao->setCodEvento($cod_evento);
+		$inscricao->setStatus(INSCRICAO_STATUS_ANDAMENTO);
+		$resultado = FachadaInscricao::getInstancia()->realizarInscricao($inscricao, $codigos_atividades);
 		if ($resultado == 0)
 		{
 			echo "As vagas nas atividades escolhidas foram reservadas. Você deve confirmar o pagamento para finalizar a sua inscrição!";
@@ -32,6 +33,6 @@
 		// de atividades novamente (ele deverah escolher de novo)
 		echo "Pelo menos uma das atividades escolhidas teve suas vagas ESGOTADAS. Por favor, " .
 				"retorne à tela de selecão de atividades e tente de novo!";
-		echo "<li><a href=\"" . URL . "apresentacao/Evento/lista_atividades.php?cod_evento=" . $_POST['cod_evento'] . "\">Retornar para seleção de atividades</a></li>";
+		echo "<li><a href=\"" . URL . "apresentacao/Evento/lista_atividades.php?cod_evento=" . $cod_evento . "\">Retornar para seleção de atividades</a></li>";
 	}
 ?>

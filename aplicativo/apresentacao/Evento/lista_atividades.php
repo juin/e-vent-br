@@ -26,8 +26,8 @@ $cod_evento = $_GET['cod_evento'];
 			foreach ($atividades as $atividade){
 				
 				//Vou implementar essa linha aqui agora
-				$vagas_disponiveis =  FachadaAtividade::getInstancia()->listarVagasDisponiveisPorAtividade(1);
-				if ($vagas_disponiveis > 0) 
+				$vagas_disponiveis =  FachadaAtividade::getInstancia()->listarVagasDisponiveisPorAtividade($atividade->getCodAtividade());
+				if ($vagas_disponiveis > 0)
 				{ 
 					echo '<input type="checkbox" name="atividades[]" value="'.$atividade->getCodAtividade().'">'.
 							$atividade->getNome()." | Carga Horária: ".$atividade->getCargaHoraria()."h | Total de vagas: ".
