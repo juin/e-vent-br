@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__).'../../config.php');
+require_once(dirname(__FILE__).'/../config.php');
 require_once (FACHADAS.'FachadaConectorBD.php');
 require_once (CLASSES.'Inscricao.php');
 require_once(CLASSES.'InstanciaUnica.php');
@@ -67,7 +67,6 @@ class PersistenciaInscricao extends InstanciaUnica {
     		$codigos_agenda = FachadaAtividade::getInstancia()->
     		listarAtividadeAgendaPorCodigoAtividade($codigo_atividade);
 	     	
-			var_dump($codigos_agenda);
 			foreach ($codigos_agenda as $codigo_agenda) {
 				$i++;
 				$queries[$i] = "INSERT INTO Inscricao_Historico
@@ -77,7 +76,6 @@ class PersistenciaInscricao extends InstanciaUnica {
     			INSCRICAO_HISTORICO_FREQUENTE_NAO_LANCADO."', NULL FROM Inscricao;";	
 			}
 		}
-		var_dump($queries);
 		return FachadaConectorBD::getInstancia()->executarTransacao($queries);    	
     }
 
