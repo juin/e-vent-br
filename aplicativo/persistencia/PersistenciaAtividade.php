@@ -75,21 +75,27 @@ class PersistenciaAtividade extends InstanciaUnica{
 		return $atividadesAgenda;	
 	}
 	
-	public function selecionarVagasDisponiveisPorCodigoAtividadeAgenda($cod_atividade_agenda){
-		$vagas_disponiveis = 0;
-		$sql = "SELECT COUNT(cod_atividade_agenda) as Inscricoes FROM Inscricao_Historico
-				WHERE cod_atividade_agenda =".$cod_atividade_agenda;
-		$vagas_disponiveis = FachadaConectorBD::getInstancia()->consultar($sql);
-		return $vagas_disponiveis;
-	}
-	
 	public function selecionarVagasDisponiveisPorAtividade($cod_atividade){
-            $sql = "SELECT (a.vagas - count(*)) as quantidadeVagas FROM Atividade a, 
-                    Inscricao i, Inscricao_Historico h, Atividade_Agenda aa WHERE
-                    aa.cod_atividade_agenda = '"  . $cod_atividade_agenda . "' AND i.status in ('Andamento', 'Confirmada')
-                    AND h.cod_inscricao = i.cod_inscricao AND aa.cod_atividade_agenda = h.cod_atividade_agenda AND
-                    a.cod_atividade = aa.cod_atividade GROUP BY a.vagas";
+    		$sql = "SELECT count(*) as quantidadeVagasOcupadas
+    				FROM Atividade_Agenda aa, Inscricao_Historico ih, Inscricao i 
+    				WHERE aa.cod_atividade = '" . $cod_atividade . "'
+    				AND ih.cod_atividade_agenda = aa.cod_atividade_agenda
+    				AND i.cod_inscricao = ih.cod_inscricao";
             $registro = FachadaConectorBD::getInstancia()->consultar($sql);
+            // pesquisa nula indica que nao existem inscricoes para a atividade
+            if (is_null($registro)) {
+            	// deve retornar, neste caso, o total de vagas da atividade como todo
+            	$sql = "SELECT a.vagas as quantidadeVagas
+            			FROM Atividade a
+						WHERE a.cod_atividade = '" . $cod_atividade . "'";
+            	$registro = FachadaConectorBD::getInstancia()->consultar($sql);
+            } else {
+            	// do contrario, retorna o total de vagas previstas menos as que foram consumidas
+            	$sql = "SELECT (a.vagas  - " . $registro[0][0] .
+            		   ") as quantidadeVagas FROM Atividade a
+						WHERE a.cod_atividade = '" . $cod_atividade . "'";
+            	$registro = FachadaConectorBD::getInstancia()->consultar($sql);
+            }
 
             return $registro[0];
     }
