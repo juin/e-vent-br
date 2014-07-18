@@ -9,7 +9,7 @@ require_once(PERSISTENCIAS . 'PersistenciaLocal.php');
 class PersistenciaEvento extends InstanciaUnica{
 	
 	public function selecionarEventosPorStatus($status){
-		$eventos = NULL;	
+		$eventos = NULL;
 		$sql = "Select cod_evento, nome, sigla, data_inicio_evento, status, pagamento from Evento WHERE status LIKE '".$status."'";
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
@@ -19,7 +19,7 @@ class PersistenciaEvento extends InstanciaUnica{
 				$eventos[$i]->setCodevento($registro["cod_evento"]);
 				$eventos[$i]->setNome($registro["nome"]);
 				$eventos[$i]->setSigla($registro["sigla"]);
-				$eventos[$i]->setDatainicio($registro["data_inicio"]);
+				$eventos[$i]->setDatainicio($registro["data_inicio_evento"]);
 				$eventos[$i]->setStatus($registro["status"]);
 				$eventos[$i]->setPagamento($registro["pagamento"]);
 				$i++;
