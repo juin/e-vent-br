@@ -30,15 +30,6 @@ class FachadaAtividade extends InstanciaUnica{
 		}
 	}
 	
-	public function listarVagasDisponiveisPorCodigoAtividadeAgenda($cod_atividade_agenda){
-		$registros = PersistenciaAtividade::getInstancia()->selecionarVagasDisponiveisPorCodigoAtividadeAgenda($cod_atividade_agenda);
-		if($registros != NULL){
-			return $registros;
-		} else {
-			return NULL;
-		}
-	}
-	
 	public function listarAtividadePorCodigo($cod_atividade){
 		$registros = PersistenciaAtividade::getInstancia()->selecionarAtividadesPorCodigo($cod_atividade);
 		if($registros != NULL){
@@ -71,7 +62,7 @@ class FachadaAtividade extends InstanciaUnica{
 	}
 	
     public function listarVagasDisponiveisPorAtividade($cod_atividade){
-        $registros = PersistenciaAtividade::getInstancia()->selecionarVagasDisponiveisPorAtividade($cod_atividade_agenda);
+        $registros = PersistenciaAtividade::getInstancia()->selecionarVagasDisponiveisPorAtividade($cod_atividade);
         if($registros!=NULL){
             return $registros[0];
         } else { 
