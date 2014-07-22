@@ -6,6 +6,7 @@ require_once (CLASSES.'ParametrosAcessoBanco.php');
 
 class FachadaConectorBD {
 
+
     //Criar Instância da classe
     private static $instancia = NULL;
 

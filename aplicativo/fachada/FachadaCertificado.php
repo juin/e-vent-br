@@ -9,8 +9,10 @@ require_once(FACHADAS.'Fpdf/fpdf.php');
 
 class FachadaCertificado extends InstanciaUnica{
 	
+
 	public function listarPorUsuario($cod_usuario){
-		return PersistenciaCertificado::getInstancia()->selecionarPorUsuario;
+		$certificados = PersistenciaCertificado::getInstancia()->selecionarPorUsuario($cod_usuario);
+		return $certificados[0];
 	}
 	
 	public function verificarCertificado($cod_validacao){
@@ -64,6 +66,10 @@ class FachadaCertificado extends InstanciaUnica{
 	}
 	public function enviarCertificado($cod_certificado){
 		
+	}
+	 
+	public function criaObjetoCertificado($cod_usuario, $cod_evento){
+		return PersistenciaCertificado::getInstancia()->criaObjetoCertificado($cod_usuario, $cod_evento);
 	}
 	
 	public function atualizarDataEmissao($cod_certificado, $data){

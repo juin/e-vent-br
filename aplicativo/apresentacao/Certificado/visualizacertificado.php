@@ -14,7 +14,7 @@
 	
 	
 	
-	FachadaCertificado::getInstancia()->gerarCertificado($certificado);
+	//echo print_r(FachadaCertificado::getInstancia()->criaObjetoCertificado(1, 1));
 	
-	
+	echo print_r(FachadaCertificado::getInstancia()->seleciona)
 ?>

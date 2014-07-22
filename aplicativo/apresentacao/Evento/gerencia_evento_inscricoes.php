@@ -21,7 +21,7 @@ if ($cod_evento != NULL) {
 echo "*************<br>";
 echo "Acompanhamento de inscrições<br>";
 
-$inscricoes = FachadaEvento::getInstancia()->lis
+//$inscricoes = FachadaEvento::getInstancia()->lis
 if ($atividades != null) {
 	foreach ($atividades as $atividade) {
 		echo "<li><a href=\"".URL."apresentacao/Evento/gerencia_atividade.php?cod_atividade=".$atividade->getCodAtividade()."\">".$atividade->getNome()."-".$atividade -> getStatus()."</a></li>";
