@@ -48,5 +48,3 @@ class ParametrosAcessoBanco {
         return $this->bd_nome_banco;
     }
 }
-
-?>
