@@ -38,10 +38,10 @@ class FachadaCertificado extends InstanciaUnica{
 			$pdf->SetTextColor(12, 54, 27);
 			//nome do aluno
 			 $pdf->SetFont('Arial', 'B', 30);
-			 $nome=strtoupper(utf8_decode($certificado->getNomeAluno()));  // Maiuscula e resolve problema de acentuação
+			 $nome=strtoupper(utf8_decode($certificado->getNomeAluno()));  // Maiuscula e resolve problema de acentuaï¿½ï¿½o
 			 $pdf->Text(30, 50, $nome);
 			    $pdf->SetFont('Arial', '', 20);
-				//máximo 5
+				//mï¿½ximo 5
 				$vetor= $certificado->getNomeAtividade();
 				$vetorCH = $certificado->getCargaHoraria();
 			 for ($j = 0; $j < count($vetor); $j++) {
@@ -54,7 +54,7 @@ class FachadaCertificado extends InstanciaUnica{
 			 $pdf->Text(30, 70, $nome_evt);
 			 $pdf->Output('C:/wamp/www/e-vent/recursos/PDF/cert.pdf');
 			 //criar objeto certificadp
-			 //salvar endereço gerado no banco
+			 //salvar endereï¿½o gerado no banco
 			 //iframe
 			
 			 
