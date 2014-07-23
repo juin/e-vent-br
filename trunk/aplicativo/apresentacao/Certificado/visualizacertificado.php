@@ -12,9 +12,6 @@
 	$certificado->setNomeAtividade('sql-certificado', 1);
 	$certificado->setCargaHoraria('20', 1);
 	
-	
-	
-	//echo print_r(FachadaCertificado::getInstancia()->criaObjetoCertificado(1, 1));
-	
-	echo print_r(FachadaCertificado::getInstancia()->seleciona)
+
+	echo (FachadaCertificado::getInstancia()->criaObjetoCertificado(1,1));
 ?>
