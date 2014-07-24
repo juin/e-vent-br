@@ -8,19 +8,53 @@ function __autoload($class_name)
 {
     require_once(CLASSES.$class_name.'.php');
 }
-
 //Salva sessão do usuario na variavel $usuarioLogado
 $usuarioLogado = $_SESSION['usuario'];
-
 ?>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Sistema de gerenciamento de Eventos | e-Vent-br</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>e-Vent-br</title>
+	
+	<link rel="stylesheet" href="<? echo SCRIPTS_CSS; ?>foundation.css"/>
+	<link rel="stylesheet" href="<? echo SCRIPTS_CSS; ?>e.vent.css"/>
+	<link rel="stylesheet" href="<? echo SCRIPTS_CSS; ?>foundation-icons.css"/>
+	
+	
+	<script src="<? echo SCRIPTS_JS; ?>modernizr.js"></script>
 </head>
-
 <body>
-    
-<p>Olá, <? echo $usuarioLogado->getNome(); ?>! <a href="<? echo URL . "apresentacao"?>">Inicio</a> <a href="#">Minha conta</a>   <a href="<? echo URL . "apresentacao/sair.php"?>">Sair</a></p>
-    
+	<? if(basename($_SERVER["SCRIPT_NAME"])!="login.php"){ ?>
+	<div class="row">	
+		<div class="large-12 medium-12 small-12 columns">	
+			<div class="fixed">		
+				<nav class="top-bar" data-topbar>
+					<ul class="title-area">
+   					<ul class="small-block-grid-1">
+   						<br>
+ 							<li><img class="evento" src="<? echo IMAGENS; ?>logo_event.png"></li>
+  						</ul>
+    					<li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+  					</ul>		
+  				<section class="top-bar-section">
+    		 		<ul class="right">
+      				<li><a href="#">Início</a></li>
+      				<li><a href="#">Eventos</a></li>
+      				<li><a href="#">Inscrições</a></li>
+      				<li><a href="#">Certificados</a></li>
+    				</ul>
+  				</section>
+  				</nav>
+  				<section id="github" class="githubissues hide-for-small-down">
+  				<div class="right">			
+					<div class="align-right">				
+						<div class="conta-usuario"><p>Olá, <strong><? echo $usuarioLogado->getNome();?></strong> <a href="">Minha Conta</a> [ <a href="<? echo URL."apresentacao/Usuario/logout.php";?>">Sair</a> ]</p></div>
+					</div>
+				</div>
+  				</section>
+			</div>
+		</div>
+	</div>	
+    <? } ?>

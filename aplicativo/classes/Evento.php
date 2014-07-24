@@ -1,123 +1,143 @@
 <?php
 
 class Evento {
-	private $cod_evento;
-	private $nome;
-	private $sigla;
-	private $data_inicio;
-	private $data_fim;
-	private $data_hora_publicado;
-	private $status;
-	private $pagamento;
-	private $url_gabarito_atividade;
-	private $url_gabarito_evento;
-	private $url_imagem;
-	private $url_site;
-	private $dias_pgto;
-	
+	private $codEvento = null;
+	private $nome = null;
+	private $sigla = null;
+	private $dataInicioEvento = null;
+	private $dataFimEvento = null;
+	private $dataInicioInscricao = null;
+	private $dataFimInscricao = null;
+	private $dataHoraPublicado = null;
+	private $status = null;
+	private $pagamento = null;
+	private $urlGabaritoAtividade = null;
+	private $urlGabaritoEvento = null;
+	private $urlGabaritoImagem = null;
+	private $urlSite = null;
+	private $diasLimitePagamento = null;
+
 	public function getCodEvento(){
-		return $this->cod_evento;
+		return $this->codEvento;
 	}
-	
+
+	public function setCodEvento($codEvento){
+		$this->codEvento = $codEvento;
+	}
+
 	public function getNome(){
 		return $this->nome;
 	}
-	
-	public function getSigla(){
-		return $this->sigla;
-	}
-	
-	public function getDataInicio(){
-		return $this->data_inicio;
-	}
-	
-	public function getDataFim(){
-		return $this->data_fim;
-	}
-	
-	public function getDataHoraPublicado(){
-		return $this->data_hora_publicado;
-	}
-	
-	public function getStatus(){
-		return $this->status;
-	}
-	
-	public function getPagamento(){
-		return $this->pagamento;
-	}
-	
-	public function getUrlAtividade(){
-		return $this->url_gabarito_atividade;
-	}
-	
-	public function getUrlEvento(){
-		return $this->url_gabarito_evento;
-	}
-	
-	public function getUrlImagem(){
-		return $this->url_imagem;
-	}
-	
-	public function getUrlSite(){
-		return $this->url_site;
-	}
-	
-	public function getDiasLimitePagamento(){
-		return $this->dias_pgto;
-	}
-	
-	public function setCodEvento($cod_evento){
-		$this->cod_evento = $cod_evento;
-	}
-	
+
 	public function setNome($nome){
 		$this->nome = $nome;
 	}
-	
+
+	public function getSigla(){
+		return $this->sigla;
+	}
+
 	public function setSigla($sigla){
 		$this->sigla = $sigla;
 	}
-	
-	public function setDataInicio($data_inicio){
-		$this->data_inicio = $data_inicio;
+
+	public function getDataInicioEvento(){
+		return $this->dataInicioEvento;
+	}
+
+	public function setDataInicioEvento($dataInicioEvento){
+		$this->dataInicioEvento = $dataInicioEvento;
+	}
+
+	public function getDataFimEvento(){
+		return $this->dataFimEvento;
+	}
+
+	public function setDataFimEvento($dataFimEvento){
+		$this->dataFimEvento = $dataFimEvento;
 	}
 	
-	public function setDataFim($data_fim){
-		$this->data_fim = $data_fim;
+	public function getDataInicioInscricao(){
+		return $this->dataInicioInscricao;
 	}
-	
-	public function setDataHoraPublicado($data_hora_publicado){
-		$this->data_hora_publicado = $data_hora_publicado;
+
+	public function setDataInicioInscricao($dataInicioInscricao){
+		$this->dataInicioInscricao = $dataInicioInscricao;
 	}
-	
+
+	public function getDataFimInscricao(){
+		return $this->dataFimInscricao;
+	}
+
+	public function setDataFimInscricao($dataFimInscricao){
+		$this->dataFimInscricao = $dataFimInscricao;
+	}
+
+	public function getDataHoraPublicado(){
+		return $this->dataHoraPublicado;
+	}
+
+	public function setDataHoraPublicado($dataHoraPublicado){
+		$this->dataHoraPublicado = $dataHoraPublicado;
+	}
+
+	public function getStatus(){
+		return $this->status;
+	}
+
 	public function setStatus($status){
 		$this->status = $status;
 	}
-	
+
+	public function getPagamento(){
+		return $this->pagamento;
+	}
+
 	public function setPagamento($pagamento){
 		$this->pagamento = $pagamento;
 	}
-	
-	public function setUrlAtividade($url_atividade){
-		$this->url_gabarito_atividade = $url_atividade;
+
+	public function getUrlGabaritoAtividade(){
+		return $this->urlGabaritoAtividade;
 	}
-	
-	public function setUrlEvento($url_evento){
-		$this->url_gabarito_evento = $url_evento;
+
+	public function setUrlGabaritoAtividade($urlGabaritoAtividade){
+		$this->urlGabaritoAtividade = $urlGabaritoAtividade;
 	}
-	
-	public function setUrlImagem($url_imagem){
-		$this->url_imagem = $url_imagem;
+
+	public function getUrlGabaritoEvento(){
+		return $this->urlGabaritoEvento;
 	}
-	
-	public function setUrlSite($url_site){
-		$this->url_site = $url_site;
+
+	public function setUrlGabaritoEvento($urlGabaritoEvento){
+		$this->urlGabaritoEvento = $urlGabaritoEvento;
 	}
-	
-	public function setDiasLimitePagamento($dias_pgto){
-		$this->dias_pgto = $dias_pgto;
+
+	public function getUrlGabaritoImagem(){
+		return $this->urlImagem;
 	}
+
+	public function setUrlGabaritoImagem($urlImagem){
+		$this->urlImagem = $urlImagem;
+	}
+
+	public function getUrlSite(){
+		return $this->urlSite;
+	}
+
+	public function setUrlSite($urlSite){
+		$this->urlSite = $urlSite;
+	}
+
+	public function getDiasLimitePagamento(){
+		return $this->diasLimitePagamento;
+	}
+
+	public function setDiasLimitePagamento($diasLimitePagamento){
+		$this->diasLimitePagamento = $diasLimitePagamento;
+	}
+
+
 }
 
 ?>

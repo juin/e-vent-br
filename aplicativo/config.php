@@ -8,7 +8,9 @@ define('CLASSES',BASE.'classes/');
 define('FACHADAS',BASE.'fachada/');
 define('PERSISTENCIAS',BASE.'persistencia/');
 define('APRESENTACAO',BASE.'apresentacao/');
-define('SCRIPTS',URL.'../recursos/js/' );
+define('SCRIPTS_JS',URL.'../recursos/js/' );
+define('SCRIPTS_CSS',URL.'../recursos/css/');
+define('IMAGENS',URL.'../recursos/imagem/');
 define('UTILIDADES',BASE.'utilidades.php');
 //Constantes de Banco de Dados
 //Acesso
