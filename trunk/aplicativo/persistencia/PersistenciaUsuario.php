@@ -28,6 +28,44 @@ class PersistenciaUsuario extends InstanciaUnica {
 
         return $usuarios;
     }
+	
+	public function selecionarPorCodigo($cod_usuario) {
+        $usuarios = NULL;
+
+        $sql = "SELECT * FROM Usuario WHERE cod_usuario=" . $cod_usuario;
+        $registros = FachadaConectorBD::getInstancia() -> consultar($sql);
+
+        if (!is_null($registros)) {
+            $i = 0;
+            //Percorre array que retornou do banco de dados e cria um objeto do tipo UsuarioSessao
+            foreach ($registros as $registro) {
+                $usuario = new Usuario();
+                $usuario -> setCodUsuario($cod_usuario);
+				$usuario -> setNomeCertificado($registro['nome_certificado']);
+				$usuario -> setNomeCracha($registro['nome_cracha']);
+				$usuario -> setSexo($registro['sexo']);
+				$usuario -> setDataNascimento($registro['data_nascimento']);
+				$usuario -> setCpf($registro['cpf']);
+				$usuario -> setRg($registro['rg']);
+                $usuario -> setLogin($registro['login']);
+				$usuario -> setTelefone1($registro['telefone1']);
+				$usuario -> setTelefone2($registro['telefone2']);
+				$usuario -> setEmail($registro['email']);
+				$usuario -> setCampusInstituicao($registro['campus_instituicao']);
+				$usuario -> setLattes($registro['lattes']);
+				$usuario -> setCategoria($registro['categoria']);
+				$usuario -> setNivelAcesso($registro['nivel_acesso']);
+				$usuario -> setNotifica($registro['notifica']);
+				$usuario -> setStatus($registro['status']);
+				$usuario -> setDataHoraCadastro($registro['data_hora_cadastro']);
+                $usuario -> setCodCidade($registro['cod_cidade']);
+				$usuario -> setCodInstituicao($registro['cod_instituicao']);
+				$usuario -> setCodCurso($registro['cod_curso']);
+                $usuarios[$i++] = $usuario;   
+            }
+        }
+        return $usuarios;
+    }
 
     public function adicionarUsuario(Usuario $usuario) {
         $cod = $usuario -> getCodUsuario();

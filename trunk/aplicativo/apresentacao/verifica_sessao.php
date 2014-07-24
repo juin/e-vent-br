@@ -1,7 +1,7 @@
 <?
 if(basename($_SERVER["SCRIPT_NAME"])!="login.php"){
 	session_start();
-	$inativo = 600; //Define tempo para sessão expirar. (em segundos)
+	$inativo = 60000; //Define tempo para sessão expirar. (em segundos)
 	
 	
 	if($_SESSION['usuario']==null){//Verifica se Sessão foi criada.

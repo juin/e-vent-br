@@ -16,6 +16,8 @@
 	<script src="<? echo SCRIPTS_JS; ?>jquery.js"></script>
 	<script src="<? echo SCRIPTS_JS; ?>foundation.min.js"></script>
 	<script src="<? echo SCRIPTS_JS; ?>foundation.tab.js"></script>
+	<script src="<? echo SCRIPTS_JS; ?>foundation.reveal.js"></script>
+	<script src="<? echo SCRIPTS_JS; ?>foundation.tooltip.js"></script>
 	<script>
 		$(document).foundation();
 	</script>

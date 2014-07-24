@@ -13,6 +13,14 @@ class FachadaUsuario extends InstanciaUnica{
         }
 	}
 	
+	public function listarUsuarioPorCodigo($cod_usuario){
+        $usuarios = PersistenciaUsuario::getInstancia()->selecionarPorCodigo($cod_usuario);
+        if($usuarios!=NULL){
+            return $usuarios[0];
+        } else { 
+        	return NULL; 
+        }
+	}
 	public function adicionarUsuario($usuario){
 		$id = PersistenciaUsuario::getInstancia()->adicionarUsuario($usuario);
 

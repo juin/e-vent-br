@@ -8,7 +8,7 @@ $cod_atividade = $_GET['cod_atividade'];
 
 if($cod_atividade!=null){
 	$atividade = FachadaAtividade::getInstancia()->listarAtividadePorCodigo($cod_atividade);
-	echo $atividade->getNome()."<br><br>**********Agenda************<br><br>";
+	echo utf8_encode($atividade->getNome())."<br><br>**********Agenda************<br><br>";
 	$agendas = FachadaAtividade::getInstancia()->listarAgendasPorAtividade($cod_atividade);
 	if ($agendas!=null) {
 		echo "<ul>";

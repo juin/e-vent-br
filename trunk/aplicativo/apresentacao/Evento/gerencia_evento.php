@@ -15,22 +15,8 @@ $cod_evento = $_GET['cod_evento'];?>
 			</div>
 </div>
 <div class="row menu-esquerdo">	
-		<div class="large-3 medium-3 small-3 columns">	
-		<br>
-		<br>
-  			<ul class="off-canvas-list doc-oc-list">
-    			<li><a href="#">Inscrições</a></li>
-    			<li><a href="#">Certificados</a></li>
-  			</ul>
-  		<br>
-  			<ul class="off-canvas-list doc-oc-list">
-    			<li class="menu-usuario"><a href="#">Eventos</a></li>
-    			<li class="menu-usuario"><a href="#">Cadastro de Participante</a></li>
-    			<li class="menu-usuario"><a href="#">Inscrição de Participante</a></li>
-    			<li class="menu-usuario"><a href="#">Pagamentos</a></li>
-  			</ul>	
-		</div>
-		
+		<? require_once(APRESENTACAO.'menu_esquerdo.php'); ?>
+
 		<div class="abas-gerenciamento">
 			<div class="large-8 medium-8 small-8 columns">
 			<br>
@@ -57,7 +43,7 @@ $cod_evento = $_GET['cod_evento'];?>
 											<div class="large-12 small-12 columns">
 											<br>
       									<label>Nome do Evento<font>*</font>:<br>
-        										<input type="text" placeholder="<? echo $evento->getNome(); ?>" />		
+        										<input type="text" placeholder="<? echo utf8_encode($evento->getNome()); ?>" />		
       									</label>
     										</div>								
 										</div>
@@ -158,13 +144,35 @@ $cod_evento = $_GET['cod_evento'];?>
 									<? $atividades = FachadaAtividade::getInstancia()->
 									listarAtividadesPorCodigoEvento($cod_evento);
 									if ($atividades != null) {?>
-										<ul>
-										<?
-										foreach ($atividades as $atividade) {
-											echo "<li><a href=\"".URL."apresentacao/Evento/gerencia_atividade.php?cod_atividade=".$atividade->getCodAtividade()."\">".$atividade->getNome()."-".$atividade -> getStatus()."</a></li>";
-										}?>
-										</ul>
+										<table>
+										  <thead>
+										    <tr>
+										      <th width="50">Cod.</th>
+										      <th>Nome</th>
+										      <th width="120">Ação</th>
+										    </tr>
+										  </thead>
+										  <tbody>
+										    <?
+												foreach ($atividades as $atividade) {?>
+													<tr>
+													<td><? echo $atividade->getCodAtividade();?></td>
+													<td><? echo utf8_encode($atividade->getNome());?></td>
+													<td><a href="#" data-reveal-id="modal-editar-atividade">Editar</a> | Apagar</td>
+													</tr>
+													<div id="modal-editar-atividade" class="reveal-modal" data-reveal>
+													  <h2>Atividade</h2>
+													  <p class="lead">Your couch.  It is mine.</p>
+													  <p>Im a cool paragraph that lives inside of an even cooler modal. Wins</p>
+													  <a class="close-reveal-modal">&#215;</a>
+													</div>
+													
+												<?}?>
+										  </tbody>
+										</table>
+										
 								  	<?}?>
+								  	
 								</fieldset>		
   						</div>
   						<div class="content" id="panel2-3">

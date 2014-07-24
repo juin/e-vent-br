@@ -40,8 +40,8 @@ $usuarioLogado = $_SESSION['usuario'];
   					</ul>		
   				<section class="top-bar-section">
     		 		<ul class="right">
-      				<li><a href="#">Início</a></li>
-      				<li><a href="#">Eventos</a></li>
+      				<li><a href="<? echo URL."apresentacao/"; ?>">Início</a></li>
+      				<li><a href="<? echo URL."apresentacao/"; ?>">Eventos</a></li>
       				<li><a href="#">Inscrições</a></li>
       				<li><a href="#">Certificados</a></li>
     				</ul>
