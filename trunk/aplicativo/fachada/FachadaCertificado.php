@@ -1,11 +1,9 @@
 <?php
-
 require_once(CLASSES.'UsuarioSessao.php');
 require_once(CLASSES.'Certificado.php');
 require_once(PERSISTENCIAS.'PersistenciaCertificado.php');
 require_once(CLASSES.'Usuario.php');
 require_once(FACHADAS.'Fpdf/fpdf.php');
-
 
 class FachadaCertificado extends InstanciaUnica{
 	
@@ -13,6 +11,22 @@ class FachadaCertificado extends InstanciaUnica{
 	public function listarPorUsuario($cod_usuario){
 		$certificados = PersistenciaCertificado::getInstancia()->selecionarPorUsuario($cod_usuario);
 		return $certificados[0];
+	}
+
+	public function criarCertificado($cod_usuario, $cod_evento){
+		return PersistenciaCertificado::getInstancia()->criarCertificado($cod_usuario, $cod_evento);
+	}
+	
+	public function atualizarDataEmissao($cod_certificado, $data){
+		return PersistenciaCertificado::getInstancia()->atualizarDataEmissao($cod_certificado, $data);
+	}
+	
+	public function atualizarDataSalvo($cod_certificado,$data){
+		return PersistenciaCertificado::getInstancia()->atualizarDataSalvo($cod_certificado, $data);
+	}
+	
+	public function atualizarDataEnvio($cod_certificado,$data){
+		return PersistenciaCertificado::getInstancia()->atualizarDataEnvio($cod_certificado, $data);
 	}
 	
 	public function verificarCertificado($cod_validacao){
@@ -25,10 +39,10 @@ class FachadaCertificado extends InstanciaUnica{
 	}
 	public function emitirCertificado($cod_usuario, $cod_evento){
 		return PersistenciaCertificado::getInstancia()->emitirCertificado($cod_usuario, $cod_evento);
-		
 	}
 
 	public function gerarCertificado (Certificado $certificado){
+	/*	
 			    $pdf = new FPDF('L', 'mm');
                 $pdf->Open();
                 $pdf->SetMargins(0, 0, 0);
@@ -52,36 +66,17 @@ class FachadaCertificado extends InstanciaUnica{
 			 }
 			 $nome_evt = $certificado->getNomeEvento();
 			 $pdf->Text(30, 70, $nome_evt);
-			 $pdf->Output('C:/wamp/www/e-vent/recursos/PDF/cert.pdf');
-			 //criar objeto certificadp
-			 //salvar endere�o gerado no banco
-			 //iframe
-			
-			 
-			 
+			 //$pdf->Output('C:/wamp/www/e-vent/recursos/PDF/cert.pdf');
+	 */
 	}
 		
 	public function salvarCertificado($cod_certificado){
 		
 	}
+	
 	public function enviarCertificado($cod_certificado){
 		
 	}
 	 
-	public function criaObjetoCertificado($cod_usuario, $cod_evento){
-		return PersistenciaCertificado::getInstancia()->criaObjetoCertificado($cod_usuario, $cod_evento);
-	}
-	
-	public function atualizarDataEmissao($cod_certificado, $data){
-		return PersistenciaCertificado::getInstancia()->atualizarDataEmissao($cod_certificado, $data);
-	}
-	
-	public function atualizarDataSalvo($cod_certificado,$data){
-		return PersistenciaCertificado::getInstancia()->atualizarDataSalvo($cod_certificado, $data);
-	}
-	
-	public function atualizarDataEnvio($cod_certificado,$data){
-		return PersistenciaCertificado::getInstancia()->atualizarDataEnvio($cod_certificado, $data);
-	}
-	
 }
+?>

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Parametros de acesso ao banco de dados.
  */

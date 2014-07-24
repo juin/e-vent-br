@@ -1,4 +1,4 @@
-<?
+<?php
 require_once (FACHADAS.'FachadaConectorBD.php');
 require_once(CLASSES . 'Atividade.php');
 require_once(CLASSES . 'AtividadeAgenda.php');

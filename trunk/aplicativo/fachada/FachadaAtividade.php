@@ -1,4 +1,4 @@
-<?
+<?php
 require_once(PERSISTENCIAS.'PersistenciaAtividade.php');
 require_once(CLASSES.'Atividade.php');
 

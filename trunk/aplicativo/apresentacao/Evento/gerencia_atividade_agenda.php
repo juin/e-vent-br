@@ -1,4 +1,4 @@
-<?
+<?php
 require_once(dirname(__FILE__).'../../../config.php');
 require_once(APRESENTACAO.'cabecalho.php');
 require_once(FACHADAS.'FachadaAtividade.php');

@@ -1,4 +1,4 @@
-<?
+<?php
 require_once(PERSISTENCIAS.'PersistenciaLocal.php');
 require_once(CLASSES.'Local.php');
 

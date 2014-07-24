@@ -1,4 +1,4 @@
-<?
+<?php
 /*
  * Locais para atividades
  */
