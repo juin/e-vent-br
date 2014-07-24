@@ -1,4 +1,4 @@
-<?
+<?php
 //Cria menu de acordo com o nivel de acesso do usuário.
 function menu($nivel=NULL){
     switch ($nivel) {

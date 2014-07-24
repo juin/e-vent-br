@@ -81,13 +81,14 @@ class PersistenciaCertificado extends InstanciaUnica{
 		return $certificados;
 	}
 
-	public function criaObjetoCertificado ($cod_usuario, $cod_evento){
+	public function criarCertificado ($cod_usuario, $cod_evento){
 		$sql='select i.cod_inscricao, u.nome_certificado, a.nome as nome_atv, a.carga_horaria, 
 		e.nome as nome_evt, e.cod_evento from inscricao i, usuario u, atividade a, evento e 
 		where i.cod_usuario = u.cod_usuario and u.cod_usuario = '.$cod_usuario.' and e.cod_evento = '.$cod_evento;
+
+		$certificados = NULL;
 		
 		$registros= FachadaConectorBD::getInstancia()->consultar($sql);
-		$certificados = NULL;
 		$i = 0;
 		$cod_insc = $registros[0][0];
 		$nome_cert = $registros[0][1];
@@ -102,7 +103,9 @@ class PersistenciaCertificado extends InstanciaUnica{
 				$certificados[0]->setCargaHoraria($registro['carga_horaria'], $i);
 			    $i++;
 		}
+        
 		return $certificados;
 
 	}
 }
+?>

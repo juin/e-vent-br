@@ -1,4 +1,4 @@
-<?
+<?php
 require_once(dirname(__FILE__).'/../config.php');
 session_start();
 //libera o espaco ocupado por $_SESSION

@@ -1,4 +1,4 @@
-<?
+<?php
 class Inscricao {
 
 	private $codInscricao = null;

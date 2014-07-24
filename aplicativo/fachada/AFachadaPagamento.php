@@ -1,4 +1,4 @@
-<?
+<?php
 require_once('IFachadaPagamento.php');
 require_once(CLASSES.'InstanciaUnica.php');
 require_once(PERSISTENCIAS.'PersistenciaPagamento.php');
