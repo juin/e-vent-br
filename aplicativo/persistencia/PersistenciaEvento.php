@@ -10,7 +10,7 @@ class PersistenciaEvento extends InstanciaUnica{
 	
 	public function selecionarEventosPorStatus($status){
 		$eventos = NULL;
-		$sql = "Select cod_evento, nome, sigla, data_inicio_evento, status, pagamento from Evento WHERE status LIKE '".$status."'";
+		$sql = "SELECT * FROM Evento WHERE status LIKE '".$status."'";
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
