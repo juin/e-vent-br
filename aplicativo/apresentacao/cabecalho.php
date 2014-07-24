@@ -1,4 +1,4 @@
-<?
+<?php
 require_once(APRESENTACAO.'menu.php');
 require_once(APRESENTACAO.'verifica_sessao.php');
 require_once(CLASSES.'UsuarioSessao.php');
