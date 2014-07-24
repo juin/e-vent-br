@@ -1,0 +1,352 @@
+body{
+  background: #ececec;	
+}
+
+.form-login{
+    margin-top:50%;
+}
+
+.panel-login{
+	margin: 0;
+	padding: 0;
+}
+	
+.titulo{
+    background-color: #e64b3b;
+    color: #FFFFFF;
+    font-size: 24px;
+}
+
+.titulo h3{
+    color: #FFFFFF;
+    margin-right: 150px;
+    margin-top: 15px;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.titulo .icone{
+    float: right;   
+}
+
+.conta-usuario a{
+	color:#368a55;	
+}
+
+.icone{
+	font-size: 2.100rem;
+	margin-right: 82px;
+	margin-top: -50px;
+	}
+	
+.login{
+    background-color: #e9e9e9;
+}
+
+.usuario label{
+	margin-left:-260px;		
+}
+
+.small-block-grid-1{
+	margin-left: 12px;	
+}
+
+.senha label{
+	margin-left:-260px;		
+}
+
+.panel{
+	background-color: #FFFFFF;	
+	}
+
+.fundo-titulo{
+	margin: 0px 0px;
+	padding: 0px 8px;
+	width: 100%
+	height: 40px;
+}
+
+.esqueceu-cadastre h2{
+	font-size: 1.000rem;
+	color: #545454;
+	float: right;
+}
+
+a{
+	color: #545454; 		
+}
+
+a:hover{
+	color: #949292;
+	}
+	
+.top-bar{
+	height: 85px;
+	background: #5b9573;		
+}
+
+.top-bar-section li:not(.has-form) a:not(.button){
+	background: #5b9573;;
+	padding: 0 30px;	
+}
+
+.top-bar .toggle-topbar.menu-icon{
+	margin-top: -40px; 	
+}
+
+.top-bar-section ul li > a{
+	font-size: 1.100rem;	
+	margin-top: 27px;
+}
+
+.top-bar .name{
+	height: 85px;	
+}
+
+.name h1 > a{
+	font-size: 1.100rem;	
+	margin-top: 27px;	
+}
+
+.top-bar-section li:not(.has-form) a:not(.button):hover {
+	background: #3c5d4a;	
+}
+
+.name li{
+	background-color: #5b9573;	
+}
+
+.top-bar-section li{
+	background-color: #5b9573;	
+}
+
+.top-bar-section ul{
+	background-color: #5b9573;	
+}
+
+.top-bar-section li:not(.has-form) a:not(.button){
+	line-height: 55px;	
+}
+
+.githubissues{
+	background: white;
+	padding: 1px 30px;
+	height: 1px;
+		
+}
+
+.cadastro-titulo h2{
+	color: #545454;
+	font-family: Verdana;	
+}
+
+fieldset{
+	border-color: #9a9a9a;	
+}
+	
+fieldset legend{
+	background: none;	
+	color: #545454;
+}
+
+.button.acessar{
+	font-size: 1.250rem;
+}
+
+.button.salvar{
+	font-size: 1.200rem;
+}
+
+.button.cancelar{
+	font-size: 1.200rem;
+}
+
+
+.zurb-footer-bottom{
+	background: #4b4c4d;
+	padding: 14px 0 50px;
+	height: 30px;		
+}
+
+.footer{
+max-width:100%;
+}
+
+.foo{
+	padding: 0;	
+}
+
+.inline-list > li > a {
+	color: white;
+	font-size: 1.100rem;	
+}
+
+.esqueceu-cadastre li a {
+	color: #545454;
+	font-size: 0.900rem;	
+}
+
+.esqueceu-cadastre li a:hover{
+	color: #949292;
+	}
+
+span{
+	font-size: 0.750rem;
+	color:#184f8f;	
+	}
+	
+font{
+	color:#184f8f;	
+}
+	
+.zurb-footer-bottom li:not(.has-form) a:not(.button):hover {
+	color: #ababab;	
+}
+
+hr{
+	border-color: #9a9a9a;	
+}	
+
+.inline-list.esqueceu-cadastre{
+	margin-top:-1rem;	
+}
+
+ul.off-canvas-list li a{
+	border-bottom-color: #368a55;
+	font-size: 1.050rem;
+	color: #ffffff;	
+}
+
+ul.off-canvas-list li a:hover{
+	background: #368a55;			
+}
+
+.off-canvas-list{
+	background-color: #43ac6a;		
+}
+
+.painel-eventos h5{
+ 	color:#545454;
+ 	font-weight: 900;	
+}
+
+.panel {
+	margin-bottom: 0.20rem;	
+}
+
+.painel-eventos-encerrados h5{
+ 	color:#545454;
+ 	font-weight: 900;	
+}
+
+.painel-eventos-encerrados h5{
+ 	color:#545454;
+ 	font-weight: 900;	
+}
+
+.gerenciamento-usuario-titulo h2{
+	margin-left: -150px;	
+	font-family: verdana;
+	color: #545454;	
+}
+
+.validacao-certificado-titulo h2{
+	margin-left: -150px;	
+	font-family: verdana;
+	color: #545454;
+}
+
+.painel-eventos-encerrados{
+	padding-left: 15.900rem;	
+}
+
+.painel-inscricoes h5{
+ 	color:#545454;
+ 	font-weight: 900;	
+}
+
+.inscricoes span{
+	font-weight: 900;
+	color:#545454;
+	font-size: 0.900rem;	
+}
+
+table tbody tr td {
+	line-height: 1.325rem;	
+}
+
+.painel-informacoes h5{
+ 	color:#545454;
+ 	font-weight: 900;	
+ 	line-height: 2;
+}
+
+.painel-informacoes span{
+	font-weight: 900;
+	color:#545454;	
+	font-size: 0.900rem;	
+}
+
+.button.efetuar{
+	font-size: 1.200rem;
+}
+
+.painel-certificados h5{
+ 	color:#545454;
+ 	font-weight: 900;	
+}
+
+.panel.certificados h5{
+ 	color:#545454;
+ 	font-weight: 900;	
+}
+
+.button.enviar{
+	font-size: 1.200rem;	
+}
+
+.off-canvas-list li.menu-usuario a{
+	background-color: #f04124;
+	border-bottom-color: #cf2a0e;		
+}
+
+.off-canvas-list li.menu-usuario a:hover{
+	background: #cf2a0e;			
+}
+
+.codigo label{
+	margin-bottom: 4px;	
+}
+
+.painel-inscricao h5{
+ 	color:#545454;
+ 	font-weight: 900;	
+}
+
+.painel-cadastro h5{
+ 	color:#545454;
+ 	font-weight: 900;	
+}
+
+.abas-gerenciamento h5{
+	color:#545454;
+ 	font-weight: 900;
+ 	
+}
+
+.content h6{
+	color:#545454;
+ 	font-weight: bold;
+} 
+
+.painel-frequencia h5{
+ 	color:#545454;
+ 	font-weight: 900;	
+}
+
+.painel-frequencia h6{
+ 	color:#545454;
+ 	font-weight: bold;	
+}
+
+
