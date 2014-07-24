@@ -125,3 +125,4 @@ if (FachadaConectorBD::getInstancia() == NULL) {
     $parametrosBD->setBDNomeBanco(ACESSO_NOME_BANCO);
     FachadaConectorBD::iniciarInstancia($parametrosBD);
 }
+?>
