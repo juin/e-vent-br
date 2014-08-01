@@ -82,13 +82,25 @@ class PersistenciaCertificado extends InstanciaUnica{
 	}
 
 	public function criarCertificado ($cod_usuario, $cod_evento){
-		$sql='select i.cod_inscricao, u.nome_certificado, a.nome as nome_atv, a.carga_horaria, 
-		e.nome as nome_evt, e.cod_evento from inscricao i, usuario u, atividade a, evento e 
-		where i.cod_usuario = u.cod_usuario and u.cod_usuario = '.$cod_usuario.' and e.cod_evento = '.$cod_evento;
-
+  		$sql='SELECT DISTINCT i.cod_inscricao, u.nome_certificado, a.nome as nome_atv, a.carga_horaria, 
+		  e.nome as nome_evt, e.cod_evento FROM Inscricao i, Usuario u, Atividade a, Atividade_Agenda aa, Evento e, Inscricao_Historico ih 
+		  WHERE i.cod_usuario = u.cod_usuario
+		  AND i.cod_inscricao = ih.cod_inscricao
+		  AND i.cod_evento = e.cod_evento
+		  AND a.cod_evento = e.cod_evento
+		  AND ih.cod_atividade_agenda = aa.cod_atividade_agenda
+		  AND aa.cod_atividade = a.cod_atividade
+		  AND u.cod_usuario = '.$cod_usuario.' 
+		  AND e.cod_evento = '.$cod_evento.'
+		  AND i.status = "Confirmada"
+		  AND ih.frequente = "Presente"';
+  
 		$certificados = NULL;
 		
 		$registros= FachadaConectorBD::getInstancia()->consultar($sql);
+		echo "bla<br>";
+		echo print_r($registros[0][4])."<br>";
+		echo "bla<br>";
 		$i = 0;
 		$cod_insc = $registros[0][0];
 		$nome_cert = $registros[0][1];
@@ -98,13 +110,16 @@ class PersistenciaCertificado extends InstanciaUnica{
 		$certificados[0]->setNomeCertificado($nome_cert);
 		$certificados[0]->setNomeEvento($nome_evt);
 				
-		foreach ($registros as $registro){
+				
+				
+	/*foreach ($registros as $registro){
 				$certificados[0]->setNomeAtividade($registro['nome_atv'], $i);
 				$certificados[0]->setCargaHoraria($registro['carga_horaria'], $i);
 			    $i++;
 		}
         
-		return $certificados;
+		return $certificados;*/
+	 return 0;
 
 	}
 }

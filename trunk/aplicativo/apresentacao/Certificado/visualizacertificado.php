@@ -13,6 +13,8 @@ $certificado->setCargaHoraria('14', 0);
 $certificado->setNomeAtividade('sql-certificado', 1);
 $certificado->setCargaHoraria('20', 1);
 	
-echo(FachadaCertificado::getInstancia()->criarCertificado(1, 1));
 
+//FachadaCertificado::getInstancia()->gerarCertificado($certificado);
+//echo FachadaCertificado::getInstancia()->criarCertificado(1,1);
+echo print_r(FachadaCertificado::getInstancia()->listarPorUsuario(1,1));
 ?>
