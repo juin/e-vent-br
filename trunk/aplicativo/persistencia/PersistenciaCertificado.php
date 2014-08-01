@@ -80,6 +80,16 @@ class PersistenciaCertificado extends InstanciaUnica{
 		}
 		return $certificados;
 	}
+	
+	public function enviarCertificado(){
+		$sql='SELECT u.email, u.cod_usuario 
+				from Usuario u 
+				WHERE u.cod_usuario=cod_usuario';
+		$registros= FachadaConectorBD::getInstancia()->consultar($sql);
+		
+		return $registros;
+		
+	}
 
 	public function criarCertificado ($cod_usuario, $cod_evento){
   		$sql='SELECT DISTINCT i.cod_inscricao, u.nome_certificado, a.nome as nome_atv, a.carga_horaria, 
@@ -98,9 +108,6 @@ class PersistenciaCertificado extends InstanciaUnica{
 		$certificados = NULL;
 		
 		$registros= FachadaConectorBD::getInstancia()->consultar($sql);
-		echo "bla<br>";
-		echo print_r($registros[0][4])."<br>";
-		echo "bla<br>";
 		$i = 0;
 		$cod_insc = $registros[0][0];
 		$nome_cert = $registros[0][1];
@@ -112,14 +119,13 @@ class PersistenciaCertificado extends InstanciaUnica{
 				
 				
 				
-	/*foreach ($registros as $registro){
+	foreach ($registros as $registro){
 				$certificados[0]->setNomeAtividade($registro['nome_atv'], $i);
 				$certificados[0]->setCargaHoraria($registro['carga_horaria'], $i);
 			    $i++;
 		}
         
-		return $certificados;*/
-	 return 0;
+		return $certificados;
 
 	}
 }
