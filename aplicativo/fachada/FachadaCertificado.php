@@ -8,8 +8,8 @@ require_once(FACHADAS.'Fpdf/fpdf.php');
 class FachadaCertificado extends InstanciaUnica{
 	
 
-	public function listarPorUsuario($cod_usuario){
-		$certificados = PersistenciaCertificado::getInstancia()->selecionarPorUsuario($cod_usuario);
+	public function listarPorUsuario($cod_usuario, $cod_evento){
+		$certificados = PersistenciaCertificado::getInstancia()->selecionarPorUsuario($cod_usuario, $cod_evento);
 		return $certificados[0];
 	}
 
@@ -42,7 +42,7 @@ class FachadaCertificado extends InstanciaUnica{
 	}
 
 	public function gerarCertificado (Certificado $certificado){
-	/*	
+	
 			    $pdf = new FPDF('L', 'mm');
                 $pdf->Open();
                 $pdf->SetMargins(0, 0, 0);
@@ -66,11 +66,19 @@ class FachadaCertificado extends InstanciaUnica{
 			 }
 			 $nome_evt = $certificado->getNomeEvento();
 			 $pdf->Text(30, 70, $nome_evt);
-			 //$pdf->Output('C:/wamp/www/e-vent/recursos/PDF/cert.pdf');
-	 */
+			 $pdf->Output('C:/wamp/www/e-vent/recursos/PDF/cert.pdf');
+	
 	}
 		
 	public function salvarCertificado($cod_certificado){
+		
+		$pdf = new FPDF();
+$pdf->Open();
+$pdf->AddPage();
+$pdf->SetFont("Arial", "B", 36);
+$pdf->Cell(50, 30, "Hello World");
+$pdf->Output("C:/wamp/www/e-vent/recursos/PDF/cert.pdf",
+"F");
 		
 	}
 	
