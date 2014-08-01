@@ -55,7 +55,7 @@ class FachadaCertificado extends InstanciaUnica{
 			 $nome=strtoupper(utf8_decode($certificado->getNomeAluno()));  // Maiuscula e resolve problema de acentua��o
 			 $pdf->Text(30, 50, $nome);
 			    $pdf->SetFont('Arial', '', 20);
-				//m�ximo 5
+				//maximo 5
 				$vetor= $certificado->getNomeAtividade();
 				$vetorCH = $certificado->getCargaHoraria();
 			 for ($j = 0; $j < count($vetor); $j++) {
@@ -72,7 +72,7 @@ class FachadaCertificado extends InstanciaUnica{
 		
 	public function salvarCertificado($cod_certificado){
 		
-		$pdf = new FPDF();
+		/*$pdf = new FPDF();
 $pdf->Open();
 $pdf->AddPage();
 $pdf->SetFont("Arial", "B", 36);
@@ -83,6 +83,15 @@ $pdf->Output("C:/wamp/www/e-vent/recursos/PDF/cert.pdf",
 	}
 	
 	public function enviarCertificado($cod_certificado){
+		*/
+	}
+	
+	public function enviarCertificado(){
+		$email = PersistenciaCertificado::getInstancia()->enviarCertificado();
+		
+	}
+	
+	public function validarCertificado(){
 		
 	}
 	 
