@@ -5,7 +5,8 @@ require_once(FACHADAS.'FachadaConectorBD.php');
 class PersistenciaCertificado extends InstanciaUnica{
 	
 	public function selecionarPorUsuario($cod_usuario){
-		$sql= 'Select * from Certificado where cod_inscricao in (Select cod_inscricao from inscricao where cod_usuario = '.$cod_usuario.')';
+		$sql= 'Select * from Certificado where cod_inscricao in 
+				(Select cod_inscricao from inscricao where cod_usuario = '.$cod_usuario.')';
 		$registros= FachadaConectorBD::getInstancia()->consultar($sql);
 		$certificados = NULL;
 		$i=0;
@@ -31,7 +32,8 @@ class PersistenciaCertificado extends InstanciaUnica{
 	}
 	
 	public function atualizarDataEmissao($cod_certificado,$data){
-		$sql = 'UPDATE Certificado set data_emissao = '.$data.' where cod_certificado = '.$cod_certificado;
+		$sql = 'UPDATE Certificado set data_emissao = '.$data.' where cod_certificado = 
+				'.$cod_certificado;
 		$registros = FachadaConectorBD::getInstancia()->atualizar($sql);
 		if($registros != null){
 			return 0;
@@ -51,7 +53,8 @@ class PersistenciaCertificado extends InstanciaUnica{
 	}
 	
 	public function atualizarDataEnvio($cod_certificado,$data){
-		$sql = 'UPDATE Certificado set data_envio = '.$data.' where cod_certificado = '.$cod_certificado;
+		$sql = 'UPDATE Certificado set data_envio = '.$data.' where cod_certificado =
+				 '.$cod_certificado;
 		$registros = FachadaConectorBD::getInstancia()->atualizar($sql);
 		if($registros != null){
 			return 0;
@@ -61,9 +64,14 @@ class PersistenciaCertificado extends InstanciaUnica{
 	}
 	
 	public function selecionarPorUsuarioEvento($cod_usuario, $cod_evento){
-        $sql='Select a.nome_certificado, b.nome as nome_atividade, b.carga_horaria, c.nome as nome_evento from
-              Usuario a, Atividade b,Evento c, Inscricao_Historico d, Inscricao e, Atividade_Agenda f where a.cod_usuario=e.cod_usuario AND d.cod_inscricao= e.cod_inscricao AND 
-			  d.cod_atividade_agenda=f.cod_atividade_agenda AND f.cod_atividade=b.cod_atividade AND d.frequente="Presente" AND a.cod_usuario='.$cod_usuario.' AND c.cod_evento = '.$cod_evento;
+        $sql='Select a.nome_certificado, b.nome as nome_atividade, b.carga_horaria, 
+        		c.nome as nome_evento from
+              Usuario a, Atividade b,Evento c, Inscricao_Historico d, Inscricao e, 
+        		Atividade_Agenda f where a.cod_usuario=e.cod_usuario AND d.cod_inscricao= 
+        		e.cod_inscricao AND 
+			  d.cod_atividade_agenda=f.cod_atividade_agenda AND f.cod_atividade=
+        		b.cod_atividade AND d.frequente="Presente" AND a.cod_usuario='.$cod_usuario.
+        ' AND c.cod_evento = '.$cod_evento;
 				
 		$registros= FachadaConectorBD::getInstancia()->consultar($sql);
 		$certificados = NULL;
@@ -81,14 +89,26 @@ class PersistenciaCertificado extends InstanciaUnica{
 		return $certificados;
 	}
 	
-	public function enviarCertificado(){
-		$sql='SELECT u.email, u.cod_usuario 
+	public function enviarCertificado($cod_usuario){
+		$sql='SELECT u.email, u.cod_usuario, u.nome_certificado
 				from Usuario u 
 				WHERE u.cod_usuario=cod_usuario';
-		$registros= FachadaConectorBD::getInstancia()->consultar($sql);
+		$usuarios= FachadaConectorBD::getInstancia()->consultar($sql);
 		
-		return $registros;
-		
+		$usuario = NULL;
+		$i = 0;
+		foreach ($registros as $registro){
+			$usuario=new Usuario();
+			$usuario->setCodUsuario($registro['cod_usuario']);
+			$usuario->setEmail($registro['email']);
+			$usuario->setNomeCertificado($registro['nome_certificado']);
+			
+			$usuarios[$i] = $usuario;
+			$i++;
+				
+		}
+		return $usuarios;
+
 	}
 
 	public function criarCertificado ($cod_usuario, $cod_evento){
@@ -124,9 +144,47 @@ class PersistenciaCertificado extends InstanciaUnica{
 				$certificados[0]->setCargaHoraria($registro['carga_horaria'], $i);
 			    $i++;
 		}
-        
-		return $certificados;
-
+	
+        return $certificados;
+	}
+	
+	public function salvarCertificado(Certificado $certificado){
+		//Terminar quando pablo incluir o campo necessario no banco
+		$sql="INSERT INTO `certificado`(`cod_certificado`, `data_hora_emissao`, 
+				`data_hora_salvo`, `cod_validacao`, 
+				`cod_inscricao`) VALUES (".$certificado->getCodCertificado().","
+						.$certificado->getData_hora_emissao().","
+						.date('Y-m-d').","
+						.$certificado->getCodValidacao().","
+						.$certificado->getCodInscricao().")";
+		//Acrescentar url certificado no mesmo padrao dos demais
+		//return FachadaConectorBD::getInstancia()->inserir($sql);
+		echo $sql;
+		
+		return 0;
+	}
+	
+	public function validarCertificado($cod_validacao){
+		$sql="SELECT count(*) from Certificado WHERE cod_validacao='".$cod_validacao."'";
+		$count=FachadaConectorBD::getInstancia()->consultar($sql);
+		if ($count>0){
+			$sql="SELECT * from Certificado WHERE cod_validacao='".$cod_validacao."'";
+			$registros= FachadaConectorBD::getInstancia()->consultar($sql);
+			$certificados = NULL;
+			$i = 0;
+			foreach ($registros as $registro){
+				$certificado=new Certificado();
+				$certificado->setNomeCertificado($registro['nome_certificado']);
+				$certificado->setNomeAtividade($registro['nome_atividade']);
+				$certificado->setCargaHoraria($registro['carga_horaria']);
+				$certificado->setNomeEvento($registro['nome_evento']);
+				//colocar o restante
+				$certificados[$i] = $certificado;
+				$i++;
+			
+			}
+			return $certificados;
+		}
 	}
 }
 ?>

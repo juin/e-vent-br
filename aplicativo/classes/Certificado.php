@@ -15,12 +15,16 @@ class Certificado{
 	private $carga_horaria;
 	private $nome_evento;
 	private $nome_aluno;
+	private $url_certificado;
 
 	
     public function getCodCertificado(){
         return $this->cod_certificado;
     }
 	
+	public function getUrlCertificado(){
+		return $this->url_certificado;
+	}
 	public function getCodInscricao(){
 		return $this->cod_inscricao;
 	}
@@ -65,6 +69,9 @@ class Certificado{
 		$this->cod_certificado = $cod_certificado;
 	}
 	
+	public function setUrlCertificado($url_certificado){
+		$this->url_certificado=$url_certificado;
+	}
 	public function setCodInscricao($cod_inscricao){
 		$this->cod_inscricao = $cod_inscricao;
 	}
@@ -105,7 +112,4 @@ class Certificado{
 	 	$this->nome_aluno=$nome_aluno;
 	 }
 	
-	
-    
-
 }
