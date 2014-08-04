@@ -19,7 +19,14 @@
 	listarTiposAtividadePorEvento($cod_evento);
 	
 ?>
+<div class="row menu-esquerdo">	
+		<? require_once(APRESENTACAO.'menu_esquerdo.php'); ?>
+		<br>
+		<div class="painel-informacoes">
+	
 	<form action="inscricao.php" method="post">
+		<div class="large-9 medium-9 small-9 columns">
+				<div class="panel">
 		<?php
 			echo "<b>Atividades Selecionadas ( Valor com base na sua categoria atual: ".$usuarioLogado->getCategoria()." ):</b><br>";
 			
@@ -94,10 +101,16 @@
 			echo "<input type=\"submit\" value=\"Avancar\" />";
 		?>
 		<input type="hidden" value="<?php echo $cod_evento;?>" name="cod_evento" />
+		</div>
+	</div>
 	</form>
 	<?
 	} else {
+		var_dump($atividadesPost);
 		echo "Escolha pelo menos um minicurso.";
 		echo "<a href=\"javascript:window.history.go(-1)\">&laquo;Voltar</a>";
 		}
 	?>
+</div>
+</div>
+<? require_once(APRESENTACAO.'rodape.php');?>
