@@ -27,7 +27,31 @@ class PersistenciaInscricao extends InstanciaUnica {
 		}
         return $inscricoes;
     }
-    
+
+    //Seleciona todas as inscrições do usuário
+    public function selecionarUltimaInscricaoValidaPorUsuarioPorEvento($cod_usuario,$cod_evento){
+        $sql = "SELECT i.cod_inscricao, e.cod_evento, e.nome, i.data_hora_inscricao, i.status
+        	    FROM Inscricao i, Evento e 
+        	    WHERE i.cod_usuario=".$cod_usuario."
+        		AND i.cod_evento=".$cod_evento."
+        		AND i.status!='Cancelada' ORDER BY i.cod_inscricao DESC";
+        // seleciona os 5 ultimos registros de inscricao
+        $registros = FachadaConectorBD::getInstancia()->consultar($sql);
+        $inscricoes = null;
+        $i = 0;
+		if (!is_null($registros)){
+			foreach ($registros as $registro){
+				$inscricoes[$i] = new Inscricao();
+				$inscricoes[$i]->setCodInscricao($registro["cod_inscricao"]);
+				$inscricoes[$i]->setCodEvento($registro["cod_evento"]);
+				$inscricoes[$i]->setDataHoraInscricao($registro["data_hora_inscricao"]);
+				$inscricoes[$i]->setStatus($registro["status"]);
+				$i++;
+			}
+		}
+        return $inscricoes;
+    }
+	   
     //Selecionar todas as inscrições do evento
     public function selecionarInscricoesPorEvento($cod_evento){
     	$sql = "Select i.cod_inscricao, e.cod_evento, e.nome, i.data_hora, i.forma_pagamento, i.status " .
@@ -79,5 +103,10 @@ class PersistenciaInscricao extends InstanciaUnica {
 		return FachadaConectorBD::getInstancia()->executarTransacao($queries);    	
     }
 
+    public function alterarStatusInscricao($cod_inscricao,$status){
+    	$sql = "UPDATE Inscricao SET status='".$status."' WHERE cod_inscricao=".$cod_inscricao.";";
+		$resultado = FachadaConectorBD::getInstancia()->atualizar($sql);
+		return $resultado;
+    }
 }
 ?>

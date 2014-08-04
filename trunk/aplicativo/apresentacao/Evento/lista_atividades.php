@@ -197,19 +197,10 @@ $usuario = FachadaUsuario::getInstancia()->listarUsuarioPorCodigo($usuarioLogado
 								<fieldset>
 									<legend>Formas de Pagamento</legend>
 									<div class="large-12 large-centered medium-12 columns">
-										<table>
-    											<tr>
-      											<th width="600"></th>
-    											</tr>
-  											<tbody>
-  												<!--<tr>
-      											<td><input type="radio" name="avista" value="À Vista" id="avista"><label for="avista">Á Vista</label></td>
-    											</tr>-->
-    											<tr>
-      											<td><input type="radio" name="deposito" value="Depósito" id="deposito"><label for="deposito">Depósito</label></td>
-    											</tr>
-  										</tbody>
-  									</table>	
+										<select name="forma_pagamento">
+											<option value="vista">A VISTA</option>
+											<option value="deposito">DEPOSITO</option>
+										</select>
   									</div>	
 					 			</fieldset>	
 							</div>		

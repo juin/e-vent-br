@@ -81,7 +81,8 @@ class PersistenciaAtividade extends InstanciaUnica{
     				WHERE EXISTS (SELECT 1 FROM  Atividade_Agenda aa, Inscricao_Historico ih
     					WHERE aa.cod_atividade = '" . $cod_atividade . "'
     					AND ih.cod_atividade_agenda = aa.cod_atividade_agenda
-    					AND i.cod_inscricao = ih.cod_inscricao)";
+    					AND i.cod_inscricao = ih.cod_inscricao)
+    				AND i.status !='Cancelada'";
             $registro = FachadaConectorBD::getInstancia()->consultar($sql);
             // pesquisa nula indica que nao existem inscricoes para a atividade
             if (is_null($registro)) {

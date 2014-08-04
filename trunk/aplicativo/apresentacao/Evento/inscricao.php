@@ -9,6 +9,8 @@
 	$vagas = true; 
 	$codigos_atividades = $_POST['atividades'];
 	$cod_evento = $_POST['cod_evento'];
+	$cod_ultima_inscricao = $_POST['cod_ultima_inscricao'];
+	$forma_pagamento = $_POST['forma_pagamento'];
 	// verifica se ainda tem vagas disponiveis
 	foreach ($codigos_atividades as $codigo_atividade) {
 		$disponiveis = FachadaAtividade::getInstancia()->listarVagasDisponiveisPorAtividade($codigo_atividade);
@@ -16,12 +18,25 @@
 			$vagas = false;
 		}
 	}
-	// realiza a inscricao se ainda houver vagas em todas atividades agendadas
+?>
+<div class="row menu-esquerdo">	
+		<? require_once(APRESENTACAO.'menu_esquerdo.php'); ?>
+		<br>
+		<div class="painel-informacoes">
+			<div class="large-9 medium-9 small-9 columns">
+				<div class="panel">
+			<?
+			// realiza a inscricao se ainda houver vagas em todas atividades agendadas
 	if ($vagas) {
 		$inscricao = new Inscricao();
 		$inscricao->setCodUsuario($usuarioLogado->getCodUsuario());
 		$inscricao->setCodEvento($cod_evento);
-		$inscricao->setStatus(INSCRICAO_STATUS_ANDAMENTO);
+		if(($forma_pagamento=="deposito") || ($forma_pagamento=="boleto")){
+			$inscricao->setStatus(INSCRICAO_STATUS_ANDAMENTO);
+		} else if($forma_pagamento=="vista"){
+			$inscricao->setStatus(INSCRICAO_STATUS_CONFIRMADA);
+		}
+		FachadaInscricao::getInstancia()->alterarStatusInscricao($cod_ultima_inscricao,"Cancelada");
 		$resultado = FachadaInscricao::getInstancia()->realizarInscricao($inscricao, $codigos_atividades);
 		if ($resultado == 0)
 		{
@@ -35,4 +50,9 @@
 				"retorne à tela de selecão de atividades e tente de novo!";
 		echo "<li><a href=\"" . URL . "apresentacao/Evento/lista_atividades.php?cod_evento=" . $cod_evento . "\">Retornar para seleção de atividades</a></li>";
 	}
-?>
+			?>
+			</div>
+			</div>		
+		</div>
+</div>
+<? require_once(APRESENTACAO.'rodape.php');?>
