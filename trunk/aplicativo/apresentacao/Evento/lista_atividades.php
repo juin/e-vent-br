@@ -95,6 +95,7 @@ $usuario = FachadaUsuario::getInstancia()->listarUsuarioPorCodigo($usuarioLogado
 										<table>
 											<thead>
     											<tr>
+    											<th></th>
       											<th>Atividades</th>
       											<th>Vagas</th>
     											</tr>
@@ -124,8 +125,10 @@ $usuario = FachadaUsuario::getInstancia()->listarUsuarioPorCodigo($usuarioLogado
 													}
 												?>
 													<tr>
+														<td>
+															<input type="checkbox" id="atividades[]" name="atividades[]" value="<? echo $atividade->getCodAtividade(); ?>">
+														</td>
 		      											<td>
-		      												<input type="checkbox" id="atividades[]" value="<? echo $atividade->getCodAtividade(); ?>">
 		      												<label data-tooltip class="has-tip" title="<? echo $title; ?>" ><? echo utf8_encode($atividade->getNome()); ?>(CH: <? echo $atividade->getCargaHoraria();?> h)</label>
 		      											</td>
 		      											<td><? echo $vagas_disponiveis;?></td>
