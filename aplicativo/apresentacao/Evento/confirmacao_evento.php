@@ -84,7 +84,7 @@
 					$atividadeAgenda = FachadaAtividade::getInstancia()->
 					listarAtividadeAgendaPorCodigoAtividade($atividade->getCodAtividade());
 					
-					echo "<li><p>" . $atividade->getNome() . "<br><b>Valor: R$ ".$valor."</b></p></li>";
+					echo "<li><p>" . utf8_encode($atividade->getNome()) . "<br><b>Valor: R$ ".$valor."</b></p></li>";
 					echo '<input type="hidden" value="'.$atividade->getCodAtividade().'" name="atividades[]" />';
 									
 					if($atividadeAgenda!=null){
@@ -96,7 +96,7 @@
 								$local->setNome("Não Definido.");
 							}						
 							echo "<li>Data: ".arrumaData($agenda->getData())." | Horario Inicio: ".$agenda->getHorarioInicio()."| Horario Fim: ".
-									  $agenda->getHorarioFim()."| Local: ".$local->getNome()."</li>";
+									  $agenda->getHorarioFim()."| Local: ".utf8_encode($local->getNome())."</li>";
 						}
 						echo "</ul>";
 					} else{

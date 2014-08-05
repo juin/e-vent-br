@@ -141,6 +141,7 @@ $cod_evento = $_GET['cod_evento'];?>
     						<br>
 								<fieldset>
 									<legend>Atividades</legend>
+									<p>Clique no título da atividade para lançar a frequência.</p>
 									<? $atividades = FachadaAtividade::getInstancia()->
 									listarAtividadesPorCodigoEvento($cod_evento);
 									if ($atividades != null) {?>
@@ -158,7 +159,11 @@ $cod_evento = $_GET['cod_evento'];?>
 													<tr>
 													<td><? echo $atividade->getCodAtividade();?></td>
 													<td><? echo utf8_encode($atividade->getNome());?></td>
-													<td><a href="#" data-reveal-id="modal-editar-atividade">Editar</a> | Apagar</td>
+													<td>
+														<a href="#" data-reveal-id="modal-editar-atividade">Editar</a>
+														 | 
+														<a href="#" data-reveal-id="modal-apagar-atividade">Apagar</a>
+													</td>
 													</tr>
 													<div id="modal-editar-atividade" class="reveal-modal" data-reveal>
 													  <h2>Atividade</h2>
@@ -166,7 +171,12 @@ $cod_evento = $_GET['cod_evento'];?>
 													  <p>Im a cool paragraph that lives inside of an even cooler modal. Wins</p>
 													  <a class="close-reveal-modal">&#215;</a>
 													</div>
-													
+													<div id="modal-apagar-atividade" class="reveal-modal" data-reveal>
+													  <h2>Apagar</h2>
+													  <p class="lead">Você confirmar a exclusão da atividade abaixo?</p>
+													  <p>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum </p>
+													  <a class="close-reveal-modal">&#215;</a>
+													</div>													
 												<?}?>
 										  </tbody>
 										</table>

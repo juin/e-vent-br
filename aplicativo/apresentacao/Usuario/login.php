@@ -67,7 +67,7 @@ if (isPostBack()) {
 		<div class="row esqueceu-cadastre">			
 			<div class="large-12 medium-12 small-12 columns">
 				<ul class="inline-list right esqueceu-cadastre">		
-      				<li><a href="#">Cadastre-se</a></li>
+      				<li><a href="<? echo URL."apresentacao/Usuario/cadastro.php"; ?>">Cadastre-se</a></li>
       				<li><a href="#">Esqueceu a senha?</a></li>
       				<li><a href="#">Validar Certificado</a></li>
 			</div>		

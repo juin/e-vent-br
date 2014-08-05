@@ -49,7 +49,7 @@ class FachadaAtividade extends InstanciaUnica{
 	}
 	
 	public function listarAtividadeAgendaPorEvento($cod_evento){
-		return PersistenciaEvento::getInstancia()->selecionarAtividadeAgendaPorCodigoEvento($cod_evento);
+		return PersistenciaAtividade::getInstancia()->selecionarAtividadeAgendaPorCodigoEvento($cod_evento);
 	}
     
 	public function listarAgendaPorCodigo($cod_atividade_agenda){
@@ -71,7 +71,7 @@ class FachadaAtividade extends InstanciaUnica{
     }
     
     public function listarParticipantesPorAtividade($cod_atividade) {
-        return PersistenciaEvento::getInstancia()->selecionarParticipantesPorAtividade($cod_atividade);
+        return PersistenciaAtividade::getInstancia()->selecionarParticipantesPorAtividade($cod_atividade);
     }
     
     public function listarAtividadesMonitoradaPorUsuario($cod_evento, $cod_usuario, $funcao){
