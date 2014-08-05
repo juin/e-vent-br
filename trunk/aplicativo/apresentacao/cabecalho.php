@@ -37,8 +37,11 @@ $usuarioLogado = $_SESSION['usuario'];
  							<li><img class="evento" src="<? echo IMAGENS; ?>logo_event.png"></li>
   						</ul>
     					<li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
-  					</ul>		
-  				<section class="top-bar-section">
+  					</ul>
+  					<div class="right conta-usuario">			
+						<p>Olá, <strong><? echo $usuarioLogado->getNome();?></strong> <a href="#">Minha Conta</a> [ <a href="<? echo URL."apresentacao/Usuario/logout.php";?>">Sair</a> ]</p>
+					</div>		
+  				<section class="top-bar-section menu-topo">
     		 		<ul class="right">
       				<li><a href="<? echo URL."apresentacao/"; ?>">Eventos</a></li>
       				<li><a href="#">Inscrições</a></li>
@@ -46,13 +49,6 @@ $usuarioLogado = $_SESSION['usuario'];
     				</ul>
   				</section>
   				</nav>
-  				<section id="github" class="githubissues hide-for-small-down">
-  				<div class="right">			
-					<div class="align-right">				
-						<div class="conta-usuario"><p>Olá, <strong><? echo $usuarioLogado->getNome();?></strong> <a href="">Minha Conta</a> [ <a href="<? echo URL."apresentacao/Usuario/logout.php";?>">Sair</a> ]</p></div>
-					</div>
-				</div>
-  				</section>
 			</div>
 		</div>
 	</div>	

@@ -17,7 +17,7 @@ $cod_evento = FachadaEvento::getInstancia()->listarEventoPorAtividade($cod_ativi
 echo '<div style="width: 210mm;">';
 echo '<div style="text-align: center;">';
 echo "<h1>".$nome_evento."</h1>";
-echo "<h2>".$nome_atividade." - Frequência</h2>";
+echo "<h2>".$nome_atividade." - Frequï¿½ncia</h2>";
 echo "<h3>".arrumaData($atividade_agenda->getData())." | ".
 		$atividade_agenda->getHorarioInicio()." - ".$atividade_agenda->getHorarioFim()."</h3>";
 echo "</div>";
@@ -31,7 +31,7 @@ foreach($inscritos as $nome){
 	$i++;
 }
 echo "</table>";
-echo '<input type="submit" value="Lançar" name="lancar" />';
+echo '<input type="submit" value="Lanï¿½ar" name="lancar" />';
 echo "</form>";
 echo "</div>";
 

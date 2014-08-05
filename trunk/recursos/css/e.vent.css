@@ -91,7 +91,7 @@ a:hover{
 }
 
 .top-bar .toggle-topbar.menu-icon{
-	margin-top: -40px; 	
+	margin-top: -25px; 	
 }
 
 .top-bar-section ul li > a{
@@ -349,4 +349,24 @@ table tbody tr td {
  	font-weight: bold;	
 }
 
-
+.cabecalho{
+    min-height: 85px;
+}
+.conta-usuario{
+    height: 25px;
+    right: 25px;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+}
+.conta-usuario p, .conta-usuario a{
+    color: white;
+    font-size: 12px;
+}
+.menu-topo{
+    height: 35px;
+}
+.corpo{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
