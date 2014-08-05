@@ -25,7 +25,7 @@ require_once(FACHADAS.'FachadaInscricao.php');
 	            if($eventos_andamento!=NULL){
 	                foreach ($eventos_andamento as $andamento) { ?>
 	                	<div class="panel">
-		                	<h5><? echo $andamento->getNome(); ?></h5>
+		                	<h5><? echo utf8_encode($andamento->getNome()); ?></h5>
 		                	<div class="row informacoes-evento">
 		  						<div class="large-4 medium-4 small-4 columns">
 		  							<br>						
@@ -39,7 +39,7 @@ require_once(FACHADAS.'FachadaInscricao.php');
 		  							</ul>
 		  						</div>
 	  							<div class="large-8 medium-8 small-8 columns">
-	  								<p><? echo $andamento->getNome(); ?></p>
+	  								<p><? echo utf8_encode($andamento->getNome()); ?></p>
 	  								<a href="<? echo URL; ?>apresentacao/Evento/lista_atividades.php?cod_evento=<? echo $andamento->getCodEvento();?>"class="success button">Fazer Inscrição</a>
 	 				 				<a href="<? echo URL; ?>apresentacao/Evento/gerencia_evento.php?cod_evento=<? echo $andamento->getCodEvento();?>" class="alert button">Gerenciamento</a>
 	 				 			</div>

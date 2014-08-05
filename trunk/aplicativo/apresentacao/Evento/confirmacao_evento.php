@@ -28,8 +28,12 @@
 	<form action="inscricao.php" method="post">
 		<div class="large-9 medium-9 small-9 columns">
 				<div class="panel">
-					<h2>Confirme os dados da sua inscrição!</h2>
-		<?php
+					
+		<?php		
+			if ($atividadesPost!=null) {
+			
+			echo "<h2>Confirme os dados da sua inscrição!</h2>";
+			
 			$ultima_inscricao = FachadaInscricao::getInstancia()->
 			listarUltimaInscricaoValidaPorUsuarioPorEvento($usuarioLogado->getCodUsuario(),$cod_evento);
 			
@@ -41,10 +45,8 @@
 						$ultima_inscricao[0]->getCodInscricao()." | ".$ultima_inscricao[0]->getStatus()."</b></p>";
 				echo '<input type="hidden" value="'.$ultima_inscricao[0]->getCodInscricao().'" name="cod_ultima_inscricao" id="cod_ultima_inscricao" />';
 			}
+			
 			echo "<p>Atividades Selecionadas ( Valor com base na sua categoria atual:<b> ".$usuarioLogado->getCategoria()." ):</b></p>";
-			
-			if ($atividadesPost!=null) {
-			
 			echo "<ul>";
 				foreach ($atividadesPost as $atividadePost){
 					$atividade = FachadaAtividade::getInstancia()->
@@ -128,7 +130,7 @@
 	</form>
 	<?
 	} else {
-		echo "Escolha pelo menos um minicurso.";
+		echo "<h3>Escolha pelo menos um minicurso.</h3>";
 		echo "<a href=\"javascript:window.history.go(-1)\">&laquo;Voltar</a>";
 		}
 	?>
