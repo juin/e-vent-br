@@ -9,7 +9,7 @@ class FachadaInscricao extends InstanciaUnica{
 		return PersistenciaInscricao::getInstancia()->selecionarInscricoesPorUsuario($cod_usuario);
 	}
 	
-	public function listarUltimaInscricaoValidaPorUsuarioPorEvento($cod_usuario,$cod_evento){
+	public function listarUltimaInscricaoValidaPorUsuarioPorEvento($cod_usuario, $cod_evento){
 		return PersistenciaInscricao::getInstancia()->selecionarUltimaInscricaoValidaPorUsuarioPorEvento($cod_usuario,$cod_evento);
 	}
 	public function listarInscricoesPorEvento($cod_evento){
@@ -21,7 +21,7 @@ class FachadaInscricao extends InstanciaUnica{
 			$codigos_atividades);
 	}
 	
-	public function alterarStatusInscricao($cod_inscricao,$status){
+	public function alterarStatusInscricao($cod_inscricao, $status){
 		return PersistenciaInscricao::getInstancia()->alterarStatusInscricao($cod_inscricao,$status);
 	}
 }
