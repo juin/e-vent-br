@@ -50,8 +50,9 @@ class FachadaEvento extends InstanciaUnica{
 	public function listarInscritosporCodigoEvento($cod_evento){
 		
 	}
-    public function inserirEventoNovo(Evento $evento){
-    	return PersistenciaEvento::getInstancia()->gravarEventoNovo($evento);
+	
+    public function criarEvento(Evento $evento){
+    	return PersistenciaEvento::getInstancia()->inserirEvento($evento);
     }
     
     public function lancarPresencaPorCodigos($cod_atividade_agenda, $cod_usuario, $cod_evento){

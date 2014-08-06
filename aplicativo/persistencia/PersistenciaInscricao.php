@@ -29,7 +29,7 @@ class PersistenciaInscricao extends InstanciaUnica {
     }
 
     //Seleciona todas as inscrições do usuário
-    public function selecionarUltimaInscricaoValidaPorUsuarioPorEvento($cod_usuario,$cod_evento){
+    public function selecionarUltimaInscricaoValidaPorUsuarioPorEvento($cod_usuario, $cod_evento){
         $sql = "SELECT i.cod_inscricao, e.cod_evento, e.nome, i.data_hora_inscricao, i.status
         	    FROM Inscricao i, Evento e 
         	    WHERE i.cod_usuario=".$cod_usuario."
@@ -75,7 +75,7 @@ class PersistenciaInscricao extends InstanciaUnica {
         return $inscricoes;
     }
     
-    public function realizarInscricao(Inscricao $inscricao, array $codigos_atividades) {
+    public function inserirInscricao(Inscricao $inscricao, array $codigos_atividades) {
     	$i = 0;
     	// adiciona a rotina de criacao da inscricao
     	$queries[$i] = "INSERT INTO Inscricao
@@ -103,7 +103,7 @@ class PersistenciaInscricao extends InstanciaUnica {
 		return FachadaConectorBD::getInstancia()->executarTransacao($queries);    	
     }
 
-    public function alterarStatusInscricao($cod_inscricao,$status){
+    public function atualizarStatusInscricao($cod_inscricao, $status){
     	$sql = "UPDATE Inscricao SET status='".$status."' WHERE cod_inscricao=".$cod_inscricao.";";
 		$resultado = FachadaConectorBD::getInstancia()->atualizar($sql);
 		return $resultado;
