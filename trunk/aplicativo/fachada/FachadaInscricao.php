@@ -17,12 +17,12 @@ class FachadaInscricao extends InstanciaUnica{
 	}
 	
 	public function realizarInscricao(Inscricao $inscricao, array $codigos_atividades){
-		return PersistenciaInscricao::getInstancia()->realizarInscricao($inscricao, 
+		return PersistenciaInscricao::getInstancia()->inserirInscricao($inscricao, 
 			$codigos_atividades);
 	}
 	
 	public function alterarStatusInscricao($cod_inscricao, $status){
-		return PersistenciaInscricao::getInstancia()->alterarStatusInscricao($cod_inscricao,$status);
+		return PersistenciaInscricao::getInstancia()->atualizarStatusInscricao($cod_inscricao,$status);
 	}
 }
 

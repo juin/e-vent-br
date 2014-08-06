@@ -92,7 +92,7 @@ class PersistenciaEvento extends InstanciaUnica{
     	return $eventos;
     }
     
-    public function gravarEventoNovo(Evento $evento){
+    public function inserirEvento(Evento $evento){
     	$sql = "INSERT INTO `Evento` (`nome`, `sigla`,
     			`data_inicio`, `data_fim`,`status`,
     			`pagamento`) VALUES ('".$evento->getNome()."','".$evento->getSigla()."',
