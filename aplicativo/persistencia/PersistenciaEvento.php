@@ -79,20 +79,25 @@ class PersistenciaEvento extends InstanciaUnica{
     			$eventos[$i]->setCodevento($registro["cod_evento"]);
     			$eventos[$i]->setNome($registro["nome"]);
     			$eventos[$i]->setSigla($registro["sigla"]);
-    			$eventos[$i]->setDatainicio($registro["data_inicio"]);
-    			$eventos[$i]->setDatafim($registro["data_fim"]);
-    			$eventos[$i]->setDatahorapublicado($registro["data_hora_publicado"]);
+    			$eventos[$i]->setDataInicioEvento($registro["data_inicio_evento"]);
+    			$eventos[$i]->setDataFimEvento($registro["data_fim_evento"]);
+				$eventos[$i]->setDataInicioInscricao($registro["data_inicio_inscricao"]);
+				$eventos[$i]->setDataFimInscricao($registro["data_fim_inscricao"]);
+    			$eventos[$i]->setDataHoraPublicado($registro["data_hora_publicado"]);
     			$eventos[$i]->setStatus($registro["status"]);
     			$eventos[$i]->setPagamento($registro["pagamento"]);
-    			$eventos[$i]->setUrlatividade($registro["url_gabarito_atividade"]);
-    			$eventos[$i]->setUrlevento($registro["url_gabarito_evento"]);
+    			$eventos[$i]->setUrlGabaritoAtividade($registro["url_gabarito_atividade"]);
+    			$eventos[$i]->setUrlGabaritoEvento($registro["url_gabarito_evento"]);
+				$eventos[$i]->setUrlGabaritoImagem($registro["url_imagem"]);
+				$eventos[$i]->setUrlSite($registro["url_site"]);
+				$eventos[$i]->setDiasLimitePagamento($registro["dias_limite_pagamento"]);
     			$i++;
     		}
     	}
     	return $eventos;
     }
     
-    public function inserirEvento(Evento $evento){
+    public function gravarEventoNovo(Evento $evento){
     	$sql = "INSERT INTO `Evento` (`nome`, `sigla`,
     			`data_inicio`, `data_fim`,`status`,
     			`pagamento`) VALUES ('".$evento->getNome()."','".$evento->getSigla()."',

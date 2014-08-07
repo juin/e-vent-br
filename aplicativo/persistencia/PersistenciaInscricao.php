@@ -29,7 +29,7 @@ class PersistenciaInscricao extends InstanciaUnica {
     }
 
     //Seleciona todas as inscrições do usuário
-    public function selecionarUltimaInscricaoValidaPorUsuarioPorEvento($cod_usuario, $cod_evento){
+    public function selecionarUltimaInscricaoValidaPorUsuarioPorEvento($cod_usuario,$cod_evento){
         $sql = "SELECT i.cod_inscricao, e.cod_evento, e.nome, i.data_hora_inscricao, i.status
         	    FROM Inscricao i, Evento e 
         	    WHERE i.cod_usuario=".$cod_usuario."
@@ -75,7 +75,7 @@ class PersistenciaInscricao extends InstanciaUnica {
         return $inscricoes;
     }
     
-    public function inserirInscricao(Inscricao $inscricao, array $codigos_atividades) {
+    public function realizarInscricao(Inscricao $inscricao, array $codigos_atividades) {
     	$i = 0;
     	// adiciona a rotina de criacao da inscricao
     	$queries[$i] = "INSERT INTO Inscricao
@@ -88,8 +88,8 @@ class PersistenciaInscricao extends InstanciaUnica {
     	// o MAX (padrao SQL) seleciona o ultimo codigo inserido para inscricao   	
     	foreach ($codigos_atividades as $codigo_atividade) {
     		
-    		$codigos_agenda = FachadaAtividade::getInstancia()->
-    		listarAtividadeAgendaPorCodigoAtividade($codigo_atividade);
+    		$codigos_agenda = PersistenciaAtividade::getInstancia()->
+    		selecionarAtividadeAgendaPorCodigoAtividadeConfirmada($codigo_atividade);
 	     	
 			foreach ($codigos_agenda as $codigo_agenda) {
 				$i++;
@@ -100,10 +100,11 @@ class PersistenciaInscricao extends InstanciaUnica {
     			INSCRICAO_HISTORICO_FREQUENTE_NAO_LANCADO."', NULL FROM Inscricao;";	
 			}
 		}
+		
 		return FachadaConectorBD::getInstancia()->executarTransacao($queries);    	
     }
 
-    public function atualizarStatusInscricao($cod_inscricao, $status){
+    public function atualizarStatusInscricao($cod_inscricao,$status){
     	$sql = "UPDATE Inscricao SET status='".$status."' WHERE cod_inscricao=".$cod_inscricao.";";
 		$resultado = FachadaConectorBD::getInstancia()->atualizar($sql);
 		return $resultado;

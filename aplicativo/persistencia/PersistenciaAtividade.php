@@ -54,11 +54,24 @@ class PersistenciaAtividade extends InstanciaUnica{
 	}
 	
 	public function selecionarAtividadeAgendaPorCodigoAtividade($cod_atividade){
+		return PersistenciaAtividade::getInstancia()->selecionarAtividadeAgendaPorCodigoAtividadePorStatus($cod_atividade,INSCRICAO_STATUS_TODOS);	
+	}
+
+	public function selecionarAtividadeAgendaPorCodigoAtividadeConfirmada($cod_atividade){
+		return PersistenciaAtividade::getInstancia()->selecionarAtividadeAgendaPorCodigoAtividadePorStatus($cod_atividade,INSCRICAO_STATUS_CONFIRMADA);	
+	}
+
+	public function selecionarAtividadeAgendaPorCodigoAtividadeCancelada($cod_atividade){
+		return PersistenciaAtividade::getInstancia()->selecionarAtividadeAgendaPorCodigoAtividadePorStatus($cod_atividade,INSCRICAO_STATUS_CANCELADA);	
+	}
+			
+	public function selecionarAtividadeAgendaPorCodigoAtividadePorStatus($cod_atividade,$status){
 		$atividadesAgenda = NULL;
 		$sql = "SELECT ag.cod_atividade_agenda, ag.data, ag.horario_inicio, ag.horario_fim, 
 		ag.cod_local FROM Atividade a, Atividade_Agenda ag
 		WHERE a.cod_atividade = ag.cod_atividade
-		AND ag.cod_atividade =".$cod_atividade;
+		AND ag.cod_atividade =".$cod_atividade."
+		AND a.status LIKE '".$status."'";
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
@@ -74,7 +87,7 @@ class PersistenciaAtividade extends InstanciaUnica{
 		}
 		return $atividadesAgenda;	
 	}
-	
+		
 	public function selecionarVagasDisponiveisPorAtividade($cod_atividade){
     		$sql = "SELECT count(*) as quantidadeVagasOcupadas
     				FROM Inscricao i 
