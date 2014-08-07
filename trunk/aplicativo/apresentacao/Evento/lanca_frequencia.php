@@ -1,23 +1,39 @@
 <?php
-require_once(dirname(__FILE__).'../../../config.php');
-require_once(dirname(__FILE__).'../../../utilidades.php');
-require_once (FACHADAS.'FachadaEvento.php');
-
+require_once (dirname(__FILE__) . '/../../config.php');
+require_once (APRESENTACAO . 'cabecalho.php');
+require_once (FACHADAS . 'FachadaEvento.php');
+require_once (FACHADAS . 'FachadaAtividade.php');
+require_once(UTILIDADES);
 
 $cod_atividade_agenda = $_GET['id'];
 
-$inscritos = FachadaEvento::getInstancia()->listarParticipantesPorAtividade($cod_atividade_agenda);
+$inscritos = FachadaAtividade::getInstancia()->listarParticipantesPorAtividade($cod_atividade_agenda);
 
-$atividade_agenda = FachadaEvento::getInstancia()->listarAgendaPorCodigo($cod_atividade_agenda);
+$atividade_agenda = FachadaAtividade::getInstancia()->listarAgendaPorCodigo($cod_atividade_agenda);
 $cod_atividade = $atividade_agenda->getCodAtividade();
-$nome_atividade = FachadaEvento::getInstancia()->listarAtividadePorCodigo($cod_atividade)->getNome();
+$nome_atividade = FachadaAtividade::getInstancia()->listarAtividadePorCodigo($cod_atividade)->getNome();
 $nome_evento = FachadaEvento::getInstancia()->listarEventoPorAtividade($cod_atividade)->getNome();
 $cod_evento = FachadaEvento::getInstancia()->listarEventoPorAtividade($cod_atividade)->getCodEvento();
+?>
 
+<div class="row">	
+		<div class="large-3 medium-3 small-3 columns">
+		</div>
+			<div class="large-7 medium-7 small-7 columns">		
+				<div class="row gerenciamento-usuario-titulo">
+					<h2>Lista de Frequência</h2>
+				</div>
+			</div>
+</div>
+<div class="row menu-esquerdo">	
+		<? require_once(APRESENTACAO.'menu_esquerdo.php'); ?>
+		<br>
+		<div class="painel-informacoes">
+<?
 echo '<div style="width: 210mm;">';
 echo '<div style="text-align: center;">';
-echo "<h1>".$nome_evento."</h1>";
-echo "<h2>".$nome_atividade." - Frequ�ncia</h2>";
+echo "<h1>".utf8_encode($nome_evento)."</h1>";
+echo "<h2>".utf8_encode($nome_atividade)." - Frequência</h2>";
 echo "<h3>".arrumaData($atividade_agenda->getData())." | ".
 		$atividade_agenda->getHorarioInicio()." - ".$atividade_agenda->getHorarioFim()."</h3>";
 echo "</div>";
@@ -31,7 +47,7 @@ foreach($inscritos as $nome){
 	$i++;
 }
 echo "</table>";
-echo '<input type="submit" value="Lan�ar" name="lancar" />';
+echo '<input type="submit" value="Lançar" name="lancar" />';
 echo "</form>";
 echo "</div>";
 
@@ -42,3 +58,6 @@ if(isset($_POST['presentes'][0])){
 	}
 }
 ?>
+</div>
+</div>
+<? require_once(APRESENTACAO.'rodape.php');?>

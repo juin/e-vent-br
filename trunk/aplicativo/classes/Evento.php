@@ -137,7 +137,6 @@ class Evento {
 		$this->diasLimitePagamento = $diasLimitePagamento;
 	}
 
-
 }
 
 ?>

@@ -22,14 +22,6 @@
 		$(document).foundation();
 	</script>
 	
-	<script>
-	  $(document).foundation({
-	    tab: {
-	      callback : function (tab) {
-	        console.log(tab);
-	      }
-	    }
-	  });
-	</script>
+
 </body>
 </html>

@@ -60,5 +60,5 @@ define('INSCRICAO_FORMA_PGTO_DEPOSITO','Deposito');
 define('INSCRICAO_STATUS_ANDAMENTO','Andamento');
 define('INSCRICAO_STATUS_CONFIRMADA','Confirmada');
 define('INSCRICAO_STATUS_CANCELADA','Cancelada');
-
+define('INSCRICAO_STATUS_TODOS','%');
 ?>
