@@ -363,6 +363,9 @@ table tbody tr td {
     color: white;
     font-size: 12px;
 }
+.conta-usuario a:hover {
+color: #1fcd5f;
+}
 .menu-topo{
     height: 35px;
 }
