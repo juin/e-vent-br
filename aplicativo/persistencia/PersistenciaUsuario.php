@@ -147,6 +147,28 @@ class PersistenciaUsuario extends InstanciaUnica {
 		
 		return $usuarios;	    
 	}
-
+	
+	public function selecionarPorFuncaoEspecial($cod_usuario, $cod_evento){
+		$usuarios = NULL;
+		$sql = 	"SELECT u.cod_usuario, nome_certificado, nivel_acesso,ua.funcao, ue.funcao".
+				" FROM Usuario u, Usuario_Atividade ua, Usuario_Evento ue, Evento e".
+				" WHERE u.cod_usuario = ".$cod_usuario.
+				" AND e.cod_evento = ".$cod_evento.
+				" AND u.cod_usuario = ua.cod_usuario".
+				" AND u.cod_usuario = ue.cod_usuario".
+				" AND e.cod_evento = ue.cod_evento";
+		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		
+		if (!is_null($registros)) {
+            $i = 0;
+            foreach ($registros as $registro) {
+                $usuario = new Usuario();
+                $usuario->setCodUsuario($registro['cod_usuario']);
+                $usuarios[$i++] = $usuario;   
+            }
+		}
+		
+		return $usuarios;
+	}
 }
 ?>

@@ -20,7 +20,7 @@
 	listarTiposAtividadePorEvento($cod_evento);
 	
 ?>
-<div class="row menu-esquerdo">	
+<div class="row corpo">	
 		<? require_once(APRESENTACAO.'menu_esquerdo.php'); ?>
 		<br>
 		<div class="painel-informacoes">
@@ -31,6 +31,8 @@
 					
 		<?php		
 			if ($atividadesPost!=null) {
+			
+			$_SESSION['efetuou_inscricao'] = "NAO";
 			
 			echo "<h2>Confirme os dados da sua inscrição!</h2>";
 			

@@ -73,6 +73,15 @@ class FachadaUsuario extends InstanciaUnica{
         }
     }
     
+	public function usuarioPossuiFuncaoEspecialPorEvento($cod_usuario, $cod_evento){
+		$usuarios = PersistenciaUsuario::getInstancia()->selecionarPorFuncaoEspecial(
+        	$cod_usuario, $cod_evento);
+        if($usuarios != NULL){
+            return true;
+        } else { 
+        	return false; 
+        }
+	}
 }
 
 ?>
