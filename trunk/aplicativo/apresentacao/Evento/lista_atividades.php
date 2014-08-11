@@ -11,7 +11,7 @@ $cod_evento = $_GET['cod_evento'];
 $evento = FachadaEvento::getInstancia()->listarEventoPorCodigo($cod_evento);
 $usuario = FachadaUsuario::getInstancia()->listarUsuarioPorCodigo($usuarioLogado->getCodUsuario());
 ?>
-<div class="row menu-esquerdo">	
+<div class="row corpo">	
 		<? require_once(APRESENTACAO.'menu_esquerdo.php'); ?>
 		<br>
 		<div class="painel-informacoes">

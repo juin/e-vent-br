@@ -25,7 +25,7 @@ $cod_evento = FachadaEvento::getInstancia()->listarEventoPorAtividade($cod_ativi
 				</div>
 			</div>
 </div>
-<div class="row menu-esquerdo">	
+<div class="row corpo">	
 		<? require_once(APRESENTACAO.'menu_esquerdo.php'); ?>
 		<br>
 		<div class="painel-informacoes">

@@ -14,13 +14,11 @@ $cod_evento = $_GET['cod_evento'];?>
 				</div>
 			</div>
 </div>
-<div class="row menu-esquerdo">	
+<div class="row corpo">	
 		<? require_once(APRESENTACAO.'menu_esquerdo.php'); ?>
 
 		<div class="abas-gerenciamento">
 			<div class="large-8 medium-8 small-8 columns">
-			<br>
-			<br>
 				<div class="panel">
 					<dl class="tabs" data-tab>
   						<dd class="tab-title active"><a href="#panel2-1">Evento</a></dd>

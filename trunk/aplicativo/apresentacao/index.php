@@ -3,6 +3,7 @@ require_once (dirname(__FILE__) . '/../config.php');
 require_once (APRESENTACAO . 'cabecalho.php');
 require_once(FACHADAS.'FachadaEvento.php');
 require_once(FACHADAS.'FachadaInscricao.php');
+require_once(FACHADAS.'FachadaUsuario.php');
 ?>
 <div class="row">	
 		<div class="large-3 medium-3 small-3 columns">
@@ -12,15 +13,12 @@ require_once(FACHADAS.'FachadaInscricao.php');
 					<h2>Eventos</h2>
 				</div>
 			</div>
-</div>
-<br>		
-	<div class="row menu-esquerdo">	
+</div>	
+	<div class="row corpo">	
 		<? require_once(APRESENTACAO.'menu_esquerdo.php'); ?>
 		<div class="painel-eventos">
 			<? $eventos_andamento = FachadaEvento::getInstancia()->listarEventosEmAndamento(); ?>
 			<div class="large-6 medium-6 small-6 columns">	
-			<br>
-			<br>
 			<?
 	            if($eventos_andamento!=NULL){
 	                foreach ($eventos_andamento as $andamento) { ?>
@@ -41,7 +39,18 @@ require_once(FACHADAS.'FachadaInscricao.php');
 	  							<div class="large-8 medium-8 small-8 columns">
 	  								<p><? echo utf8_encode($andamento->getNome()); ?></p>
 	  								<a href="<? echo URL; ?>apresentacao/Evento/lista_atividades.php?cod_evento=<? echo $andamento->getCodEvento();?>"class="success button">Fazer Inscrição</a>
+	 				 				<?
+	 				 					if(FachadaUsuario::getInstancia()->
+										usuarioPossuiFuncaoEspecialPorEvento($usuarioLogado->getCodUsuario(),$andamento->getCodEvento()) == TRUE){
+											
+	 				 				 ?>
 	 				 				<a href="<? echo URL; ?>apresentacao/Evento/gerencia_evento.php?cod_evento=<? echo $andamento->getCodEvento();?>" class="alert button">Gerenciamento</a>
+	 				 				
+	 				 				<? }
+										
+										
+											
+									?>
 	 				 			</div>
 	 				 		</div>
 	 				 	</div>
@@ -92,9 +101,6 @@ require_once(FACHADAS.'FachadaInscricao.php');
 				</div>
 		</div>
  	</div>
-	<br>
-	<br>
-	<br>
 	<section id="github" class="githubissues hide-for-small-down">
    	<div class="row collapse">
       	<div class="large-12 medium-12 small-12 columns">						

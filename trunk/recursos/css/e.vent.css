@@ -369,6 +369,9 @@ color: #1fcd5f;
 .menu-topo{
     height: 35px;
 }
+ul.menu-gerencia{
+    margin-top: 20px;
+}
 .corpo{
     margin-top: 30px;
     margin-bottom: 30px;
