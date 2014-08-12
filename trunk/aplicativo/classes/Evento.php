@@ -13,7 +13,7 @@ class Evento {
 	private $pagamento = null;
 	private $urlGabaritoAtividade = null;
 	private $urlGabaritoEvento = null;
-	private $urlGabaritoImagem = null;
+	private $urlImagem = null;
 	private $urlSite = null;
 	private $diasLimitePagamento = null;
 
@@ -113,11 +113,11 @@ class Evento {
 		$this->urlGabaritoEvento = $urlGabaritoEvento;
 	}
 
-	public function getUrlGabaritoImagem(){
+	public function getUrlImagem(){
 		return $this->urlImagem;
 	}
 
-	public function setUrlGabaritoImagem($urlImagem){
+	public function setUrlImagem($urlImagem){
 		$this->urlImagem = $urlImagem;
 	}
 
