@@ -28,12 +28,12 @@ require_once(FACHADAS.'FachadaUsuario.php');
 		  						<div class="large-4 medium-4 small-4 columns">
 		  							<br>						
 		  							<ul class="small-block-grid-1">
-		  							<? if($andamento->getUrlGabaritoImagem()!=null){
-		  								$imagem = $andamento->getUrlGabaritoImagem();
-		  							} else{
-		  								$imagem = IMAGENS."imagem-evento-padraoa.jpg";
-		  							}?>
-		 								<li><img class="evento" src="<? echo $imagem; ?>"></li>
+		  							<? if($andamento->getUrlImagem()!=null){ ?>
+		  								<li><img class="evento" src="http://<? echo $andamento->getUrlImagem(); ?>"></li>
+		  							<? } else{ ?>
+		  								<li><img class="evento" src="<? echo IMAGENS."imagem-evento-padrao.jpg"; ?>"></li>
+		  							<? } ?>
+		 								
 		  							</ul>
 		  						</div>
 	  							<div class="large-8 medium-8 small-8 columns">

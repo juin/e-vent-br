@@ -16,7 +16,6 @@ $cod_evento = $_GET['cod_evento'];?>
 </div>
 <div class="row corpo">	
 		<? require_once(APRESENTACAO.'menu_esquerdo.php'); ?>
-
 		<div class="abas-gerenciamento">
 			<div class="large-8 medium-8 small-8 columns">
 				<div class="panel">
@@ -28,113 +27,8 @@ $cod_evento = $_GET['cod_evento'];?>
 					</dl>
 					<div class="tabs-content">
   						<div class="content active" id="panel2-1">
-  							<br>
-  							<form class="form-cadastro">
-								<fieldset>
-									<legend>Dados do Evento</legend>
-									<?
-										
-											$evento = FachadaEvento::getInstancia()->
-											listarEventoPorCodigo($cod_evento);
-									?>
-    									<div class="row">
-											<div class="large-12 small-12 columns">
-											<br>
-      									<label>Nome do Evento<font>*</font>:<br>
-        										<input type="text" placeholder="<? echo utf8_encode($evento->getNome()); ?>" />		
-      									</label>
-    										</div>								
-										</div>
-										<div class="row">
-											<div class="large-12 small-12 columns">
-      										<label>Sigla<font>*</font>:<br>
-        											<input type="text" placeholder="Sigla" />		
-      										</label>
-    										</div>								
-										</div>
-										<div class="row">
-											<div class="large-6 small-6 columns">
-      										<label>Data de Início<font>*</font>:<br>
-        											<input type="date" placeholder="large-4.columns"/>		
-      										</label>
-      									</div>																
-											<div class="large-6 small-6 columns">
-      										<label>Data de Término<font>*</font>:<br>
-        											<input type="date" placeholder="large-4.columns"/>		
-      										</label>
-      									</div>
-    									</div>
-    									<div class="row">
-											<div class="large-6 small-6 columns">
-      										<label>Data de Início da Inscrição<font>*</font>:<br>
-        											<input type="date" placeholder="large-4.columns"/>		
-      										</label>
-      									</div>																
-										<div class="large-6 small-6 columns">
-      									<label>Data de Término da Inscrição<font>*</font>:<br>
-        										<input type="date" placeholder="large-4.columns"/>		
-      									</label>
-      								</div>
-    								</div>
-    								<div class="row">
-   									<div class="large-12 medium-12 small-12 columns">
-      									<label>Pagamento<font>*</font>: </label>
-      										<input type="checkbox" name="Gratuito" value="Gratuito" id="Gratuito"><label for="gratuito">Gratuito</label>
-      										<input type="checkbox" name="Pago" value="Pago" id="Pago"><label for="pago">Pago</label>
-    									</div>
-  									</div>
-  									<div class="row collapse">		
-  										<div class="large-3 small-2 columns">
-      									<span class="prefix">http://</span>
-    									</div>
-    									<div class="large-9 small-10 columns">			
-        										<input type="text" placeholder="URL gabarito Atividade..." />			
-      								</div>
-      								<div class="large-3 small-2 columns">
-      									<span class="prefix">http://</span>
-    									</div>
-    									<div class="large-9 small-10 columns">			
-        										<input type="text" placeholder="URL gabarito Evento..." />			
-      								</div>
-      								<div class="large-3 small-2 columns">
-      									<span class="prefix">http://</span>
-    									</div>
-    									<div class="large-9 small-10 columns">			
-        										<input type="text" placeholder="URL imagem Evento..." />			
-      								</div>
-      								<div class="large-3 small-2 columns">
-      									<span class="prefix">http://</span>
-    									</div>
-    									<div class="large-9 small-10 columns">			
-        										<input type="text" placeholder="URL do site..." />			
-      								</div>
-    								</div>
-    								<div class="row">
-										<div class="large-12 small-12 columns">
-      									<label>Dias limite para Pagamento<font>*</font>:<br>
-        										<input type="text" placeholder="Dias" />		
-      									</label>
-    									</div>
-    									<div class="large-12 medium-12 small-12 columns">
-    										<font>(*)Campos Obrigatórios</font>	
-    									</div>									
-									</div>
-							</fieldset>		
-						</form>		
-    								<div class="row">
-										<div class="large-12 medium-12 small-12 columns">
-											<div class="large-4 medium-4 small-4 columns">	
-												<p></p>
-											</div>
-											<div class="large-4 medium-4 small-4 columns">
-												<p></p>
-											</div>
-											<div class="large-3 medium-3 small-3 columns">
-												<input type="submit" name="salvar" value="Salvar" class="success button expand salvar" />
-											</div>
-										</div>	
-									</div>	
-  							</div>
+  							<a href="<?echo URL;?>apresentacao/Evento/evento_editar.php?cod_evento=<?echo $cod_evento;?>">Editar Evento</a>
+  						</div>
   						<div class="content" id="panel2-2">
     						<br>
 								<fieldset>

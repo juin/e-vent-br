@@ -28,7 +28,7 @@ class PersistenciaEvento extends InstanciaUnica{
 				$eventos[$i]->setPagamento($registro["pagamento"]);
 				$eventos[$i]->setUrlGabaritoAtividade($registro["url_gabarito_atividade"]);
 				$eventos[$i]->setUrlGabaritoEvento($registro["url_gabarito_evento"]);
-				$eventos[$i]->setUrlGabaritoImagem($registro["url_imagem"]);
+				$eventos[$i]->setUrlImagem($registro["url_imagem"]);
 				$eventos[$i]->setUrlSite($registro["url_site"]);
 				$eventos[$i]->setDiasLimitePagamento($registro["dias_limite_pagamento"]);
 				$i++;
@@ -58,7 +58,7 @@ class PersistenciaEvento extends InstanciaUnica{
 				$eventos[$i]->setPagamento($registro["pagamento"]);
 				$eventos[$i]->setUrlGabaritoAtividade($registro["url_gabarito_atividade"]);
 				$eventos[$i]->setUrlGabaritoEvento($registro["url_gabarito_evento"]);
-				$eventos[$i]->setUrlGabaritoImagem($registro["url_imagem"]);
+				$eventos[$i]->setUrlImagem($registro["url_imagem"]);
 				$eventos[$i]->setUrlSite($registro["url_site"]);
 				$eventos[$i]->setDiasLimitePagamento($registro["dias_limite_pagamento"]);
 				$i++;
@@ -88,7 +88,7 @@ class PersistenciaEvento extends InstanciaUnica{
     			$eventos[$i]->setPagamento($registro["pagamento"]);
     			$eventos[$i]->setUrlGabaritoAtividade($registro["url_gabarito_atividade"]);
     			$eventos[$i]->setUrlGabaritoEvento($registro["url_gabarito_evento"]);
-				$eventos[$i]->setUrlGabaritoImagem($registro["url_imagem"]);
+				$eventos[$i]->setUrlImagem($registro["url_imagem"]);
 				$eventos[$i]->setUrlSite($registro["url_site"]);
 				$eventos[$i]->setDiasLimitePagamento($registro["dias_limite_pagamento"]);
     			$i++;
@@ -112,6 +112,27 @@ class PersistenciaEvento extends InstanciaUnica{
     				AND cod_evento = ".$cod_evento.") AND cod_atividade_agenda = ".$cod_atividade_agenda;
     	return FachadaConectorBD::getInstancia()->atualizar($sql);
     }
+	
+	public function atualizarEvento(Evento $evento){
+		$sql = 	"UPDATE Evento". 
+				" SET nome='".$evento->getNome()."',".
+				" sigla='".$evento->getSigla()."',".
+				" data_inicio_evento='".$evento->getDataInicioEvento()."',".
+				" data_fim_evento='".$evento->getDataFimEvento()."',".
+				" data_inicio_inscricao='".$evento->getDataInicioInscricao()."',".
+				" data_fim_inscricao='".$evento->getDataFimInscricao()."',".
+				" pagamento='".$evento->getPagamento()."',".
+				" url_gabarito_atividade='".$evento->getUrlGabaritoAtividade()."',".
+				" url_gabarito_evento='".$evento->getUrlGabaritoEvento()."',".
+				" url_imagem='".$evento->getUrlImagem()."',".
+				" url_site='".$evento->getUrlSite()."',".
+				" dias_limite_pagamento=".$evento->getDiasLimitePagamento().
+				" WHERE cod_evento=".$evento->getCodEvento().";";
+	    var_dump($sql);
+		$resultado = FachadaConectorBD::getInstancia()->atualizar($sql);
+		return $resultado;
+		
+	}
 }
 
 ?>
