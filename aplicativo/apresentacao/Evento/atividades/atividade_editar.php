@@ -1,5 +1,5 @@
 <?php
-    require_once (dirname(__FILE__) . '/../../config.php');
+    require_once (dirname(__FILE__) . '/../../../config.php');
 require_once (APRESENTACAO . 'cabecalho.php');
 require_once (FACHADAS . 'FachadaEvento.php');
 require_once (FACHADAS . 'FachadaAtividade.php');
@@ -7,40 +7,44 @@ require_once(UTILIDADES);
 
 if (isPostBack()) {
 	
+	$atividade = $_POST;
+	$cod_atividade = $atividade['cod_atividade'];
+	$cod_evento = $atividade['cod_evento'];
 	
-	$evento = $_POST;
-	$cod_atividade = $_POST['cod_atividade'];
 	
-	$atualizar_atividade = new Atividade();
+	$incluir_atividade = new Atividade();
+	$incluir_atividade->setCodAtividade($atividade['cod_atividade']);
+	$incluir_atividade->setNome($atividade['nome']);
+	$incluir_atividade->setResumo($atividade['resumo']);
+	$incluir_atividade->setConhecimentoAprendido($atividade['conhecimento_aprendido']);
+	$incluir_atividade->setConteudoProgramatico($atividade['conteudo_programatico']);
+	$incluir_atividade->setPreRequisito($atividade['prerequisito']);
+	$incluir_atividade->setPublicoAlvo($atividade['publico_alvo']);
+	$incluir_atividade->setFerramenta($atividade['ferramenta']);
+	$incluir_atividade->setCargaHoraria($atividade['carga_horaria']);
+	$incluir_atividade->setVagas($atividade['vagas']);
+	$incluir_atividade->setObservacao($atividade['observacao']);
+	$incluir_atividade->setTipoFrequencia($atividade['tipo_frequencia']);
+	$incluir_atividade->setStatus($atividade['status']);
+	$incluir_atividade->setcodAtividadeTipo($atividade['cod_atividade_tipo']);
+	$incluir_atividade->setCodEvento($atividade['cod_evento']);
 	
-	$atualizar_evento->setCodEvento($evento['cod_evento']);
-	$atualizar_evento->setNome($evento['nome']);
-	$atualizar_evento->setSigla($evento['sigla']);
-	$atualizar_evento->setDataInicioEvento($evento['data_inicio_evento']);
-	$atualizar_evento->setDataFimEvento($evento['data_fim_evento']);
-	$atualizar_evento->setDataInicioInscricao($evento['data_inicio_inscricao']);
-	$atualizar_evento->setDataFimInscricao($evento['data_fim_inscricao']);
-	$atualizar_evento->setPagamento($evento['pagamento']);
-	$atualizar_evento->setUrlGabaritoAtividade($evento['url_gabarito_atividade']);
-	$atualizar_evento->setUrlGabaritoEvento($evento['url_gabarito_evento']);
-	$atualizar_evento->setUrlImagem($evento['url_imagem']);
-	$atualizar_evento->setUrlSite($evento['url_site']);
-	$atualizar_evento->setDiasLimitePagamento($evento['dias_limite_pagamento']);
 	
-	if(FachadaEvento::getInstancia()->alterarEvento($atualizar_evento) >= 0){
-		header('location: '.URL.'apresentacao/Evento/gerencia_evento.php?cod_evento='.$cod_evento);
+	if (is_int(FachadaAtividade::getInstancia()->criarAtividade($incluir_atividade))){
+		header('location: '.URL.'apresentacao/Evento/gerencia_evento.php?cod_evento='.$atividade['cod_evento']);
 	}
 	
-	} else {
-		$cod_evento = $_GET['cod_evento'];
-	}
+}else{
+	$cod_evento = $_GET['cod_evento'];
+	$cod_atividade = $_GET['cod_atividade'];
+}
 ?>
 <div class="row">	
 		<div class="large-3 medium-3 small-3 columns">
 		</div>
 			<div class="large-7 medium-7 small-7 columns">		
 				<div class="row gerenciamento-usuario-titulo">
-					<h2>Editar Evento</h2>
+					<h2>Adicionar Atividade</h2>
 				</div>
 			</div>
 </div>
@@ -49,102 +53,113 @@ if (isPostBack()) {
 		
 		<div class="large-9 medium-9 small-9 columns">
 			<div class="panel">
-				<form class="form-cadastro" action="evento_editar.php" method="post">
+				<form class="form-cadastro" action="atividade_editar.php" method="post">
+					<? $atividade = FachadaAtividade::getInstancia()->listarAtividadePorCodigo($cod_atividade);	?>
 								<fieldset>
-									<legend>Dados do Evento</legend>
-									<?
-										
-											$evento = FachadaEvento::getInstancia()->
-											listarEventoPorCodigo($cod_evento);
-									?>
-    									<div class="row">
+									<legend>Dados da Atividades</legend>
+										<div class="row">
 											<div class="large-12 small-12 columns">
-											<br>
-      									<label>Nome do Evento<font>*</font>:<br>
-        										<input id="nome" name="nome" type="text" placeholder="Informe o nome do evento" value="<? echo utf8_encode($evento->getNome()); ?>"/>		
-      									</label>
+	      									<label>Nome da Atividade<font>*</font>:<br>
+	        										<input id="nome" name="nome" type="text" placeholder="Informe o título da Atividade" value="<? echo utf8_encode($atividade->getNome()); ?>"/>		
+	      									</label>
     										</div>								
 										</div>
 										<div class="row">
 											<div class="large-12 small-12 columns">
-      										<label>Sigla<font>*</font>:<br>
-        											<input id="sigla" name="sigla" type="text" placeholder="Digite uma sigla" value="<? echo utf8_encode($evento->getSigla()); ?>" />		
+      										<label>Resumo<font>*</font>:<br>
+        											<textarea rows="4" cols="50" id="resumo" name="resumo" title="Resumo" placeholder="Resumo sobre a atividade"><? echo utf8_encode($atividade->getResumo()); ?> 
+        											</textarea>
       										</label>
     										</div>								
 										</div>
 										<div class="row">
 											<div class="large-6 small-6 columns">
-      										<label>Data de Início<font>*</font>:<br>
-        											<input id="data_inicio_evento" name="data_inicio_evento" type="date" value="<? echo $evento->getDataInicioEvento(); ?>"/>		
+      										<label>Conhecimento Aprendido<font>*</font>:<br>
+        											<textarea rows="4" cols="50" id="conhecimento_aprendido" name="conhecimento_aprendido"/><? echo utf8_encode($atividade->getConhecimentoAprendido()); ?>
+        											</textarea>		
       										</label>
       									</div>																
 											<div class="large-6 small-6 columns">
-      										<label>Data de Término<font>*</font>:<br>
-        											<input id="data_fim_evento" name="data_fim_evento" type="date" value="<? echo $evento->getDataFimEvento(); ?>"/>		
+      										<label>Conteúdo Programático<font>*</font>:<br>
+        											<textarea id="conteudo_programatico" name="conteudo_programatico"><? echo utf8_encode($atividade->getConteudoProgramatico()); ?></textarea>		
       										</label>
       									</div>
     									</div>
     									<div class="row">
 											<div class="large-6 small-6 columns">
-      										<label>Data de Início da Inscrição<font>*</font>:<br>
-        											<input id="data_inicio_inscricao" name="data_inicio_inscricao" type="date" value="<? echo $evento->getDataInicioInscricao(); ?>"/>		
-      										</label>
-      									</div>																
-										<div class="large-6 small-6 columns">
-      									<label>Data de Término da Inscrição<font>*</font>:<br>
-        										<input id="data_fim_inscricao" name="data_fim_inscricao" type="date" value="<? echo $evento->getDataFimInscricao(); ?>"/>		
-      									</label>
-      								</div>
-    								</div>
-    								<div class="row">
-   									<div class="large-12 medium-12 small-12 columns">
-      									<label>Pagamento<font>*</font>: </label>
-      									<select id="pagamento" name="pagamento">
-      										<? if($evento->getPagamento()=="Gratuito"){ ?>
-      											<option value="Gratuito">Gratuito</option>
-      											<option value="Pago">Pago</option>
-      										<? } elseif ($evento->getPagamento()=="Pago") { ?>
-												<option value="Pago">Pago</option>
-												<option value="Gratuito">Gratuito</option>
-											 <? } else{ ?>
-											 	<option value=""> Não Informado </option>
-											 	<option value="Pago">Pago</option>
-												<option value="Gratuito">Gratuito</option>
-											 <? } ?>
-      									</select>
+	      										<label>Pré-requisitos<font>*</font>:<br>
+	        											<textarea id="prerequisito" name="prerequisito"><? echo utf8_encode($atividade->getPreRequisito()); ?></textarea>		
+	      										</label>
+      										</div>																
+											<div class="large-6 small-6 columns">
+		      									<label>Público Alvo<font>*</font>:<br>
+		        										<textarea id="publico_alvo" name="publico_alvo"><? echo utf8_encode($atividade->getPublicoAlvo()); ?></textarea>
+		      									</label>
+	      									</div>
     									</div>
-  									</div>
-  									<div class="row collapse">		
-  										<div class="large-3 small-2 columns">
-      										<span class="prefix">http://</span>
-    									</div>
-    									<div class="large-9 small-10 columns">			
-        										<input id="url_gabarito_atividade" name="url_gabarito_atividade" type="text" placeholder="URL gabarito Atividade..." value="<? echo $evento->getUrlGabaritoAtividade(); ?>"/>			
-      								</div>
-      									<div class="large-3 small-2 columns">
-      										<span class="prefix">http://</span>
-    									</div>
-    									<div class="large-9 small-10 columns">			
-        										<input id="url_gabarito_evento" name="url_gabarito_evento" type="text" placeholder="URL gabarito Evento..." value="<? echo $evento->getUrlGabaritoEvento(); ?>"/>			
-      								</div>
-      									<div class="large-3 small-2 columns">
-      										<span class="prefix">http://</span>
-    									</div>
-    									<div class="large-9 small-10 columns">			
-        										<input id="url_imagem" name="url_imagem" type="text" placeholder="URL imagem Evento..." value="<? echo $evento->getUrlImagem(); ?>"/>			
-      								</div>
-      									<div class="large-3 small-2 columns">
-      										<span class="prefix">http://</span>
-    									</div>
-    									<div class="large-9 small-10 columns">			
-        										<input id="url_site" name="url_site" type="text" placeholder="URL do site..." value="<? echo $evento->getUrlSite(); ?>"/>			
-      								</div>
-    								</div>
-    								<div class="row">
+    									<div class="row">
+											<div class="large-12 small-12 columns">
+		      									<label>Ferramenta<font>*</font>:<br>
+		        										<input id="ferramenta" name="ferramenta" type="text" value="<? echo utf8_encode($atividade->getFerramenta()); ?>" placeholder="Ferramenta"/>		
+		      									</label>
+	    									</div>
+										</div>
+										<div class="row">
+											<div class="large-6 small-6 columns">
+		      									<label>Carga-Horária<font>*</font>:<br>
+		        										<input id="carga_horaria" name="carga_horaria" type="text" value="<? echo utf8_encode($atividade->getCargaHoraria()); ?>" placeholder="Carga Horária"/>		
+		      									</label>
+	    									</div>
+	    									<div class="large-6 small-6 columns">
+		      									<label>Vagas<font>*</font>:<br>
+		        										<input id="vagas" name="vagas" type="text" value="<? echo utf8_encode($atividade->getVagas()); ?>" placeholder="Vagas"/>		
+		      									</label>
+	    									</div>
+										</div>
+										<div class="row">
+											<div class="large-12 small-12 columns">
+	      										<label>Observação<font>*</font>:<br>
+	        											<textarea rows="4" cols="50" id="observacao" name="observacao" title="Observação" placeholder="Observação"><? echo utf8_encode($atividade->getObservacao()); ?>
+	        											</textarea>
+	      										</label>
+    										</div>						
+										</div>
+										<div class="row">
+											<div class="large-6 small-6 columns">
+	      										<label>Tipo Frequência<font>*</font>:<br>
+	        										<select id="tipo_frequencia" name="tipo_frequencia">
+			        								<? if($atividade->getTipoFrequencia()=="Evento"){ ?>
+		      											<option value="Evento">Evento</option>
+	        											<option value="Atividade">Atividade</option>
+		      										<? } elseif ($atividade->getTipoFrequencia()=="Atividade") { ?>
+														<option value="Atividade">Atividade</option>
+														<option value="Evento">Evento</option>
+													 <? } else{ ?>
+													 	<option value=""> Não Informado </option>
+													 	<option value="Atividade">Atividade</option>
+													 	<option value="Evento">Evento</option>
+													 <? } ?>
+	        										
+	        										</select>
+	      										</label>
+    										</div>
+    										<div class="large-6 small-6 columns">
+		      									<label>Status<font>*</font>:<br>
+	        										<select id="status" name="status">
+	        											<option value="Confirmada">Confirmada</option>
+	        											<option value="Cancelada">Cancelada</option>
+        											</select>		
+		      									</label>
+	    									</div>						
+										</div>
+									<div class="row">
 										<div class="large-12 small-12 columns">
-      									<label>Dias limite para Pagamento<font>*</font>:<br>
-        										<input id="dias_limite_pagamento" name="dias_limite_pagamento" type="text" placeholder="Dias" value="<? echo $evento->getDiasLimitePagamento(); ?>"/>		
-      									</label>
+	      									<label>Tipo de Atividade<font>*</font>:<br>
+	        									<select id="cod_atividade_tipo" name="cod_atividade_tipo">
+	        											<option value="1">Minicurso</option>
+	        											<option value="2">Palestra</option>
+        										</select>			
+	      									</label>
     									</div>
     									<div class="large-12 medium-12 small-12 columns">
     										<font>(*)Campos Obrigatórios</font>	
@@ -156,7 +171,8 @@ if (isPostBack()) {
 											<? echo "<a href=\"javascript:window.history.go(-1)\" class=\"voltar right\" \">&laquo;Voltar</a>"; ?>
 										</div>
 										<div class="large-3 medium-3 small-3 columns right">
-											<input type="hidden" id="cod_evento" name="cod_evento" value="<? echo $evento->getCodEvento(); ?>" />
+											<input type="hidden" id="cod_evento" name="cod_evento" value="<? echo $cod_evento; ?>" />
+											<input type="hidden" id="cod_evento" name="cod_evento" value="<? echo $cod_atividade; ?>" />
 											<input type="submit" name="salvar" value="Salvar" class="success button expand salvar" />
 										</div>
 									</div>
