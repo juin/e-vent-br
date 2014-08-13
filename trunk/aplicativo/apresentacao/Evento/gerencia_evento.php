@@ -20,14 +20,14 @@ $cod_evento = $_GET['cod_evento'];?>
 		<div class="abas-gerenciamento">
 			<div class="large-8 medium-8 small-8 columns">
 				<div class="panel">
-					<dl class="tabs" data-tab>
-  						<dd class="tab-title active"><a href="#panel2-1">Evento</a></dd>
-  						<dd class="tab-title"><a href="#panel2-2">Atividades</a></dd>
-  						<dd class="tab-title"><a href="#panel2-3">Programação</a></dd>
-  						<dd class="tab-title"><a href="#panel2-4">Estatística</a></dd>
+					<dl class="tabs" data-tab data-options="deep_linking:true">
+  						<dd class="tab-title active"><a href="#tab-evento-1">Evento</a></dd>
+  						<dd class="tab-title"><a href="#tab-evento-2">Atividades</a></dd>
+  						<dd class="tab-title"><a href="#tab-evento-3">Programação</a></dd>
+  						<dd class="tab-title"><a href="#tab-evento-4">Estatística</a></dd>
 					</dl>
 					<div class="tabs-content">
-  						<div class="content active" id="panel2-1">
+  						<div class="content active" id="tab-evento-1">
   							<fieldset>
   								<? $evento = FachadaEvento::getInstancia()->
 											listarEventoPorCodigo($cod_evento); ?>
@@ -52,7 +52,7 @@ $cod_evento = $_GET['cod_evento'];?>
   								</div>
   							</div>
   						</div>
-  						<div class="content" id="panel2-2">
+  						<div class="content" id="tab-evento-2">
     						<br>
 								<fieldset>
 									<legend>Atividades</legend>
@@ -75,7 +75,7 @@ $cod_evento = $_GET['cod_evento'];?>
 													<td><? echo $atividade->getCodAtividade();?></td>
 													<td><? echo utf8_encode($atividade->getNome());?></td>
 													<td>
-														<a href="#">Editar</a>
+														<a href="<?echo URL;?>apresentacao/Evento/atividades/atividade_editar.php?cod_evento=<? echo $cod_evento; ?>&cod_atividade=<? echo $atividade->getCodAtividade(); ?>">Editar</a>
 														 | 
 														<a href="#">Apagar</a>
 													</td>
@@ -92,10 +92,10 @@ $cod_evento = $_GET['cod_evento'];?>
   								</div>
   							</div>		
   						</div>
-  						<div class="content" id="panel2-3">
+  						<div class="content" id="tab-evento-3">
     						<p>Third panel content goes here...</p>
   						</div>
-  						<div class="content" id="panel2-4">
+  						<div class="content" id="tab-evento-4">
     						<p>Fourth panel content goes here...</p>
   						</div>
 					</div>		

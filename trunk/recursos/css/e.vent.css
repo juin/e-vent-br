@@ -375,6 +375,10 @@ ul.menu-gerencia{
 .corpo{
     margin-top: 30px;
     margin-bottom: 30px;
+    min-height: 400px;
+}
+.corpo textarea{
+    min-height: 120px;
 }
 .voltar{
     padding:20px;
