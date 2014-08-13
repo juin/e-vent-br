@@ -3,6 +3,7 @@ require_once (dirname(__FILE__) . '/../../config.php');
 require_once (APRESENTACAO . 'cabecalho.php');
 require_once (FACHADAS . 'FachadaEvento.php');
 require_once (FACHADAS . 'FachadaAtividade.php');
+require_once (UTILIDADES);
 
 $cod_evento = $_GET['cod_evento'];?>
 <div class="row">	
@@ -27,7 +28,29 @@ $cod_evento = $_GET['cod_evento'];?>
 					</dl>
 					<div class="tabs-content">
   						<div class="content active" id="panel2-1">
-  							<a href="<?echo URL;?>apresentacao/Evento/evento_editar.php?cod_evento=<?echo $cod_evento;?>">Editar Evento</a>
+  							<fieldset>
+  								<? $evento = FachadaEvento::getInstancia()->
+											listarEventoPorCodigo($cod_evento); ?>
+  								<legend>Dados do Evento</legend>
+	  							<p><b>Nome:</b> <? echo utf8_encode($evento->getNome()); ?></p>
+	  							<p><b>Sigla:</b> <? echo utf8_encode($evento->getSigla()); ?></p>
+	  							<p><b>Ínicio:</b> <? echo arrumaData($evento->getDataInicioEvento()); ?> 
+	  								<b>Fim:</b> <? echo arrumaData($evento->getDataFimEvento()); ?></p>
+	  							<p><b>Ínicio das inscrições:</b> <? echo arrumaData($evento->getDataInicioInscricao()); ?> 
+	  								<b>Fim das Inscrições:</b> <? echo arrumaData($evento->getDataFimInscricao()); ?></p>
+	  							<p><b>Status:</b> <? echo utf8_encode($evento->getStatus()); ?></p>
+	  							<p><b>Pagamento:</b> <? echo utf8_encode($evento->getPagamento()); ?></p>
+	  							<p><b>URL Gabarito Atividade:</b> <a href="http://<? echo $evento->getUrlGabaritoAtividade(); ?>" target="_blank">http://<? echo $evento->getUrlGabaritoAtividade(); ?></a></p>
+	  							<p><b>URL Gabarito Evento:</b> <a href="http://<? echo $evento->getUrlGabaritoEvento(); ?>" target="_blank">http://<? echo $evento->getUrlGabaritoEvento(); ?></a></p>
+	  							<p><b>URL Logo Evento:</b> <a href="http://<? echo $evento->getUrlImagem(); ?>" target="_blank">http://<? echo $evento->getUrlImagem(); ?></a></p>
+	  							<p><b>Site:</b> <a href="http://<? echo $evento->getUrlSite(); ?>" target="_blank">http://<? echo $evento->getUrlSite(); ?></a></p>
+	  							<p><b>Dias limite para pagamento:</b> <? echo $evento->getDiasLimitePagamento(); ?></p>
+  							</fieldset>
+  							<div class="row">
+								<div class="large-3 medium-3 small-3 columns right">
+  									<a href="<?echo URL;?>apresentacao/Evento/evento_editar.php?cod_evento=<?echo $cod_evento;?>" class="success button expand salvar">Editar Evento</a>
+  								</div>
+  							</div>
   						</div>
   						<div class="content" id="panel2-2">
     						<br>
@@ -52,30 +75,22 @@ $cod_evento = $_GET['cod_evento'];?>
 													<td><? echo $atividade->getCodAtividade();?></td>
 													<td><? echo utf8_encode($atividade->getNome());?></td>
 													<td>
-														<a href="#" data-reveal-id="modal-editar-atividade">Editar</a>
+														<a href="#">Editar</a>
 														 | 
-														<a href="#" data-reveal-id="modal-apagar-atividade">Apagar</a>
+														<a href="#">Apagar</a>
 													</td>
 													</tr>
-													<div id="modal-editar-atividade" class="reveal-modal" data-reveal>
-													  <h2>Atividade</h2>
-													  <p class="lead">Your couch.  It is mine.</p>
-													  <p>Im a cool paragraph that lives inside of an even cooler modal. Wins</p>
-													  <a class="close-reveal-modal">&#215;</a>
-													</div>
-													<div id="modal-apagar-atividade" class="reveal-modal" data-reveal>
-													  <h2>Apagar</h2>
-													  <p class="lead">Você confirmar a exclusão da atividade abaixo?</p>
-													  <p>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum </p>
-													  <a class="close-reveal-modal">&#215;</a>
-													</div>													
 												<?}?>
 										  </tbody>
 										</table>
 										
 								  	<?}?>
-								  	
-								</fieldset>		
+								</fieldset>
+								<div class="row">
+								<div class="large-3 medium-3 small-3 columns right">
+  									<a href="<?echo URL;?>apresentacao/Evento/atividades/atividade_criar.php?cod_evento=<? echo $cod_evento; ?>" class="success button expand salvar">Adicionar Atividade</a>
+  								</div>
+  							</div>		
   						</div>
   						<div class="content" id="panel2-3">
     						<p>Third panel content goes here...</p>

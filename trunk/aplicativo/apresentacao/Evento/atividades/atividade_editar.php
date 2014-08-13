@@ -9,9 +9,9 @@ if (isPostBack()) {
 	
 	
 	$evento = $_POST;
-	$cod_evento = $_POST['cod_evento'];
+	$cod_atividade = $_POST['cod_atividade'];
 	
-	$atualizar_evento = new Evento();
+	$atualizar_atividade = new Atividade();
 	
 	$atualizar_evento->setCodEvento($evento['cod_evento']);
 	$atualizar_evento->setNome($evento['nome']);
