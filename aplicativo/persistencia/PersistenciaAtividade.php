@@ -8,6 +8,21 @@ require_once(PERSISTENCIAS . 'PersistenciaLocal.php');
 
 class PersistenciaAtividade extends InstanciaUnica{
 	
+	public function inserirAtividade(Atividade $atividade){
+		$sql = "INSERT INTO `Atividade` (`nome`, `resumo`, `conhecimento_aprendido`, `conteudo_programatico`, 
+				`prerequisito`, `publico_alvo`, `ferramenta`, `carga_horaria`, `vagas`, `observacao`, `tipo_frequencia`, `status`,
+				 `cod_atividade_tipo`, `cod_evento`)
+    			VALUES (
+    			'".$atividade->getNome()."','".$atividade->getResumo()."',
+    			'".$atividade->getConhecimentoAprendido()."','".$atividade->getConteudoProgramatico()."',
+    			'".$atividade->getPreRequisito()."','".$atividade->getPublicoAlvo()."','".$atividade->getFerramenta()."',
+    			'".$atividade->getCargaHoraria()."',
+    			'".$atividade->getVagas()."','".$atividade->getObservacao()."','".$atividade->getTipoFrequencia()."',
+    			'".$atividade->getStatus()."','".$atividade->getcodAtividadeTipo()."','".$atividade->getCodEvento()."')";
+    	echo $sql;
+    	return FachadaConectorBD::getInstancia()->inserir($sql);	
+	}
+	
 	public function selecionarTiposAtividadePorEvento($cod_evento){
 		$atividades_tipo = NULL;
 		$sql = "SELECT at.cod_atividade_tipo, at.nome, av.cod_evento, av.valor_estudante, 

@@ -4,6 +4,10 @@ require_once(CLASSES.'Atividade.php');
 
 class FachadaAtividade extends InstanciaUnica{
 	
+	public function criarAtividade(Atividade $atividade){
+		return PersistenciaAtividade::getInstancia()->inserirAtividade($atividade);
+	}
+	
 	public function listarTiposAtividadePorEvento($cod_evento){
 		$registros = PersistenciaAtividade::getInstancia()->selecionarTiposAtividadePorEvento($cod_evento);
 		if($registros != NULL){
