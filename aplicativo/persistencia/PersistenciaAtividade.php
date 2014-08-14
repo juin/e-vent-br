@@ -47,6 +47,30 @@ class PersistenciaAtividade extends InstanciaUnica{
 		return $atividades_tipo;	
 	}
 	
+	public function selecionarTiposAtividadePorCodigo($cod_atividade_tipo){
+		$atividades_tipo = NULL;
+		$sql = "SELECT at.cod_atividade_tipo, at.nome, av.cod_evento, av.valor_estudante, 
+		av.valor_professor, av.valor_profissional_outros
+		FROM Atividade_Tipo at, Atividade_Valor av
+		WHERE at.cod_atividade_tipo = av.cod_atividade_tipo
+		AND at.cod_atividade_tipo =".$cod_atividade_tipo;
+		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$i = 0;
+		if (!is_null($registros)){
+			foreach ($registros as $registro){
+				$atividades_tipo[$i] = new AtividadeValor();
+				$atividades_tipo[$i]->setCodAtividadeTipo($registro["cod_atividade_tipo"]);
+				$atividades_tipo[$i]->setCodEvento($registro["cod_evento"]);
+				$atividades_tipo[$i]->setValorEstudante($registro["valor_estudante"]);
+				$atividades_tipo[$i]->setValorProfessor($registro["valor_professor"]);
+				$atividades_tipo[$i]->setValorProfissionalOutros($registro["valor_profissional_outros"]);
+				$atividades_tipo[$i]->setNome($registro["nome"]);
+				$i++;
+			}
+		}
+		return $atividades_tipo;	
+	}
+		
 	public function selecionarAtividadesPorCodigoEvento($cod_evento){
 		$atividades = NULL;	
 		$sql = "SELECT a.cod_atividade, a.nome, a.status, a.carga_horaria, a.vagas,a.cod_atividade_tipo
@@ -134,7 +158,7 @@ class PersistenciaAtividade extends InstanciaUnica{
 		$atividades = NULL;
 		$sql = "SELECT a.cod_atividade, a.nome, a.resumo, a.conhecimento_aprendido, a.conteudo_programatico,
 		a.prerequisito, a.publico_alvo, a.ferramenta, a.carga_horaria, a.vagas, a.observacao, a.tipo_frequencia,
-		a.cod_atividade_tipo
+		a.status, a.cod_atividade_tipo, a.cod_evento
 		 FROM Atividade a WHERE a.cod_atividade=".$cod_atividade;
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
@@ -146,14 +170,16 @@ class PersistenciaAtividade extends InstanciaUnica{
 				$atividades[$i]->setResumo($registro["resumo"]);
 				$atividades[$i]->setConhecimentoAprendido($registro["conhecimento_aprendido"]);
 				$atividades[$i]->setConteudoProgramatico($registro["conteudo_programatico"]);
-				$atividades[$i]->setPreRequisito($registro["prerequisito"]);
+				$atividades[$i]->setPreRequisito($registro["prerequisito"]); 
 				$atividades[$i]->setPublicoAlvo($registro["publico_alvo"]);
 				$atividades[$i]->setFerramenta($registro["ferramenta"]);
 				$atividades[$i]->setCargaHoraria($registro["carga_horaria"]);
 				$atividades[$i]->setVagas($registro["vagas"]);
 				$atividades[$i]->setObservacao($registro["observacao"]);
-				$atividades[$i]->setStatus($registro["tipo_frequencia"]);
+				$atividades[$i]->setTipoFrequencia($registro["tipo_frequencia"]);
+				$atividades[$i]->setStatus($registro["status"]);
 				$atividades[$i]->setCodAtividadetipo($registro["cod_atividade_tipo"]);
+				$atividades[$i]->setCodEvento($registro["cod_evento"]);
 				$i++;
 			}
 		}
@@ -253,6 +279,28 @@ class PersistenciaAtividade extends InstanciaUnica{
 		
 		return $atividades;
     }
+	
+	public function atualizarAtividade(Atividade $atividade){
+		$sql = 	"UPDATE Atividade". 
+				" SET nome='".$atividade->getNome()."',".
+				" resumo='".$atividade->getResumo()."',".
+				" conhecimento_aprendido='".$atividade->getConhecimentoAprendido()."',".
+				" conteudo_programatico='".$atividade->getConteudoProgramatico()."',".
+				" prerequisito='".$atividade->getPreRequisito()."',".
+				" publico_alvo='".$atividade->getPublicoAlvo()."',".
+				" ferramenta='".$atividade->getFerramenta()."',".
+				" carga_horaria='".$atividade->getCargaHoraria()."',".
+				" vagas='".$atividade->getVagas()."',".
+				" observacao='".$atividade->getObservacao()."',".
+				" tipo_frequencia='".$atividade->getTipoFrequencia()."',".
+				" status='".$atividade->getStatus()."',".
+				" cod_atividade_tipo=".$atividade->getcodAtividadeTipo().
+				" WHERE cod_atividade=".$atividade->getCodAtividade().";";
+		var_dump($sql);
+		$resultado = FachadaConectorBD::getInstancia()->atualizar($sql);
+		return $resultado;
+		
+	}
 
 }
 ?>

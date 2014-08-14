@@ -17,6 +17,15 @@ class FachadaAtividade extends InstanciaUnica{
 		}
 	}
 	
+	public function listarTiposAtividadePorCodigo($cod_atividade_tipo){
+		$registros = PersistenciaAtividade::getInstancia()->selecionarTiposAtividadePorCodigo($cod_atividade_tipo);
+		if($registros != NULL){
+			return $registros;
+		} else {
+			return NULL;
+		}
+	}
+		
 	public function listarAtividadesPorCodigoEvento($cod_evento){
 		return PersistenciaAtividade::getInstancia()->selecionarAtividadesPorCodigoEvento($cod_evento);
 	}
@@ -81,5 +90,10 @@ class FachadaAtividade extends InstanciaUnica{
     public function listarAtividadesMonitoradaPorUsuario($cod_evento, $cod_usuario, $funcao){
         return PersistenciaEvento::getInstancia()->selecionarAtividadesRealizadasPorUsuario($cod_evento, $cod_usuario, $funcao);
     }
+
+	public function alterarAtividade(Atividade $atividade){
+		return PersistenciaAtividade::getInstancia()->atualizarAtividade($atividade);
+		
+	}
 }
 ?>

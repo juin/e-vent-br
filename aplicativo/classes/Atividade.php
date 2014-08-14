@@ -7,7 +7,7 @@ class Atividade {
 	private $resumo;
 	private $conhecimento_aprendido;
 	private $conteudo_programatico;
-	private $pre_requisito;
+	private $prerequisito;
 	private $publico_alvo;
 	private $ferramenta;
 	private $carga_horaria;
@@ -98,8 +98,8 @@ class Atividade {
 		$this->conteudo_programatico = $conteudo_programatico;
 	}
 	
-	public function setPreRequisito($pre_requisito){
-		$this->pre_requisito = $pre_requisito;
+	public function setPreRequisito($prerequisito){
+		$this->prerequisito = $prerequisito;
 	}
 	
 	public function setPublicoAlvo($publico_alvo){

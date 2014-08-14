@@ -128,7 +128,6 @@ class PersistenciaEvento extends InstanciaUnica{
 				" url_site='".$evento->getUrlSite()."',".
 				" dias_limite_pagamento=".$evento->getDiasLimitePagamento().
 				" WHERE cod_evento=".$evento->getCodEvento().";";
-	    var_dump($sql);
 		$resultado = FachadaConectorBD::getInstancia()->atualizar($sql);
 		return $resultado;
 		

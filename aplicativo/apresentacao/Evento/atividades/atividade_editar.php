@@ -30,7 +30,7 @@ if (isPostBack()) {
 	$incluir_atividade->setCodEvento($atividade['cod_evento']);
 	
 	
-	if (is_int(FachadaAtividade::getInstancia()->criarAtividade($incluir_atividade))){
+	if (is_int(FachadaAtividade::getInstancia()->alterarAtividade($incluir_atividade))){
 		header('location: '.URL.'apresentacao/Evento/gerencia_evento.php?cod_evento='.$atividade['cod_evento']);
 	}
 	
@@ -67,7 +67,7 @@ if (isPostBack()) {
 										<div class="row">
 											<div class="large-12 small-12 columns">
       										<label>Resumo<font>*</font>:<br>
-        											<textarea rows="4" cols="50" id="resumo" name="resumo" title="Resumo" placeholder="Resumo sobre a atividade"><? echo utf8_encode($atividade->getResumo()); ?> 
+        											<textarea id="resumo" name="resumo" title="Resumo"><? echo utf8_encode($atividade->getResumo()); ?> 
         											</textarea>
       										</label>
     										</div>								
@@ -75,7 +75,7 @@ if (isPostBack()) {
 										<div class="row">
 											<div class="large-6 small-6 columns">
       										<label>Conhecimento Aprendido<font>*</font>:<br>
-        											<textarea rows="4" cols="50" id="conhecimento_aprendido" name="conhecimento_aprendido"/><? echo utf8_encode($atividade->getConhecimentoAprendido()); ?>
+        											<textarea id="conhecimento_aprendido" name="conhecimento_aprendido"/><? echo utf8_encode($atividade->getConhecimentoAprendido()); ?>
         											</textarea>		
       										</label>
       									</div>																
@@ -126,7 +126,7 @@ if (isPostBack()) {
 										</div>
 										<div class="row">
 											<div class="large-6 small-6 columns">
-	      										<label>Tipo Frequência<font>*</font>:<br>
+	      										<label>Tipo Frequência<font>*</font>: <? echo $atividade->getTipoFrequencia(); ?><br>
 	        										<select id="tipo_frequencia" name="tipo_frequencia">
 			        								<? if($atividade->getTipoFrequencia()=="Evento"){ ?>
 		      											<option value="Evento">Evento</option>
@@ -146,8 +146,16 @@ if (isPostBack()) {
     										<div class="large-6 small-6 columns">
 		      									<label>Status<font>*</font>:<br>
 	        										<select id="status" name="status">
+	        											<? if($atividade->getStatus()=="Confirmada"){ ?>
 	        											<option value="Confirmada">Confirmada</option>
 	        											<option value="Cancelada">Cancelada</option>
+	        											<? } elseif ($atividade->getStatus()=="Cancelada"){?>
+	        											<option value="Cancelada">Cancelada</option>
+	        											<option value="Confirmada">Confirmada</option>
+	        											<? } else{ ?>
+	        											<option value="Confirmada">Confirmada</option>
+	        											<option value="Cancelada">Cancelada</option>	
+	        											<? } ?>
         											</select>		
 		      									</label>
 	    									</div>						
@@ -155,9 +163,16 @@ if (isPostBack()) {
 									<div class="row">
 										<div class="large-12 small-12 columns">
 	      									<label>Tipo de Atividade<font>*</font>:<br>
+	      										<? $tipos_atividades = FachadaAtividade::getInstancia()
+													->listarTiposAtividadePorEvento($cod_evento); 
+													$atividade_tipo = FachadaAtividade::getInstancia()->listarTiposAtividadePorCodigo($atividade->getcodAtividadeTipo());
+													?>
 	        									<select id="cod_atividade_tipo" name="cod_atividade_tipo">
-	        											<option value="1">Minicurso</option>
-	        											<option value="2">Palestra</option>
+	        											<option value="<? echo $atividade_tipo[0]->getCodAtividadeTipo(); ?>"><? echo $atividade_tipo[0]->getNome(); ?></option>
+	        											<option value=""> --- </option>
+	        											<? foreach ($tipos_atividades as $tipo_atividade) { ?>
+															<option value="<?echo $tipo_atividade->getCodAtividadeTipo(); ?>"><?echo $tipo_atividade->getNome(); ?></option>	
+														<? } ?>
         										</select>			
 	      									</label>
     									</div>
@@ -172,7 +187,7 @@ if (isPostBack()) {
 										</div>
 										<div class="large-3 medium-3 small-3 columns right">
 											<input type="hidden" id="cod_evento" name="cod_evento" value="<? echo $cod_evento; ?>" />
-											<input type="hidden" id="cod_evento" name="cod_evento" value="<? echo $cod_atividade; ?>" />
+											<input type="hidden" id="cod_atividade" name="cod_atividade" value="<? echo $cod_atividade; ?>" />
 											<input type="submit" name="salvar" value="Salvar" class="success button expand salvar" />
 										</div>
 									</div>
