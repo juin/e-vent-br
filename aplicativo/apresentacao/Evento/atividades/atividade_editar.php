@@ -3,6 +3,7 @@
 require_once (APRESENTACAO . 'cabecalho.php');
 require_once (FACHADAS . 'FachadaEvento.php');
 require_once (FACHADAS . 'FachadaAtividade.php');
+require_once (FACHADAS . 'FachadaLocal.php');
 require_once(UTILIDADES);
 
 if (isPostBack()) {
@@ -126,7 +127,7 @@ if (isPostBack()) {
 										</div>
 										<div class="row">
 											<div class="large-6 small-6 columns">
-	      										<label>Tipo Frequência<font>*</font>: <? echo $atividade->getTipoFrequencia(); ?><br>
+	      										<label>Tipo Frequência<font>*</font>:<br>
 	        										<select id="tipo_frequencia" name="tipo_frequencia">
 			        								<? if($atividade->getTipoFrequencia()=="Evento"){ ?>
 		      											<option value="Evento">Evento</option>
@@ -179,6 +180,32 @@ if (isPostBack()) {
     									<div class="large-12 medium-12 small-12 columns">
     										<font>(*)Campos Obrigatórios</font>	
     									</div>									
+									</div>
+									<div class="row">
+										<fieldset>
+											<legend>Agenda:</legend>
+											<? 
+												$agendas = FachadaAtividade::getInstancia()->listarAgendasPorAtividade($cod_atividade);
+												if ($agendas!=null) {
+													echo "<ul>";
+													foreach ($agendas as $agenda) {
+														if(!is_null($agenda->getCodLocal())){
+															$local = FachadaLocal::getInstancia()->listarLocalPorCodigo($agenda->getCodLocal());
+														} else{
+															$local = "Não Definido.";
+														}
+														echo "<li><a href=\"".URL."apresentacao/Evento/gerencia_atividade_agenda.php?cod_atividade_agenda=".$agenda->getCodAtividadeAgenda()."\">".
+														arrumaData($agenda->getData())." - ".arrumaHora($agenda->getHorarioInicio())." - ".arrumaHora($agenda->getHorarioFim())." - ".$local->getNome()."</a></li>";
+													}
+													echo "</ul>";
+												}
+											?>
+											<div class="row">
+												<div class="large-9 columns">
+													<a href="#">Adicionar Agenda</a>
+												</div>
+											</div>
+										</fieldset>
 									</div>
 							</fieldset>		
 						    		<div class="row">
