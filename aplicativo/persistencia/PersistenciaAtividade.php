@@ -71,7 +71,7 @@ class PersistenciaAtividade extends InstanciaUnica{
 		return $atividades_tipo;	
 	}
 		
-	public function selecionarAtividadesPorCodigoEvento($cod_evento){
+	public function selecionarAtividadesPorEvento($cod_evento){
 		$atividades = NULL;	
 		$sql = "SELECT a.cod_atividade, a.nome, a.status, a.carga_horaria, a.vagas,a.cod_atividade_tipo
 		FROM Atividade a WHERE a.cod_evento =".$cod_evento;
@@ -92,19 +92,19 @@ class PersistenciaAtividade extends InstanciaUnica{
 		return $atividades;
 	}
 	
-	public function selecionarAtividadeAgendaPorCodigoAtividade($cod_atividade){
-		return PersistenciaAtividade::getInstancia()->selecionarAtividadeAgendaPorCodigoAtividadePorStatus($cod_atividade,INSCRICAO_STATUS_TODOS);	
+	public function selecionarAtividadeAgendaPorAtividade($cod_atividade){
+		return PersistenciaAtividade::getInstancia()->selecionarAtividadeAgendaPorAtividadePorStatus($cod_atividade, INSCRICAO_STATUS_TODOS);	
 	}
 
 	public function selecionarAtividadeAgendaPorCodigoAtividadeConfirmada($cod_atividade){
-		return PersistenciaAtividade::getInstancia()->selecionarAtividadeAgendaPorCodigoAtividadePorStatus($cod_atividade,INSCRICAO_STATUS_CONFIRMADA);	
+		return PersistenciaAtividade::getInstancia()->selecionarAtividadeAgendaPorAtividadePorStatus($cod_atividade, INSCRICAO_STATUS_CONFIRMADA);	
 	}
 
 	public function selecionarAtividadeAgendaPorCodigoAtividadeCancelada($cod_atividade){
-		return PersistenciaAtividade::getInstancia()->selecionarAtividadeAgendaPorCodigoAtividadePorStatus($cod_atividade,INSCRICAO_STATUS_CANCELADA);	
+		return PersistenciaAtividade::getInstancia()->selecionarAtividadeAgendaPorAtividadePorStatus($cod_atividade, INSCRICAO_STATUS_CANCELADA);	
 	}
 			
-	public function selecionarAtividadeAgendaPorCodigoAtividadePorStatus($cod_atividade,$status){
+	public function selecionarAtividadeAgendaPorAtividadePorStatus($cod_atividade,$status){
 		$atividadesAgenda = NULL;
 		$sql = "SELECT ag.cod_atividade_agenda, ag.data, ag.horario_inicio, ag.horario_fim, 
 		ag.cod_local FROM Atividade a, Atividade_Agenda ag
@@ -114,6 +114,30 @@ class PersistenciaAtividade extends InstanciaUnica{
 		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
+			foreach ($registros as $registro){
+				$atividadesAgenda[$i] = new AtividadeAgenda();
+				$atividadesAgenda[$i]->setCodAtividadeAgenda($registro["cod_atividade_agenda"]);
+				$atividadesAgenda[$i]->setData($registro["data"]);
+				$atividadesAgenda[$i]->setHorarioInicio($registro["horario_inicio"]);
+				$atividadesAgenda[$i]->setHorarioFim($registro["horario_fim"]);
+				$atividadesAgenda[$i]->setCodLocal($registro["cod_local"]);
+				$i++;
+			}
+		}
+		return $atividadesAgenda;	
+	}
+
+	public function selecionarAtividadeAgendaPorInscricao($cod_inscricao){
+		$atividadesAgenda = NULL;
+		$sql = "SELECT aa.cod_atividade_agenda, aa.data, aa.horario_inicio, 
+				aa.horario_fim, cod_local
+				FROM Atividade_Agenda aa 
+				WHERE EXISTS (SELECT 1 FROM  Inscricao_Historico ih
+					WHERE ih.cod_inscricao = '" . $cod_inscricao . "'
+					AND ih.cod_atividade_agenda = aa.cod_atividade_agenda)";
+		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		if (!is_null($registros)){
+			$i = 0;
 			foreach ($registros as $registro){
 				$atividadesAgenda[$i] = new AtividadeAgenda();
 				$atividadesAgenda[$i]->setCodAtividadeAgenda($registro["cod_atividade_agenda"]);
