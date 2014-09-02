@@ -134,11 +134,9 @@ class FachadaCertificado extends InstanciaUnica {
 			$address = $email;
 			$mail->AddAddress ( $address, $nome );
 			
-			$mail->AddAttachment ( "images/infor.gif" ); // attachment
-			
 			$mail->Send ();
 			
-			echo "A sua encomenda foi feita com sucesso, obrigado!";
+			echo "O Certificado foi enviado com sucesso!";
 		}
 	}
 	public function validarCertificado() {
