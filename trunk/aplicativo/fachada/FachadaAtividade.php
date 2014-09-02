@@ -17,48 +17,24 @@ class FachadaAtividade extends InstanciaUnica{
 		}
 	}
 	
-	public function listarTiposAtividadePorCodigo($cod_atividade_tipo){
-		$registros = PersistenciaAtividade::getInstancia()->selecionarTiposAtividadePorCodigo($cod_atividade_tipo);
-		if($registros != NULL){
-			return $registros;
-		} else {
-			return NULL;
-		}
-	}
-		
 	public function listarAtividadesPorCodigoEvento($cod_evento){
-		return PersistenciaAtividade::getInstancia()->selecionarAtividadesPorCodigoEvento($cod_evento);
+		return PersistenciaAtividade::getInstancia()->selecionarAtividadesPorEvento($cod_evento);
 	}
 	
-	/*
-	 * Lista a agenda dessa atividade
-	 * 
-	 * */
-	public function listarAtividadeAgendaPorCodigoAtividade($cod_atividade){
-		$registros = PersistenciaAtividade::getInstancia()->selecionarAtividadeAgendaPorCodigoAtividade($cod_atividade);
-		if($registros != NULL){
-			return $registros;
-		} else {
-			return NULL;
-		}
+	public function listarAtividadeAgendaPorAtividade($cod_atividade){
+		return PersistenciaAtividade::getInstancia()->selecionarAtividadeAgendaPorAtividade($cod_atividade);
+	}
+	
+	public function listarAtividadeAgendaPorInscricao($cod_inscricao) {
+		return PersistenciaAtividade::getInstancia()->selecionarAtividadeAgendaPorInscricao($cod_inscricao);
 	}
 	
 	public function listarAtividadePorCodigo($cod_atividade){
-		$registros = PersistenciaAtividade::getInstancia()->selecionarAtividadesPorCodigo($cod_atividade);
-		if($registros != NULL){
-			return $registros[0];
-		} else {
-			return NULL;
-		}
+		return PersistenciaAtividade::getInstancia()->selecionarAtividadesPorCodigo($cod_atividade);
 	}
 	
 	public function listarAgendasPorAtividade($cod_atividade){
-		$registros = PersistenciaAtividade::getInstancia()->selecionarAgendasPorAtividade($cod_atividade);
-		if($registros != NULL){
-			return $registros;
-		} else {
-			return NULL;
-		}
+		return PersistenciaAtividade::getInstancia()->selecionarAgendasPorAtividade($cod_atividade);
 	}
 	
 	public function listarAtividadeAgendaPorEvento($cod_evento){

@@ -46,11 +46,7 @@ class FachadaEvento extends InstanciaUnica{
     		return -1;
     	}
     }
-    
-	public function listarInscritosporCodigoEvento($cod_evento){
-		
-	}
-	
+
     public function criarEvento(Evento $evento){
     	return PersistenciaEvento::getInstancia()->inserirEvento($evento);
     }
