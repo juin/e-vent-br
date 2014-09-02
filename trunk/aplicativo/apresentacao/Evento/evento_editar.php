@@ -27,8 +27,41 @@ if (isPostBack()) {
 	$atualizar_evento->setUrlSite($evento['url_site']);
 	$atualizar_evento->setDiasLimitePagamento($evento['dias_limite_pagamento']);
 	
+	$allowedExts = array("gif", "jpeg", "jpg", "png");
+	$temp = explode(".", $_FILES["file"]["name"]);
+	$extension = end($temp);
+	
+	echo $_FILES["file"]["type"];
+	
+	if ((($_FILES["file"]["type"] == "image/gif")
+	|| ($_FILES["file"]["type"] == "image/jpeg")
+	|| ($_FILES["file"]["type"] == "image/jpg")
+	|| ($_FILES["file"]["type"] == "image/pjpeg")
+	|| ($_FILES["file"]["type"] == "image/x-png")
+	|| ($_FILES["file"]["type"] == "image/png"))
+	&& ($_FILES["file"]["size"] < 2000000000)
+	&& in_array($extension, $allowedExts)) {
+	  if ($_FILES["file"]["error"] > 0) {
+	    echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
+	  } else {
+	    echo "Upload: " . $_FILES["file"]["name"] . "<br>";
+	    echo "Type: " . $_FILES["file"]["type"] . "<br>";
+	    echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
+	    echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
+	    if (file_exists("upload/" . $_FILES["file"]["name"])) {
+	      echo $_FILES["file"]["name"] . " already exists. ";
+	    } else {
+	      move_uploaded_file($_FILES["file"]["tmp_name"],
+	      "upload/" . $_FILES["file"]["name"]);
+	      echo "Stored in: " . "upload/" . $_FILES["file"]["name"];
+	    }
+	  }
+	} else {
+	  echo "Invalid file";
+	}
+
 	if(FachadaEvento::getInstancia()->alterarEvento($atualizar_evento) >= 0){
-		header('location: '.URL.'apresentacao/Evento/gerencia_evento.php?cod_evento='.$cod_evento);
+		//header('location: '.URL.'apresentacao/Evento/gerencia_evento.php?cod_evento='.$cod_evento);
 	}
 	
 	} else {
@@ -49,7 +82,7 @@ if (isPostBack()) {
 		
 		<div class="large-9 medium-9 small-9 columns">
 			<div class="panel">
-				<form class="form-cadastro" action="evento_editar.php" method="post">
+				<form class="form-cadastro" action="evento_editar.php" method="post" enctype="multipart/form-data">
 								<fieldset>
 									<legend>Dados do Evento</legend>
 									<?
@@ -115,29 +148,24 @@ if (isPostBack()) {
     									</div>
   									</div>
   									<div class="row collapse">		
-  										<div class="large-3 small-2 columns">
+    									<div class="large-12 small-12 columns">
+    											<label>Gabarito Atividade</label>			
+        										<input id="url_gabarito_atividade" name="url_gabarito_atividade" type="file" placeholder="URL gabarito Atividade..." value="<? echo $evento->getUrlGabaritoAtividade(); ?>"/>			
+      									</div>
+    									<div class="large-12 small-12 columns">
+    											<label>Gabarito Evento</label>				
+        										<input id="url_gabarito_evento" name="url_gabarito_evento" type="file" placeholder="URL gabarito Evento..." value="<? echo $evento->getUrlGabaritoEvento(); ?>"/>			
+      									</div>
+    									<div class="large-12 small-12 columns">
+    											<label>Logo Evento</label>					
+        										<input id="file" name="file" type="file" placeholder="URL imagem Evento..." value="<? echo $evento->getUrlImagem(); ?>"/>			
+      									</div>
+      									<label>Site oficial:</label>
+      									<div class="large-3 small-3 columns">
       										<span class="prefix">http://</span>
-    									</div>
-    									<div class="large-9 small-10 columns">			
-        										<input id="url_gabarito_atividade" name="url_gabarito_atividade" type="text" placeholder="URL gabarito Atividade..." value="<? echo $evento->getUrlGabaritoAtividade(); ?>"/>			
-      								</div>
-      									<div class="large-3 small-2 columns">
-      										<span class="prefix">http://</span>
-    									</div>
-    									<div class="large-9 small-10 columns">			
-        										<input id="url_gabarito_evento" name="url_gabarito_evento" type="text" placeholder="URL gabarito Evento..." value="<? echo $evento->getUrlGabaritoEvento(); ?>"/>			
-      								</div>
-      									<div class="large-3 small-2 columns">
-      										<span class="prefix">http://</span>
-    									</div>
-    									<div class="large-9 small-10 columns">			
-        										<input id="url_imagem" name="url_imagem" type="text" placeholder="URL imagem Evento..." value="<? echo $evento->getUrlImagem(); ?>"/>			
-      								</div>
-      									<div class="large-3 small-2 columns">
-      										<span class="prefix">http://</span>
-    									</div>
-    									<div class="large-9 small-10 columns">			
-        										<input id="url_site" name="url_site" type="text" placeholder="URL do site..." value="<? echo $evento->getUrlSite(); ?>"/>			
+      									</div>
+    									<div class="large-9 small-9 columns">
+        										<input id="url_site" name="url_site" type="url" placeholder="URL do site..." value="<? echo $evento->getUrlSite(); ?>"/>			
       								</div>
     								</div>
     								<div class="row">
