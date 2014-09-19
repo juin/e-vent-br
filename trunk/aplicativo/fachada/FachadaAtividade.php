@@ -4,6 +4,7 @@ require_once(CLASSES.'Atividade.php');
 
 class FachadaAtividade extends InstanciaUnica{
 	
+	//Método que cria uma nova atividade.
 	public function criarAtividade(Atividade $atividade){
 		return PersistenciaAtividade::getInstancia()->inserirAtividade($atividade);
 	}
