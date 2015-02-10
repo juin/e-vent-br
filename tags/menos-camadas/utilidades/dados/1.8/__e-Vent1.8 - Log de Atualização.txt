@@ -1,0 +1,56 @@
+=======================================
+Alteração Realizadas no BD - Versão 1.8
+=======================================
+
+===============
+TABELAS CRIADAS
+===============
+Tabela Usuario_Temporario
+	+ cpf
+	+ e-mail
+	+ nome
+	+ login
+	+ senha
+
+Tabela Pagamento e Deposito
+
+==============
+CAMPOS CRIADOS
+==============
+Tabela Evento
+	+ url_imagem
+	+ url_site
+	+ data_inicio_inscricao
+	+ data_fim_inscricao
+	+ dias_limite_pagamento
+
+Tabela Configuracao
+	+ dias_limite_pagamento
+
+Tabela Pagamento
+	+ tipo_pagamento
+	
+================
+CAMPOS EXCLUÍDOS
+================
+Tabela Inscricao
+	+ forma_pagamento
+	
+==================
+CAMPOS ATUALIZADOS
+==================
+Tabela Evento	
+	+ data_inicio -> data_inicio_evento
+	+ data_fim -> data_fim_evento
+
+Tabela Certificado
+	+ cod_validacao (unique)
+
+Tabela Usuario
+	+ status
+
+Tabela Atividade_Valor	
+	+ valor_profissional_outros	
+	
+Tabela Inscricao
+	+ data_hora -> data_hora_inscricao
