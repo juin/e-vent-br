@@ -1,5 +1,5 @@
 <?php
-require_once (FACHADAS . 'FachadaConectorBD.php');
+require_once (PERSISTENCIAS . 'PersistenciaConectorBD.php');
 require_once (CLASSES . 'UsuarioSessao.php');
 require_once (CLASSES . 'InstanciaUnica.php');
 
@@ -9,7 +9,7 @@ class PersistenciaUsuario extends InstanciaUnica {
         $usuarios = NULL;
 
         $sql = "SELECT * FROM Usuario WHERE login='" . $login . "' AND senha='" . $senha . "'";
-        $registros = FachadaConectorBD::getInstancia() -> consultar($sql);
+        $registros = PersistenciaConectorBD::getInstancia() -> consultar($sql);
 
         if (!is_null($registros)) {
             $i = 0;
@@ -26,7 +26,11 @@ class PersistenciaUsuario extends InstanciaUnica {
             }
         }
 
-        return $usuarios;
+        if($usuarios!=NULL){
+            return $usuarios[0];
+        } else { 
+                return NULL; 
+        }
     }
 	
 	public function selecionarPorCodigo($cod_usuario) {

@@ -1,5 +1,5 @@
 <?php
-require_once (FACHADAS.'FachadaConectorBD.php');
+require_once (FACHADAS.'PersistenciaConectorBD.php');
 require_once(CLASSES . 'Atividade.php');
 require_once(CLASSES . 'AtividadeAgenda.php');
 require_once(CLASSES . 'AtividadeValor.php');
@@ -44,7 +44,11 @@ class PersistenciaAtividade extends InstanciaUnica{
 				$i++;
 			}
 		}
-		return $atividades_tipo;	
+		if($atividades_tipo != NULL){
+			return $atividades_tipo;
+		} else {
+			return NULL;
+		}
 	}
 	
 	public function selecionarTiposAtividadePorCodigo($cod_atividade_tipo){
