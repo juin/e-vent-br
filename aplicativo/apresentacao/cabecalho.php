@@ -8,6 +8,7 @@ function __autoload($class_name)
 {
     require_once(CLASSES.$class_name.'.php');
 }
+
 //Salva sessão do usuario na variavel $usuarioLogado
 $usuarioLogado = $_SESSION['usuario'];
 ?>
