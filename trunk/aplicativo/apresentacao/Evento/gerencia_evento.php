@@ -71,13 +71,13 @@ $cod_evento = $_GET['cod_evento'];?>
 										  <tbody>
 										    <?
 												foreach ($atividades as $atividade) {?>
-													<tr>
+													<tr class="<? echo $atividade->getStatus(); ?>">
 													<td><? echo $atividade->getCodAtividade();?></td>
 													<td><? echo utf8_encode($atividade->getNome());?></td>
 													<td>
 														<a href="<?echo URL;?>apresentacao/Evento/atividades/atividade_editar.php?cod_evento=<? echo $cod_evento; ?>&cod_atividade=<? echo $atividade->getCodAtividade(); ?>">Editar</a>
 														 | 
-														<a href="#">Apagar</a>
+														<a href="#">Cancelar</a>
 													</td>
 													</tr>
 												<?}?>

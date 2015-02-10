@@ -4064,6 +4064,9 @@ table {
     color: #222222; }
   table tr.even, table tr.alt, table tr:nth-of-type(even) {
     background: #f9f9f9; }
+    table tr.Cancelada{
+    background-color: red;
+    }
   table thead tr th,
   table tfoot tr th,
   table tbody tr td,
