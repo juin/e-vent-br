@@ -6,7 +6,7 @@ require_once (CLASSES.'ParametrosAcessoBanco.php');
  * Configurações do Banco de Dados
  */
 
-class FachadaConectorBD {
+class PersistenciaConectorBD {
 
 
     //Criar Instância da classe
@@ -119,12 +119,12 @@ class FachadaConectorBD {
  * Parametros de Acesso ao banco de dados
  * Cremildo: Verificar melhor forma de refazer esse processo. (Usar Properties)
  */
-if (FachadaConectorBD::getInstancia() == NULL) {
+if (PersistenciaConectorBD::getInstancia() == NULL) {
     $parametrosBD = new ParametrosAcessoBanco();
     $parametrosBD->setBDServidor(ACESSO_SERVIDOR);
     $parametrosBD->setBDUsuario(ACESSO_USUARIO);
     $parametrosBD->setBDSenha(ACESSO_SENHA);
     $parametrosBD->setBDNomeBanco(ACESSO_NOME_BANCO);
-    FachadaConectorBD::iniciarInstancia($parametrosBD);
+    PersistenciaConectorBD::iniciarInstancia($parametrosBD);
 }
 ?>

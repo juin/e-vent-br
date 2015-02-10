@@ -1,7 +1,7 @@
 <?php
 require_once (dirname(__FILE__) . '/../../config.php');
 require_once (APRESENTACAO . 'cabecalho.php');
-require_once(FACHADAS.'FachadaUsuario.php');
+require_once(PERSISTENCIAS.'PersistenciaUsuario.php');
 require_once(UTILIDADES);
 
 $informarInvalido = false;
@@ -12,7 +12,7 @@ if (isPostBack()) {
 	    $senha=$_POST['senha'];
 	
 	    if(($login) && ($senha)) { //Ele entra nessa condição se as duas variáveis não estiverem vazia
-	        $usuario = FachadaUsuario::getInstancia()->validarAcesso($login, $senha);
+	        $usuario = PersistenciaUsuario::getInstancia()->selecionarPorLoginSenha($login, $senha);
 	        
 	        if ($usuario != NULL) {
 	            session_start(); 

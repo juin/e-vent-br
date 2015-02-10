@@ -1,9 +1,9 @@
 <?php
 require_once (dirname(__FILE__) . '/../config.php');
 require_once (APRESENTACAO . 'cabecalho.php');
-require_once(FACHADAS.'FachadaEvento.php');
-require_once(FACHADAS.'FachadaInscricao.php');
-require_once(FACHADAS.'FachadaUsuario.php');
+require_once(PERSISTENCIAS.'PersistenciaEvento.php');
+require_once(PERSISTENCIAS.'PersistenciaInscricao.php');
+require_once(PERSISTENCIAS.'PersistenciaUsuario.php');
 ?>
 <div class="row">	
 		<div class="large-3 medium-3 small-3 columns">
@@ -17,7 +17,7 @@ require_once(FACHADAS.'FachadaUsuario.php');
 	<div class="row corpo">	
 		<? require_once(APRESENTACAO.'menu_esquerdo.php'); ?>
 		<div class="painel-eventos">
-			<? $eventos_andamento = FachadaEvento::getInstancia()->listarEventosEmAndamento(); ?>
+			<? $eventos_andamento = PersistenciaEvento::getInstancia()->listarEventosEmAndamento(); ?>
 			<div class="large-6 medium-6 small-6 columns">	
 			<?
 	            if($eventos_andamento!=NULL){

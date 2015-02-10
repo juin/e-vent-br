@@ -2,7 +2,7 @@
 /*
  * Interface 
  * */
-interface IFachadaPagamento{
+interface IPersistenciaPagamento{
     
     function confirmarPagamentoInscricao($cod_inscricao);
     

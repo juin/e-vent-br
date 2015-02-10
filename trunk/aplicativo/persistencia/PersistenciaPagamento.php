@@ -5,7 +5,7 @@ require_once (CLASSES . 'InstanciaUnica.php');
 /*
  * 
  */
-class PersistenciaPagamento extends InstanciaUnica {
+class PersistenciaPagamento extends InstanciaUnica implements IPersistenciaPagamento {
 
     public function confirmarPagamentoInscricao($cod_inscricao){
         $sql = "UPDATE Inscricao SET status = 'Confirmada' WHERE cod_inscricao = '" . $cod_inscricao . "' AND status ='Andamento'";
