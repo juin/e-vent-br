@@ -1,0 +1,1 @@
+O sistema deve permitir o gerenciamento online de eventos, incluindo funcionalidades como inscrição online, emissão de boleto, emissão de certificado, histórico de eventos, histórico de usuário, entre outros. Uma vez instalado e configurado, ele permitirá a criação de vários eventos e seus respectivos parâmetros.
