@@ -1,6 +1,6 @@
 <?php
 require_once (CLASSES . 'InstanciaUnica.php');
-require_once (FACHADAS . 'FachadaConectorBD.php');
+require_once(PERSISTENCIAS.'PersistenciaConectorBD.php');
 class PersistenciaCertificado extends InstanciaUnica {
 	public function selecionarPorUsuario($cod_usuario) {
 		$sql = 'Select * from Certificado where cod_inscricao in 

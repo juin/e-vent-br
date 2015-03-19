@@ -1,6 +1,6 @@
 <?php
 require_once(dirname(__FILE__).'/../config.php');
-require_once(FACHADAS.'FachadaConectorBD.php');
+require_once(PERSISTENCIAS.'PersistenciaConectorBD.php');
 require_once(CLASSES . 'Atividade.php');
 require_once(CLASSES . 'AtividadeAgenda.php');
 require_once(CLASSES . 'Usuario.php');
@@ -11,7 +11,7 @@ class PersistenciaEvento extends InstanciaUnica{
 	public function selecionarEventosPorStatus($status){
 		$eventos = NULL;
 		$sql = "SELECT * FROM Evento WHERE status LIKE '".$status."'";
-		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
 			foreach ($registros as $registro){
@@ -38,10 +38,10 @@ class PersistenciaEvento extends InstanciaUnica{
 		return $eventos;
 	}
     
-	public function selecionarEventosPorCodigo($cod_evento){
+	public function selecionarEventoPorCodigo($cod_evento){
 		$eventos = NULL;
 		$sql = 'Select * from Evento where cod_evento = '.$cod_evento;
-		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
 			foreach ($registros as $registro){
@@ -64,14 +64,19 @@ class PersistenciaEvento extends InstanciaUnica{
 				$i++;
 			}
 		}
-		return $eventos;
+
+		if($eventos!=NULL){
+        	return $eventos[0];
+        } else { 
+            return NULL;
+        }
 	}
     
     public function selecionarEventoPorAtividade($cod_atividade){
     	$eventos = NULL;
     	$sql = 'Select * from Evento where cod_evento = 
     			(Select cod_evento from Atividade where cod_atividade = '.$cod_atividade.')';
-    	$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+    	$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
     	$i = 0;
     	if (!is_null($registros)){
     		foreach ($registros as $registro){
@@ -103,14 +108,14 @@ class PersistenciaEvento extends InstanciaUnica{
     			`pagamento`) VALUES ('".$evento->getNome()."','".$evento->getSigla()."',
     			'".$evento->getDataInicio()."','".$evento->getDataFim()."','".EVENTO_STATUS_ANDAMENTO."',
 				'".$evento->getPagamento()."')";
-    	return FachadaConectorBD::getInstancia()->inserir($sql);
+    	return PersistenciaConectorBD::getInstancia()->inserir($sql);
     }
     
     public function inserirPresencaPorCodigos($cod_atividade_agenda, $cod_usuario, $cod_evento){
     	$sql = "Update Inscricao_Historico set frequente ='Presente' where cod_inscricao = 
     			(Select cod_inscricao from Inscricao where cod_usuario = ".$cod_usuario."
     				AND cod_evento = ".$cod_evento.") AND cod_atividade_agenda = ".$cod_atividade_agenda;
-    	return FachadaConectorBD::getInstancia()->atualizar($sql);
+    	return PersistenciaConectorBD::getInstancia()->atualizar($sql);
     }
 	
 	public function atualizarEvento(Evento $evento){
@@ -128,10 +133,11 @@ class PersistenciaEvento extends InstanciaUnica{
 				" url_site='".$evento->getUrlSite()."',".
 				" dias_limite_pagamento=".$evento->getDiasLimitePagamento().
 				" WHERE cod_evento=".$evento->getCodEvento().";";
-		$resultado = FachadaConectorBD::getInstancia()->atualizar($sql);
+		$resultado = PersistenciaConectorBD::getInstancia()->atualizar($sql);
 		return $resultado;
 		
 	}
+	
 }
 
 ?>

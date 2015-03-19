@@ -37,7 +37,7 @@ class PersistenciaUsuario extends InstanciaUnica {
         $usuarios = NULL;
 
         $sql = "SELECT * FROM Usuario WHERE cod_usuario=" . $cod_usuario;
-        $registros = FachadaConectorBD::getInstancia() -> consultar($sql);
+        $registros = PersistenciaConectorBD::getInstancia() -> consultar($sql);
 
         if (!is_null($registros)) {
             $i = 0;
@@ -97,7 +97,7 @@ class PersistenciaUsuario extends InstanciaUnica {
 				'$senha','$tel1','$tel2','$email','$instituicao','$curso','$lattes','$categ',
 				'$nivel','$notif','$status',$dtcad,$cidade)";
 
-        return FachadaConectorBD::getInstancia()->inserir($sql);
+        return PersistenciaConectorBD::getInstancia()->inserir($sql);
     }
     
     public function selecionarPorEventoFuncao($cod_usuario, $cod_evento, $funcao){
@@ -110,7 +110,7 @@ class PersistenciaUsuario extends InstanciaUnica {
 				" and u.cod_usuario = ue.cod_usuario" .
 				" and u.status = 'Ativo'";
 				
-		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
 		if (!is_null($registros)) {
             $i = 0;
             foreach ($registros as $registro) {
@@ -136,7 +136,7 @@ class PersistenciaUsuario extends InstanciaUnica {
 				" and u.cod_usuario = ua.cod_usuario" .
 				" and u.status = 'Ativo'";
 				
-		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
 		if (!is_null($registros)) {
             $i = 0;
             foreach ($registros as $registro) {
@@ -161,13 +161,37 @@ class PersistenciaUsuario extends InstanciaUnica {
 				" AND u.cod_usuario = ua.cod_usuario".
 				" AND u.cod_usuario = ue.cod_usuario".
 				" AND e.cod_evento = ue.cod_evento";
-		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
 		
 		if (!is_null($registros)) {
             $i = 0;
             foreach ($registros as $registro) {
                 $usuario = new Usuario();
                 $usuario->setCodUsuario($registro['cod_usuario']);
+                $usuarios[$i++] = $usuario;   
+            }
+		}
+		
+		return $usuarios;
+	}
+	
+	//Verifica se usuário possui função especial em algum evento
+	public function verificarPorFuncaoEspecialEvento($cod_usuario){
+		$usuarios = NULL;
+		$sql = 	"SELECT u.cod_usuario, nivel_acesso, ue.cod_evento, ue.funcao".
+				" FROM Usuario u, Usuario_Evento ue".
+				" WHERE u.cod_usuario = ".$cod_usuario.
+				" AND u.cod_usuario = ue.cod_usuario";
+		$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
+		
+		if (!is_null($registros)) {
+            $i = 0;
+            foreach ($registros as $registro) {
+                $usuario = new UsuarioEvento();
+                $usuario->setCodUsuario($registro['cod_usuario']);
+				$usuario->setNivelAcesso($registro['nivel_acesso']);
+				$usuario->setCodEvento($registro['codigo_evento']);
+				$usuario->setFuncaoEvento($registro['funcao']);
                 $usuarios[$i++] = $usuario;   
             }
 		}

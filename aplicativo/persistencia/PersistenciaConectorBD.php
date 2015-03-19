@@ -1,6 +1,5 @@
 <?php
 require_once (CLASSES.'ParametrosAcessoBanco.php');
-
  
  /*
  * Configurações do Banco de Dados
@@ -15,6 +14,8 @@ class PersistenciaConectorBD {
     //Atributo para guardar os parametros do Banco de Dados
     private $parametros = NULL;
 
+	
+	
     public static function iniciarInstancia($parametrosBD) {
         if (!isset(self::$instancia)) {
             $c = __CLASS__;
@@ -67,7 +68,7 @@ class PersistenciaConectorBD {
     }
 
     public function consultarComLimite($query, $limite) {
-    	return FachadaConectorBD::getInstancia()->consultar($query . " LIMIT " . $limite);
+    	return PersistenciaConectorBD::getInstancia()->consultar($query . " LIMIT " . $limite);
     }
 
     public function inserir($query) {

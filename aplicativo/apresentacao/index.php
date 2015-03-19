@@ -17,8 +17,14 @@ require_once(PERSISTENCIAS.'PersistenciaUsuario.php');
 	<div class="row corpo">	
 		<? require_once(APRESENTACAO.'menu_esquerdo.php'); ?>
 		<div class="painel-eventos">
-			<? $eventos_andamento = PersistenciaEvento::getInstancia()->listarEventosEmAndamento(); ?>
-			<div class="large-6 medium-6 small-6 columns">	
+			<? $eventos_andamento = PersistenciaEvento::getInstancia()->selecionarEventosPorStatus(EVENTO_STATUS_ANDAMENTO); ?>
+			<div class="large-6 medium-6 small-6 columns">
+				<?
+    				
+    				$funcao = PersistenciaUsuario::getInstancia()->verificarPorFuncaoEspecialEvento(3);
+					echo $funcao[0]->getFuncaoEvento();
+					
+    			?>
 			<?
 	            if($eventos_andamento!=NULL){
 	                foreach ($eventos_andamento as $andamento) { ?>
@@ -40,8 +46,8 @@ require_once(PERSISTENCIAS.'PersistenciaUsuario.php');
 	  								<p><? echo utf8_encode($andamento->getNome()); ?></p>
 	  								<a href="<? echo URL; ?>apresentacao/Evento/lista_atividades.php?cod_evento=<? echo $andamento->getCodEvento();?>"class="success button">Fazer Inscrição</a>
 	 				 				<?
-	 				 					if(FachadaUsuario::getInstancia()->
-										usuarioPossuiFuncaoEspecialPorEvento($usuarioLogado->getCodUsuario(),$andamento->getCodEvento()) == TRUE){
+	 				 					if(PersistenciaUsuario::getInstancia()->
+										selecionarPorFuncaoEspecial($usuarioLogado->getCodUsuario(),$andamento->getCodEvento()) == TRUE){
 											
 	 				 				 ?>
 	 				 				<a href="<? echo URL; ?>apresentacao/Evento/gerencia_evento.php?cod_evento=<? echo $andamento->getCodEvento();?>" class="alert button">Gerenciamento</a>
@@ -63,7 +69,7 @@ require_once(PERSISTENCIAS.'PersistenciaUsuario.php');
 			<div class="large-3 medium-2 small-3 columns">	
 		   	<h5>Inscrições</h5>
 				<div class="inscricoes">
-					<? $inscricoes = FachadaInscricao::getInstancia()->listarInscricoesPorUsuario($usuarioLogado->getCodUsuario());?>
+					<? $inscricoes = PersistenciaInscricao::getInstancia()->selecionarInscricoesPorUsuario($usuarioLogado->getCodUsuario());?>
   					<table>
   						<tbody>
   							<?
@@ -71,8 +77,8 @@ require_once(PERSISTENCIAS.'PersistenciaUsuario.php');
 					            foreach ($inscricoes as $inscricao) {?>
 					            	<tr>
 			      						<td>Inscrição: <? echo str_pad($inscricao->getCodInscricao(), 4, "0", STR_PAD_LEFT); ?><br>
-			      							<? $evento = FachadaEvento::getInstancia()->
-			      							listarEventoPorCodigo($inscricao->getCodEvento());?>
+			      							<? $evento = PersistenciaEvento::getInstancia()->
+			      							selecionarEventoPorCodigo($inscricao->getCodEvento());?>
 			      							 <span><? echo $evento->getSigla(); ?></span><br>
 			      							 Status: <? echo $inscricao->getStatus(); ?>
 			      						</td>
@@ -88,12 +94,12 @@ require_once(PERSISTENCIAS.'PersistenciaUsuario.php');
 			<div class="large-8 medium-8 small-8 columns">	
 				<br>
 			   	<h5>Eventos Encerrados</h5>
-				<? $eventos_encerrados = FachadaEvento::getInstancia()->listarEventosEncerrados();
+				<? $eventos_encerrados = PersistenciaEvento::getInstancia()->selecionarEventosPorStatus(EVENTO_STATUS_ENCERRADO);
 	            if($eventos_encerrados!=NULL){
 	                foreach ($eventos_encerrados as $encerrado) { ?>
 	                	<div class="panel">
-	  						<h5><? echo $andamento->getNome(); ?></h5>
-	 				 		<p><? echo $andamento->getNome(); ?></p>				
+	  						<h5><? echo $encerrado->getNome(); ?></h5>
+	 				 		<p><? echo $encerrado->getNome(); ?></p>				
 						</div>
 	                <?}
 	            }

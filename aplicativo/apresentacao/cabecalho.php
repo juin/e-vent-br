@@ -25,6 +25,7 @@ $usuarioLogado = $_SESSION['usuario'];
 	
 	
 	<script src="<? echo SCRIPTS_JS; ?>modernizr.js"></script>
+	
 </head>
 <body>
 	<? if(basename($_SERVER["SCRIPT_NAME"])!="login.php"){ ?>

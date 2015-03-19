@@ -2,22 +2,22 @@
 	require_once(dirname(__FILE__).'/../../config.php');
 	require_once(dirname(__FILE__).'/../../utilidades.php');
 	require_once (APRESENTACAO . 'cabecalho.php');
-	require_once (FACHADAS.'FachadaEvento.php');
-	require_once (FACHADAS.'FachadaAtividade.php');
-	require_once (FACHADAS.'FachadaLocal.php');
-	require_once (FACHADAS.'FachadaInscricao.php');
+	require_once (PERSISTENCIAS.'PersistenciaEvento.php');
+	require_once (PERSISTENCIAS.'PersistenciaAtividade.php');
+	require_once (PERSISTENCIAS.'PersistenciaLocal.php');
+	require_once (PERSISTENCIAS.'PersistenciaInscricao.php');
 	
 	$atividadesPost = $_POST['atividades'];
 	$cod_evento = $_POST['cod_evento'];
-	
+	$evento = PersistenciaEvento::getInstancia()->selecionarEventosPorCodigo($cod_evento);
 	//echo "<h1>Listagem de Atividades Selecionadas</h1>";
 	//echo "<h3>Evento: ".
-		 FachadaEvento::getInstancia()->listarEventoPorCodigo($cod_evento)->getNome();
+		$evento[0]->getNome();
 	//echo "</h3><br/>";
 	$valor_total_inscricao = 0;
 	//Lista os valores das atividades desse evento
-	$valoresAtividades = FachadaAtividade::getInstancia()->
-	listarTiposAtividadePorEvento($cod_evento);
+	$valoresAtividades = PersistenciaAtividade::getInstancia()->
+	selecionarTiposAtividadePorEvento($cod_evento);
 	
 ?>
 <div class="row corpo">	
@@ -36,8 +36,8 @@
 			
 			echo "<h2>Confirme os dados da sua inscrição!</h2>";
 			
-			$ultima_inscricao = FachadaInscricao::getInstancia()->
-			listarUltimaInscricaoValidaPorUsuarioPorEvento($usuarioLogado->getCodUsuario(),$cod_evento);
+			$ultima_inscricao = PersistenciaInscricao::getInstancia()->
+			selecionarUltimaInscricaoValidaPorUsuarioPorEvento($usuarioLogado->getCodUsuario(),$cod_evento);
 			
 			
 			if($ultima_inscricao != null){
@@ -51,15 +51,15 @@
 			echo "<p>Atividades Selecionadas ( Valor com base na sua categoria atual:<b> ".$usuarioLogado->getCategoria()." ):</b></p>";
 			echo "<ul>";
 				foreach ($atividadesPost as $atividadePost){
-					$atividade = FachadaAtividade::getInstancia()->
-					listarAtividadePorCodigo($atividadePost[0]);
+					$atividade = PersistenciaAtividade::getInstancia()->
+					selecionarAtividadesPorCodigo($atividadePost[0]);
 					
 					//Inicializa variavel com valor da atividade:
 					$valor = 0;
 					//Incrementa valor total com base na categoria do usuario logado e tipo de atividade
 					foreach ($valoresAtividades as $valorAtividade) {
 							
-						if ($valorAtividade->getCodAtividadeTipo()==$atividade->getcodAtividadeTipo()) {
+						if ($valorAtividade->getCodAtividadeTipo()==$atividade[0]->getcodAtividadeTipo()) {
 							switch ($usuarioLogado->getCategoria()) {
 								case 'Estudante':
 									$valor_total_inscricao = $valor_total_inscricao +
@@ -85,22 +85,22 @@
 						
 					}
 					
-					$atividadeAgenda = FachadaAtividade::getInstancia()->
-					listarAtividadeAgendaPorCodigoAtividade($atividade->getCodAtividade());
+					$atividadeAgenda = PersistenciaAtividade::getInstancia()->
+					selecionarAtividadeAgendaPorCodigoAtividade($atividade[0]->getCodAtividade());
 					
-					echo "<li><p>" . utf8_encode($atividade->getNome()) . "<br><b>Valor: R$ ".$valor."</b></p></li>";
-					echo '<input type="hidden" value="'.$atividade->getCodAtividade().'" name="atividades[]" />';
+					echo "<li><p>" . utf8_encode($atividade[0]->getNome()) . "<br><b>Valor: R$ ".$valor."</b></p></li>";
+					echo '<input type="hidden" value="'.$atividade[0]->getCodAtividade().'" name="atividades[]" />';
 									
 					if($atividadeAgenda!=null){
 						echo "<ul><p><b>Agenda:</b></p>";
 						foreach ($atividadeAgenda as $agenda) {
 							if(!is_null($agenda->getCodLocal())){
-								$local = FachadaLocal::getInstancia()->listarLocalPorCodigo($agenda->getCodLocal());
+								$local = PersistenciaLocal::getInstancia()->selecionarPorCodigo($agenda->getCodLocal());
 							} else{
 								$local->setNome("Não Definido.");
 							}						
 							echo "<li>Data: ".arrumaData($agenda->getData())." | Horario Inicio: ".$agenda->getHorarioInicio()."| Horario Fim: ".
-									  $agenda->getHorarioFim()."| Local: ".utf8_encode($local->getNome())."</li>";
+									  $agenda->getHorarioFim()."| Local: ".utf8_encode($local[0]->getNome())."</li>";
 						}
 						echo "</ul>";
 					} else{
