@@ -20,10 +20,8 @@ require_once(PERSISTENCIAS.'PersistenciaUsuario.php');
 			<? $eventos_andamento = PersistenciaEvento::getInstancia()->selecionarEventosPorStatus(EVENTO_STATUS_ANDAMENTO); ?>
 			<div class="large-6 medium-6 small-6 columns">
 				<?
-    				
     				$funcao = PersistenciaUsuario::getInstancia()->verificarPorFuncaoEspecialEvento(3);
 					echo $funcao[0]->getFuncaoEvento();
-					
     			?>
 			<?
 	            if($eventos_andamento!=NULL){
