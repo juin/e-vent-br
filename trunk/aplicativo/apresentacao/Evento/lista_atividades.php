@@ -2,14 +2,14 @@
 require_once(dirname(__FILE__).'/../../config.php');
 require_once(APRESENTACAO.'cabecalho.php');
 require_once(dirname(__FILE__).'/../../utilidades.php');
-require_once(FACHADAS.'FachadaEvento.php');
-require_once(FACHADAS.'FachadaAtividade.php');
-require_once(FACHADAS.'FachadaLocal.php');
-require_once(FACHADAS.'FachadaUsuario.php');
+require_once(PERSISTENCIAS.'PersistenciaEvento.php');
+require_once(PERSISTENCIAS.'PersistenciaAtividade.php');
+require_once(PERSISTENCIAS.'PersistenciaLocal.php');
+require_once(PERSISTENCIAS.'PersistenciaUsuario.php');
 
 $cod_evento = $_GET['cod_evento'];
-$evento = FachadaEvento::getInstancia()->listarEventoPorCodigo($cod_evento);
-$usuario = FachadaUsuario::getInstancia()->listarUsuarioPorCodigo($usuarioLogado->getCodUsuario());
+$evento = PersistenciaEvento::getInstancia()->selecionarEventosPorCodigo($cod_evento);
+$usuario = PersistenciaUsuario::getInstancia()->selecionarPorCodigo($usuarioLogado->getCodUsuario());
 ?>
 <div class="row corpo">	
 		<? require_once(APRESENTACAO.'menu_esquerdo.php'); ?>
@@ -18,8 +18,8 @@ $usuario = FachadaUsuario::getInstancia()->listarUsuarioPorCodigo($usuarioLogado
 		<form method="post" action="confirmacao_evento.php">			
 			<div class="large-9 medium-9 small-9 columns">
 				<div class="panel">
-  					<h5><?php echo utf8_encode($evento->getNome());?></h5> 						
- 				 		<p><? echo arrumaData($evento->getDataInicioEvento());?> à <? echo arrumaData($evento->getDataFimEvento());?> | <? echo arrumaData($evento->getUrlSite());?></p>							 		
+  					<h5><?php echo utf8_encode($evento[0]->getNome());?></h5> 						
+ 				 		<p><? echo arrumaData($evento[0]->getDataInicioEvento());?> à <? echo arrumaData($evento[0]->getDataFimEvento());?> | <? echo arrumaData($evento[0]->getUrlSite());?></p>							 		
   					<div class="row informacoes-evento">
 						<div class="large-12 medium-12 small-12 columns">
 							<form class="form-cadastro">
@@ -28,11 +28,11 @@ $usuario = FachadaUsuario::getInstancia()->listarUsuarioPorCodigo($usuarioLogado
 										<legend>Informações do Inscrito</legend>
 											<div class="row informacoes-inscrito">
 												<div class="large-12 medium-12 small-12 columns">
-													<p><span>Nome Completo:</span> <? echo $usuario->getNomeCertificado();?><br>
+													<p><span>Nome Completo:</span> <? echo $usuario[0]->getNomeCertificado();?><br>
 											</div>
 											<div class="large-12 medium-12 small-12 columns">
       										<label>Nome do Crachá:<br>
-        											<input type="text" placeholder="<? echo $usuario->getNomeCracha();?>" />		
+        											<input type="text" placeholder="<? echo $usuario[0]->getNomeCracha();?>" />		
       										</label>
     										</div>								
 					 						</div>
@@ -51,8 +51,7 @@ $usuario = FachadaUsuario::getInstancia()->listarUsuarioPorCodigo($usuarioLogado
 									<div class="large-12 large-centered medium-12 columns">
 										<table>
 										<?
-										$atividades_tipo = FachadaAtividade::getInstancia()->listarTiposAtividadePorEvento($cod_evento);
-		
+										$atividades_tipo = PersistenciaAtividade::getInstancia()->selecionarTiposAtividadePorEvento($cod_evento);
 										?>
 											<thead>
     											<tr>
@@ -86,7 +85,7 @@ $usuario = FachadaUsuario::getInstancia()->listarUsuarioPorCodigo($usuarioLogado
 					<div class="large-12 large-centered medium-12 columns">
 						<div class="row atividades">
 							<?php 
-								$atividades = FachadaAtividade::getInstancia()->listarAtividadesPorCodigoEvento($cod_evento);
+								$atividades = PersistenciaAtividade::getInstancia()->selecionarAtividadesPorCodigoEvento($cod_evento);
 							?>
 							<div class="panel">	 		
 								<fieldset>
@@ -104,21 +103,21 @@ $usuario = FachadaUsuario::getInstancia()->listarUsuarioPorCodigo($usuarioLogado
   											<? if($atividades!=null){
   											foreach ($atividades as $atividade){
 				
-												$vagas_disponiveis =  FachadaAtividade::getInstancia()->listarVagasDisponiveisPorAtividade($atividade->getCodAtividade());
+												$vagas_disponiveis =  PersistenciaAtividade::getInstancia()->selecionarVagasDisponiveisPorAtividade($atividade->getCodAtividade());
 												if ($vagas_disponiveis > 0)
 												{ 
-													$atividadeAgenda = FachadaAtividade::getInstancia()->
-													listarAtividadeAgendaPorCodigoAtividade($atividade->getCodAtividade());
+													$atividadeAgenda = PersistenciaAtividade::getInstancia()->
+													selecionarAtividadeAgendaPorCodigoAtividade($atividade->getCodAtividade());
 													$title = null;
 													if($atividadeAgenda!=null){
 														foreach ($atividadeAgenda as $agenda) {
 															if(!is_null($agenda->getCodLocal())){
-																$local = FachadaLocal::getInstancia()->listarLocalPorCodigo($agenda->getCodLocal());
+																$local = PersistenciaLocal::getInstancia()->selecionarPorCodigo($agenda->getCodLocal());
 															} else{
 																$local->setNome("Não Definido.");
 															}						
 															$title .= "Data: ".arrumaData($agenda->getData())." | Horario Inicio: ".$agenda->getHorarioInicio()."| Horario Fim: ".
-																	  $agenda->getHorarioFim()."| Local: ".utf8_encode($local->getNome())."<br/>";
+																	  $agenda->getHorarioFim()."| Local: ".utf8_encode($local[0]->getNome())."<br/>";
 														}
 													} else{
 														$title = "Nenhuma Agenda cadastrada para essa atividade<br><br>";
@@ -131,7 +130,7 @@ $usuario = FachadaUsuario::getInstancia()->listarUsuarioPorCodigo($usuarioLogado
 		      											<td>
 		      												<label data-tooltip class="has-tip" title="<? echo $title; ?>" ><? echo utf8_encode($atividade->getNome()); ?>(CH: <? echo $atividade->getCargaHoraria();?> h)</label>
 		      											</td>
-		      											<td><? echo $vagas_disponiveis;?></td>
+		      											<td><? echo $vagas_disponiveis[0];?></td>
 	    											</tr>
 												<? }
 												else 

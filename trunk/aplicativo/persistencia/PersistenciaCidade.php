@@ -1,5 +1,5 @@
 <?php
-require_once(FACHADAS.'FachadaConectorBD.php');
+require_once(PERSISTENCIAS.'PersistenciaConectorBD.php');
 require_once(CLASSES.'Estado');
 require_once(CLASSES.'Cidade');
 

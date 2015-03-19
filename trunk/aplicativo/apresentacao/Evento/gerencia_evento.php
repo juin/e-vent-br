@@ -1,8 +1,10 @@
 <?php
 require_once (dirname(__FILE__) . '/../../config.php');
 require_once (APRESENTACAO . 'cabecalho.php');
-require_once (FACHADAS . 'FachadaEvento.php');
-require_once (FACHADAS . 'FachadaAtividade.php');
+require_once (PERSISTENCIAS . 'PersistenciaEvento.php');
+require_once (PERSISTENCIAS . 'PersistenciaAtividade.php');
+require_once (PERSISTENCIAS . 'PersistenciaInscricao.php');
+require_once (PERSISTENCIAS . 'PersistenciaUsuario.php');
 require_once (UTILIDADES);
 
 $cod_evento = $_GET['cod_evento'];?>
@@ -24,13 +26,13 @@ $cod_evento = $_GET['cod_evento'];?>
   						<dd class="tab-title active"><a href="#tab-evento-1">Evento</a></dd>
   						<dd class="tab-title"><a href="#tab-evento-2">Atividades</a></dd>
   						<dd class="tab-title"><a href="#tab-evento-3">Programação</a></dd>
-  						<dd class="tab-title"><a href="#tab-evento-4">Estatística</a></dd>
+  						<dd class="tab-title"><a href="#tab-evento-4">Inscrições</a></dd>
 					</dl>
 					<div class="tabs-content">
   						<div class="content active" id="tab-evento-1">
   							<fieldset>
-  								<? $evento = FachadaEvento::getInstancia()->
-											listarEventoPorCodigo($cod_evento); ?>
+  								<? $evento = PersistenciaEvento::getInstancia()->
+											selecionarEventoPorCodigo($cod_evento); ?>
   								<legend>Dados do Evento</legend>
 	  							<p><b>Nome:</b> <? echo utf8_encode($evento->getNome()); ?></p>
 	  							<p><b>Sigla:</b> <? echo utf8_encode($evento->getSigla()); ?></p>
@@ -57,8 +59,8 @@ $cod_evento = $_GET['cod_evento'];?>
 								<fieldset>
 									<legend>Atividades</legend>
 									<p>Clique no título da atividade para lançar a frequência.</p>
-									<? $atividades = FachadaAtividade::getInstancia()->
-									listarAtividadesPorCodigoEvento($cod_evento);
+									<? $atividades = PersistenciaAtividade::getInstancia()->
+									selecionarAtividadesPorCodigoEvento($cod_evento);
 									if ($atividades != null) {?>
 										<table>
 										  <thead>
@@ -96,7 +98,39 @@ $cod_evento = $_GET['cod_evento'];?>
     						<p>Third panel content goes here...</p>
   						</div>
   						<div class="content" id="tab-evento-4">
-    						<p>Fourth panel content goes here...</p>
+							<fieldset>
+								
+									<?
+										$inscricoes = PersistenciaInscricao::getInstancia()->selecionarInscricoesPorEvento($cod_evento);
+									?>
+									<input type="checkbox" name="inscricaoStatus" id="inscricaoStatus" value="Em Andamento"/>Em Andamento
+									<input type="checkbox" name="inscricaoStatus" id="inscricaoStatus" value="Confirmada"/>Confirmada
+									<input type="checkbox" name="inscricaoStatus" id="inscricaoStatus" value="Cancelada"/>Cancelada
+									<div class="lista-inscricoes">
+										<table>
+											<thead>
+												<th>Código</th>
+												<th>Participante</th>
+												<th>Data/Hora</th>
+												<th>Status</th>
+											</thead>
+											<tbody>
+												<? if($inscricoes!=NULL){
+													foreach($inscricoes as $inscricao){?>
+												<tr>
+													<td><? echo $inscricao->getCodInscricao(); ?></td>
+													<? $usuario = PersistenciaUsuario::getInstancia()->selecionarPorCodigo($inscricao->getCodUsuario());?>
+													<td><? echo $usuario[0]->getNomeCertificado(); ?></td>
+													<td><? echo $inscricao->getDataHoraInscricao(); ?></td>
+													<td><? echo $inscricao->getStatus(); ?></td>
+												</tr>
+												<?	}
+												}?>
+											</tbody>
+										</table>
+									</div>
+								
+							</fieldset>
   						</div>
 					</div>		
 				</div>				

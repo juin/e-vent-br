@@ -1,5 +1,5 @@
 <?php
-require_once (FACHADAS.'PersistenciaConectorBD.php');
+require_once(PERSISTENCIAS.'PersistenciaConectorBD.php');
 require_once(CLASSES . 'Atividade.php');
 require_once(CLASSES . 'AtividadeAgenda.php');
 require_once(CLASSES . 'AtividadeValor.php');
@@ -20,7 +20,7 @@ class PersistenciaAtividade extends InstanciaUnica{
     			'".$atividade->getVagas()."','".$atividade->getObservacao()."','".$atividade->getTipoFrequencia()."',
     			'".$atividade->getStatus()."','".$atividade->getcodAtividadeTipo()."','".$atividade->getCodEvento()."')";
     	echo $sql;
-    	return FachadaConectorBD::getInstancia()->inserir($sql);	
+    	return PersistenciaConectorBD::getInstancia()->inserir($sql);	
 	}
 	
 	public function selecionarTiposAtividadePorEvento($cod_evento){
@@ -30,7 +30,7 @@ class PersistenciaAtividade extends InstanciaUnica{
 		FROM Atividade_Tipo at, Atividade_Valor av
 		WHERE at.cod_atividade_tipo = av.cod_atividade_tipo
 		AND av.cod_evento =".$cod_evento;
-		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
 			foreach ($registros as $registro){
@@ -58,7 +58,7 @@ class PersistenciaAtividade extends InstanciaUnica{
 		FROM Atividade_Tipo at, Atividade_Valor av
 		WHERE at.cod_atividade_tipo = av.cod_atividade_tipo
 		AND at.cod_atividade_tipo =".$cod_atividade_tipo;
-		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
 			foreach ($registros as $registro){
@@ -79,7 +79,7 @@ class PersistenciaAtividade extends InstanciaUnica{
 		$atividades = NULL;	
 		$sql = "SELECT a.cod_atividade, a.nome, a.status, a.carga_horaria, a.vagas,a.cod_atividade_tipo
 		FROM Atividade a WHERE a.cod_evento =".$cod_evento;
-		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
 			foreach ($registros as $registro){
@@ -115,7 +115,7 @@ class PersistenciaAtividade extends InstanciaUnica{
 		WHERE a.cod_atividade = ag.cod_atividade
 		AND ag.cod_atividade =".$cod_atividade."
 		AND a.status LIKE '".$status."'";
-		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
 			foreach ($registros as $registro){
@@ -139,22 +139,21 @@ class PersistenciaAtividade extends InstanciaUnica{
     					AND ih.cod_atividade_agenda = aa.cod_atividade_agenda
     					AND i.cod_inscricao = ih.cod_inscricao)
     				AND i.status !='Cancelada'";
-            $registro = FachadaConectorBD::getInstancia()->consultar($sql);
+            $registro = PersistenciaConectorBD::getInstancia()->consultar($sql);
             // pesquisa nula indica que nao existem inscricoes para a atividade
             if (is_null($registro)) {
             	// deve retornar, neste caso, o total de vagas da atividade como todo
             	$sql = "SELECT a.vagas as quantidadeVagas
             			FROM Atividade a
 						WHERE a.cod_atividade = '" . $cod_atividade . "'";
-            	$registro = FachadaConectorBD::getInstancia()->consultar($sql);
+            	$registro = PersistenciaConectorBD::getInstancia()->consultar($sql);
             } else {
             	// do contrario, retorna o total de vagas previstas menos as que foram consumidas
             	$sql = "SELECT (a.vagas  - " . $registro[0][0] .
             		   ") as quantidadeVagas FROM Atividade a
 						WHERE a.cod_atividade = '" . $cod_atividade . "'";
-            	$registro = FachadaConectorBD::getInstancia()->consultar($sql);
+            	$registro = PersistenciaConectorBD::getInstancia()->consultar($sql);
             }
-
             return $registro[0];
     }
 
@@ -164,7 +163,7 @@ class PersistenciaAtividade extends InstanciaUnica{
 		a.prerequisito, a.publico_alvo, a.ferramenta, a.carga_horaria, a.vagas, a.observacao, a.tipo_frequencia,
 		a.status, a.cod_atividade_tipo, a.cod_evento
 		 FROM Atividade a WHERE a.cod_atividade=".$cod_atividade;
-		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
 			foreach ($registros as $registro){
@@ -195,7 +194,7 @@ class PersistenciaAtividade extends InstanciaUnica{
 		$sql = "SELECT ag.cod_atividade_agenda, ag.data, ag.horario_inicio, 
 		ag.horario_fim, ag.cod_local, ag.cod_atividade FROM Atividade_Agenda ag 
 		WHERE ag.cod_atividade_agenda=".$cod_atividade_agenda;
-		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
 			foreach ($registros as $registro){
@@ -225,7 +224,7 @@ class PersistenciaAtividade extends InstanciaUnica{
 		$sql = "SELECT ag.cod_atividade_agenda, ag.data, ag.horario_inicio, 
 		ag.horario_fim, ag.cod_local FROM Atividade a, Atividade_Agenda ag 
 		WHERE a.cod_atividade= ag.cod_atividade AND ag.cod_atividade=".$cod_atividade;
-		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
 			foreach ($registros as $registro){				
@@ -247,7 +246,7 @@ class PersistenciaAtividade extends InstanciaUnica{
         		where i.cod_usuario = u.cod_usuario AND h.cod_inscricao = i.cod_inscricao 
         		AND h.cod_atividade_agenda = ".$cod_atividade." AND i.status = 'Confirmada'
         		ORDER BY nome_certificado";
-        $registros = FachadaConectorBD::getInstancia()->consultar($sql);
+        $registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
         $i = 0;
         if (!is_null($registros)){
             foreach ($registros as $registro){
@@ -269,7 +268,7 @@ class PersistenciaAtividade extends InstanciaUnica{
                 " and ua.cod_usuario = '".$cod_usuario."'" .
 				" and ua.cod_atividade = a.cod_atividade" . 
                 " and ua.funcao = '" . $funcao . "'";
-		$registros = FachadaConectorBD::getInstancia()->consultar($sql);
+		$registros = PersistenciaConectorBD::getInstancia()->consultar($sql);
 		$i = 0;
 		if (!is_null($registros)){
 			foreach ($registros as $registro){
@@ -301,7 +300,7 @@ class PersistenciaAtividade extends InstanciaUnica{
 				" cod_atividade_tipo=".$atividade->getcodAtividadeTipo().
 				" WHERE cod_atividade=".$atividade->getCodAtividade().";";
 		var_dump($sql);
-		$resultado = FachadaConectorBD::getInstancia()->atualizar($sql);
+		$resultado = PersistenciaConectorBD::getInstancia()->atualizar($sql);
 		return $resultado;
 		
 	}

@@ -2,9 +2,9 @@
 	require_once(dirname(__FILE__).'../../../config.php');
 	require_once(APRESENTACAO . 'cabecalho.php');
 	require_once(CLASSES.'Inscricao.php');
-	require_once(FACHADAS.'FachadaInscricao.php');
-	require_once(FACHADAS.'FachadaEvento.php');
-	require_once(FACHADAS.'FachadaAtividade.php');
+	require_once(PERSISTENCIAS.'PersistenciaInscricao.php');
+	require_once(PERSISTENCIAS.'PersistenciaEvento.php');
+	require_once(PERSISTENCIAS.'PersistenciaAtividade.php');
 	
 	$vagas = true; 
 	$codigos_atividades = $_POST['atividades'];
@@ -13,7 +13,7 @@
 	$forma_pagamento = $_POST['forma_pagamento'];
 	// verifica se ainda tem vagas disponiveis
 	foreach ($codigos_atividades as $codigo_atividade) {
-		$disponiveis = FachadaAtividade::getInstancia()->listarVagasDisponiveisPorAtividade($codigo_atividade);
+		$disponiveis = PersistenciaAtividade::getInstancia()->selecionarVagasDisponiveisPorAtividade($codigo_atividade);
 		if ($disponiveis == 0) {
 			$vagas = false;
 		}
@@ -38,8 +38,8 @@
 			} else if($forma_pagamento=="vista"){
 				$inscricao->setStatus(INSCRICAO_STATUS_CONFIRMADA);
 			}
-			FachadaInscricao::getInstancia()->alterarStatusInscricao($cod_ultima_inscricao,"Cancelada");
-			$resultado = FachadaInscricao::getInstancia()->realizarInscricao($inscricao, $codigos_atividades);
+			PersistenciaInscricao::getInstancia()->atualizarStatusInscricao($cod_ultima_inscricao,"Cancelada");
+			$resultado = PersistenciaInscricao::getInstancia()->realizarInscricao($inscricao, $codigos_atividades);
 			
 			if ($resultado == 0)
 			{
